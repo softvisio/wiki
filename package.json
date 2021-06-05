@@ -1,0 +1,20 @@
+{
+    "name": "@softvisio/wiki",
+    "private": true,
+    "description": "Wiki",
+    "homepage": "https://softvisio.github.io/wiki/",
+    "bugs": {
+        "url": "https://github.com/softvisio/wiki/issues",
+        "email": "root <root@softvisio.net>"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/softvisio/wiki.git"
+    },
+    "license": "Proprietary Software",
+    "author": "root <root@softvisio.net>",
+    "scripts": {
+        "build": "softvisio-cli docs build",
+        "start": "softvisio-cli docs start"
+    }
+}

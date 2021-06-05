@@ -1,0 +1,6 @@
+release:
+  enabled: false
+
+docs:
+  location: /
+  changelog: false
