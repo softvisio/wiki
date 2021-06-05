@@ -1,0 +1,111 @@
+realcomm: 104.248.57.32 / 10.136.156.114
+test: 198.211.112.162 / 10.136.153.41
+
+# firewalld
+yum install -y firewalld
+systemctl enable firewalld
+systemctl restart firewalld
+
+# wireguard
+curl -Lo /etc/yum.repos.d/wireguard.repo https://copr.fedorainfracloud.org/coprs/jdoss/wireguard/repo/epel-7/jdoss-wireguard-epel-7.repo
+yum install -y epel-release
+yum install -y wireguard-dkms wireguard-tools
+
+
+umask 077
+
+mkdir /etc/wireguard
+
+wg genkey > /etc/wireguard/private.key
+wg genpsk > /etc/wireguard/preshared.key
+# wg genkey | tee server_private_key | wg pubkey > server_public_key
+# wg genkey | tee client_private_key | wg pubkey > client_public_key
+
+# generate server config
+cat <<'EOF' > /etc/wireguard/wg0.conf
+[Interface]
+SaveConfig = true
+ListenPort = 51820
+Address = 192.168.100.1/24
+PrivateKey = aOH0iFLQcl7V8n2bEmlIKUzANlhpE35e0mHS6OCJgFU=
+# PublicKey = 4LN63LDQA+f6qiK5LquPrR8e4jd91d9fKB2DhU4Kqho=
+# PostUp   = iptables -A FORWARD -i %i -j ACCEPT; iptables -A FORWARD -o %i -j ACCEPT; iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+# PostDown = iptables -D FORWARD -i %i -j ACCEPT; iptables -D FORWARD -o %i -j ACCEPT; iptables -t nat -D POSTROUTING -o eth0 -j MASQUERADE
+EOF
+
+chmod 600 /etc/wireguard/wg0.conf
+
+systemctl enable wg-quick@wg0.service
+systemctl restart wg-quick@wg0.service
+
+wg set wg0 \
+    listen-port 51820 \
+    private-key /etc/wireguard/private.key
+
+# add peer
+wg set wg0 \
+    peer hIlcsoVqiXBay45e6VVW2V24DWJZPKBDkE1/kktjhV4= \
+    preshared-key /etc/wireguard/preshared.key \
+    persistent-keepalive 60 \
+    allowed-ips 192.168.100.10/32
+
+# remove peer
+wg set wg0 \
+    peer hIlcsoVqiXBay45e6VVW2V24DWJZPKBDkE1/kktjhV4= \
+    remove
+
+wg-quick save wg0
+
+
+firewall-cmd --permanent --add-port=51820/udp
+
+cat /etc/sysctl.conf
+net.ipv4.ip_forward = 1
+
+sysctl -p
+sysctl -w net.ipv4.ip_forward=1
+
+# sones
+lo - trusted
+eth0 - public
+eth1 - trusted
+wg0 - external
+
+firewall-cmd --permanent --zone=trusted --add-interface=lo
+firewall-cmd --permanent --zone=trusted --add-interface=eth1
+firewall-cmd --permanent --zone=external --add-interface=wg0
+
+
+firewall-cmd --permanent --zone=public --remove-service=dhcpv6-client
+
+--zone=external
+
+firewall-cmd --permanent --zone=external --add-masquerade
+firewall-cmd --permanent --direct --add-rule ipv4 nat POSTROUTING 0 -o wg0 -j MASQUERADE
+firewall-cmd --permanent --direct --add-rule ipv4 filter FORWARD 0 -i eth1 -o wg0 -j ACCEPT
+firewall-cmd --permanent --direct --add-rule ipv4 filter FORWARD 0 -i wg0 -o eth1 -m state --state RELATED,ESTABLISHED -j ACCEPT
+
+firewall-cmd --permanent --direct --add-rule ipv4 nat POSTROUTING 0 -o wg0 -j MASQUERADE
+firewall-cmd --permanent --direct --add-rule ipv4 filter FORWARD 0 -i wg0 -j ACCEPT
+firewall-cmd --permanent --direct --add-rule ipv4 filter FORWARD 0 -o wg0 -j ACCEPT
+
+
+firewall-cmd --reload
+
+firewall-cmd --direct --get-all-rules
+
+PostUp   = 
+	iptables -A FORWARD -i %i -j ACCEPT; 
+	iptables -A FORWARD -o %i -j ACCEPT; 
+	iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+
+PostDown = 
+	iptables -D FORWARD -i %i -j ACCEPT; 
+	iptables -D FORWARD -o %i -j ACCEPT; 
+	iptables -t nat -D POSTROUTING -o eth0 -j MASQUERADE
+
+
+
+
+
+

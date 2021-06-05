@@ -1,0 +1,84 @@
+# https://fralef.me/docker-and-iptables.html
+
+yum -y install firewalld
+systemctl enable firewalld
+systemctl restart firewalld
+
+firewall-cmd --permanent --zone=public --remove-service=dhcpv6-client
+
+firewall-cmd --permanent --zone=trusted --change-interface=lo
+firewall-cmd --permanent --zone=trusted --change-interface=eth1
+
+firewall-cmd --permanent --zone=public --add-service=http
+firewall-cmd --permanent --zone=public --add-service=https
+
+firewall-cmd --complete-reload
+
+----------------------------------------
+
+firewall-cmd --permanent --zone=public --add-masquerade
+firewall-cmd --permanent --zone=trusted --change-interface=wg0
+firewall-cmd --permanent --zone=public --add-port=51820/udp
+firewall-cmd --complete-reload
+
+curl -Lo /etc/yum.repos.d/wireguard.repo https://copr.fedorainfracloud.org/coprs/jdoss/wireguard/repo/epel-7/jdoss-wireguard-epel-7.repo
+yum install -y epel-release
+yum install -y wireguard-dkms wireguard-tools
+
+umask 077
+mkdir /etc/wireguard
+touch /etc/wireguard/wg0.conf
+wg genkey > /etc/wireguard/private.key
+wg genpsk > /etc/wireguard/preshared.key
+
+ip link add wg0 type wireguard
+ip addr add 192.168.100.11/24 dev wg0
+wg set wg0 listen-port 51820 private-key /etc/wireguard/private.key
+wg-quick save wg0
+ip link set wg0 up
+
+systemctl enable wg-quick@wg0.service
+systemctl restart wg-quick@wg0.service
+
+wg set wg0 \
+    peer hIlcsoVqiXBay45e6VVW2V24DWJZPKBDkE1/kktjhV4= \
+    preshared-key /etc/wireguard/preshared.key \
+    persistent-keepalive 25 \
+    allowed-ips 192.168.100.10
+
+wg-quick save wg0
+
+ip route add 10.138.0.0/16 via 10.136.162.89 dev eth1
+
+----------------------------------------
+TODO
+    - test nat <-> nat in ither datacentre;
+    - try to ssh to remote box in other DC via wg service;
+
+
+TODO make nat timeout = 25
+echo "1" > /proc/sys/net/ipv4/ip_forward
+
+realcommercial:
+eth0 - 104.248.57.32
+eth1 - 10.136.156.114
+
+https://realcommercial:8888/gui/
+https://104.248.57.32:8888/gui/
+
+windows
+wg0 - 192.168.100.10/32
+
+firewall-cmd --permanent --zone=external --add-interface=wg0
+
+firewall-cmd --permanent --add-masquerade
+firewall-cmd --direct --add-rule ipv4 nat POSTROUTING 0 -o wg0 -j MASQUERADE
+firewall-cmd --direct --add-rule ipv4 filter FORWARD 0 -i wg0 -o eth0 -j ACCEPT
+firewall-cmd --direct --add-rule ipv4 filter FORWARD 0 -i eth0 -o wg0 -j ACCEPT
+
+firewall-cmd --direct --add-rule ipv4 nat POSTROUTING 0 -o eth0 -j MASQUERADE
+firewall-cmd --direct --add-rule ipv4 filter FORWARD 0 -i eth0 -o eth1 -j ACCEPT
+firewall-cmd --direct --add-rule ipv4 filter FORWARD 0 -i eth1 -o eth0 -j ACCEPT
+
+
+firewall-cmd --direct --get-all-rules
