@@ -5,12 +5,12 @@
     "description": "Wiki",
     "homepage": "https://bitbucket.org/zdm/wiki",
     "bugs": {
-        "url": "https://bitbucket.org/zdm/wiki/issues",
+        "url": "https://github.com/softvisio/wiki/issues",
         "email": "zdm@softvisio.net"
     },
     "repository": {
         "type": "git",
-        "url": "https://bitbucket.org/zdm/wiki.git"
+        "url": "https://github.com/softvisio/wiki.git"
     },
     "author": "zdm <zdm@softvisio.net>"
 }
