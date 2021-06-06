@@ -9,7 +9,7 @@
 -   [google caldav](google-caldav.md)
 -   [mysql](mysql.md)
 -   [pgsql](pgsql.md)
--   [sql syntax-rules](sql-syntax-rules.md)
+-   [sql syntax rules](sql-syntax-rules.md)
 -   [sqlite](sqlite.md)
 -   [ssh](ssh.md)
 -   [visual studio-build tools](visual-studio-build-tools.md)
