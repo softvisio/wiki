@@ -2,14 +2,14 @@
 
 ## Install on CentOS
 
-```
+```sh
 dnf install -y elrepo-release epel-release
 dnf install -y kmod-wireguard wireguard-tools iptables
 ```
 
 ## Setup
 
-```
+```sh
 NETWORK_ADDR=10.0.0.1/24
 POSTROUTING_ETH=eth0
 
@@ -19,12 +19,12 @@ mkdir -p /etc/wireguard
 pushd /etc/wireguard
 
 # generate server keys
-wg genkey | tee /etc/wireguard/server.private.key | wg pubkey > /etc/wireguard/server.public.key
+wg genkey | tee /etc/wireguard/server.private.key | wg pubkey >/etc/wireguard/server.public.key
 
 # generate server config
 cat <<EOF >/etc/wireguard/wg0.conf
 [Interface]
-PrivateKey = `cat /etc/wireguard/server.private.key`
+PrivateKey = $(cat /etc/wireguard/server.private.key)
 Address    = $NETWORK_ADDR
 ListenPort = 51820
 PostUp     = sysctl -w net.ipv4.ip_forward=1; iptables -A FORWARD -o %i -j ACCEPT; iptables -t nat -A POSTROUTING -o $POSTROUTING_ETH -j MASQUERADE

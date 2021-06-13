@@ -1,11 +1,12 @@
 # Compact `.vmdk`
 
-```
+```shell
 # fill free space with zeros
-cat /dev/zero > /wipefile; rm -rf /wipefile
+cat /dev/zero >/wipefile
+rm -rf /wipefile
 ```
 
-```
+```shell
 :: defragment all .vmdk files in the current directory
 for /R %f in (*.vmdk) do vmware-vdiskmanager -d "%f"
 

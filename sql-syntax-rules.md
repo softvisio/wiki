@@ -1,6 +1,6 @@
 # Example
 
-```
+```sql
 CREATE TABLE "test" (
 	"id" uuid PRIMARY KEY NOT NULL DEFAULT get_random_uuid(),
 	"title" text NOT NULL
@@ -33,7 +33,7 @@ SELECT count(*) AS "total", COALESCE("name", 'no name') FROM "user" WHERE "id" I
 
     Index names examples
 
-    ```
+    ```sql
     CREATE INDEX "user_id_idx" ON "user" ("id");
 
     CREATE INDEX "user_id_title_idx" ON "user" ("id", "title");
@@ -45,7 +45,7 @@ SELECT count(*) AS "total", COALESCE("name", 'no name') FROM "user" WHERE "id" I
 
     Sequence names examples
 
-    ```
+    ```sql
     CREATE SEQUENCE "user_id_seq" AS int8;
     ```
 
@@ -57,7 +57,7 @@ SELECT count(*) AS "total", COALESCE("name", 'no name') FROM "user" WHERE "id" I
 
     Trigger names examples
 
-    ```
+    ```sql
     CREATE FUNCTION user_before_insert_trigger() RETURNS TRIGGER
 
     CREATE TRIGGER "user_before_insert_trigger" BEFORE INSERT ON "user" FOR EACH ROW EXECUTE PROCEDURE user_before_insert_trigger();
