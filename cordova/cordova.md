@@ -10,7 +10,7 @@ Do not use latest platform, some plugins may not work.
 
 To reinstall everything from the scratch remove `node_modules`, `platforms`, `plugins` directories.
 
-```
+```shell
 # setup cordova build environment
 env-android
 
@@ -25,7 +25,7 @@ cordova build android
 
 !!! Under macos do not work with the project in vmware shared folder, copy it to internal filesystem.
 
-```
+```shell
 # add ios platform
 cordova platform add --nosave ios
 
@@ -35,7 +35,7 @@ cordova build ios
 
 If you will see errors, related to the pods, try this:
 
-```
+```shell
 cd platform/ios
 pod install
 ```
@@ -44,20 +44,20 @@ pod install
 
 ## WINDOWS
 
-```
+```shell
 # run on android device, connected to the USB port
 cordova run android --device
 ```
 
 Access app console from the browser:
 
-```
+```text
 chrome://inspect/#devices
 ```
 
 ## MACOS
 
-```
+```shell
 # view available devices under emulator
 cordova run --list
 
@@ -81,15 +81,15 @@ cordova run ios --target="iPad-Pro--12-9-inch---4th-generation-, 13.5" --nobuild
 
 You can install and use tool:
 
-```
+```text
 https://apps.apple.com/us/app/transporter/id1450874784?mt=12
 ```
 
 or upload, using command line:
 
-```
+```shell
 # upload via command line
-xcrun altool --upload-app -f <filename>.ipa -u dzagashev@gmail.com
+xcrun altool --upload-app -f -u dzagashev@gmail.com <filename >.ipa
 ```
 
 If your account has 2FA enabled, first visit https://appleid.apple.com/ and generate an app password.

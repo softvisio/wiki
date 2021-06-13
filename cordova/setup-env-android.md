@@ -34,7 +34,7 @@
 
     Download and install [Intel HEXM](https://software.intel.com/en-us/articles/intel-hardware-accelerated-execution-manager-intel-haxm) or using sdkmanager:
 
-    ```
+    ```shell
     sdkmanager "extras;intel;Hardware_Accelerated_Execution_Manager"
     ```
 
@@ -42,29 +42,29 @@
 
 -   Install emulator
 
-    ```
+    ```shell
     sdkmanager emulator
     ```
 
 -   List abi system images
 
-    ```
+    ```shell
     sdkmanager --list | grep "system-images;android-"
     ```
 
 -   Install abi system image
 
-    ```
+    ```shell
     sdkmanager "system-images;android-28;google_apis;x86_64"
     ```
 
 -   Create avd
 
-    ```
+    ```shell
     avdmanager create avd --force --abi "google_apis/x86_64" --package "system-images;android-28;google_apis;x86_64" --device "pixel" --name "pixel"
     ```
 
 -   Run emulator
-    ```
+    ```shell
     emulator -avd pixel
     ```

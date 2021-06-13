@@ -19,19 +19,19 @@ If `must-revalidate`, `proxy-revalidate` are used - browser sends `Cache-Control
 
 For `nginx` the only working solution is to use `X-Accel-Expires` header. `X-Accel-Expires` header must always placed before `Cache-Control`.
 
-```
+```text
 X-Accel-Expires: @1
 Cache-Control: public, max-age=0
 ```
 
 ## Cache forever
 
-```
+```text
 Cache-Control: public, max-age=30672000, immutable
 ```
 
 ## Do not cache
 
-```
+```text
 Cache-Control: no-store, no-cache
 ```

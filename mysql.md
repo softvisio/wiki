@@ -2,14 +2,14 @@
 
 ## Deploy
 
-```
+```shell
 dnf -y install mariadb-devel
 cpanm Devel::CheckLib DBI https://github.com/gooddata/DBD-MariaDB/archive/master.tar.gz
 ```
 
 ## Connect
 
-```
+```shell
 my $dbh = DBI->connect(
     qq[DBI:MariaDB:database=$db;host=$host;port=$port],
     $username,
@@ -25,7 +25,7 @@ my $dbh = DBI->connect(
 
 ## Create table
 
-```
+```sql
 CREATE TABLE IF NOT EXISTS `table` (
     `id` VARCHAR(20) NOT NULL,
     PRIMARY KEY (`player_id`)

@@ -1,6 +1,6 @@
 # PREPARE PROJECT UNDER IOS
 
-```
+```shell
 # firebasex plugin requirements
 # https://github.com/dpa99c/cordova-plugin-firebasex/issues/452
 cp resources/ios/GoogleService-Info.plist ./
@@ -16,7 +16,7 @@ open -a xcode platforms/ios
 
 To build signed `.ipa` bundle:
 
-```
+```shell
 cordova build ios --release --device
 ```
 

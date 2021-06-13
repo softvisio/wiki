@@ -1,6 +1,6 @@
 # ANDROID
 
-```
+```shell
 # setup build environment
 env-android
 

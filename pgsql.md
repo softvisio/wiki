@@ -2,7 +2,7 @@
 
 ## Create database
 
-```
+```sql
 CREATE EXTENSION IF NOT EXISTS "softvisio";
 
 SELECT create_database('test') AS "password";
@@ -10,7 +10,7 @@ SELECT create_database('test') AS "password";
 
 ## User management
 
-```
+```sql
 # create user
 CREATE USER "<username>" WITH ENCRYPTED PASSWORD '<password>';
 
@@ -32,7 +32,7 @@ DROP USER "<username>";
 
 ## Unix timestamp with microseconds
 
-```
+```sql
 "unix_timestamp" FLOAT NOT NULL DEFAULT EXTRACT(EPOCH FROM CURRENT_TIMESTAMP),
 ```
 
@@ -40,7 +40,7 @@ DROP USER "<username>";
 
 [`uuid-ossp` extension documentation.](https://www.postgresql.org/docs/current/static/uuid-ossp.html)
 
-```
+```sql
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
 # use UUID v1 - based on MAC addr.
@@ -54,6 +54,6 @@ CREATE EXTENSION IF NOT EXISTS "pgcrypto";
 
 ## Notifications
 
-```
+```sql
 PERFORM pg_notify( 'event-name', payload );
 ```

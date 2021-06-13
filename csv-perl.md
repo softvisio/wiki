@@ -2,7 +2,7 @@
 
 ## Read CSV
 
-```
+```perl
 use Text::CSV_XS qw[];
 
 my $data = Text::CSV_XS::csv(
@@ -15,7 +15,7 @@ my $data = Text::CSV_XS::csv(
 
 ## Write CSV
 
-```
+```perl
 use Text::CSV_XS qw[];
 
 Text::CSV_XS::csv(
