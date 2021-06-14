@@ -81,7 +81,7 @@ EOF
 rm -rf /etc/wireguard/client.private.key /etc/wireguard/client.public.key /etc/wireguard/client.preshared.key
 ```
 
-# AllowedIPs
+### AllowedIPs
 
 On client if you want to tunnel all traffic - use `0.0.0.0/0`, or if you want tot route only traffic to specific network via wireguard - use this network address, eg: `10.10.10.0/24`.
 

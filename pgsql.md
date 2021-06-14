@@ -8,7 +8,7 @@ CREATE EXTENSION IF NOT EXISTS "softvisio";
 SELECT create_database('test') AS "password";
 ```
 
-## User management
+### User management
 
 ```sql
 # create user
