@@ -1,5 +1,19 @@
 # Git
 
+### GitHub links
+
+-   https://<OWNER\>.github.io/<NAME\>/
+
+    Link to the docs site, returns data with the valid content type.
+
+-   https://raw.githubusercontent.com/<OWNER\>/<NAME\>/<BRANCH\>/
+
+    Link to the content from the repository. Returns data **without** content type.
+
+-   https://media.githubusercontent.com/media/<OWNER\>/<NAME\>/<BRANCH\>/
+
+    Link to the `LFS` repository content.
+
 ### Move Repository
 
 ```shell
