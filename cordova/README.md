@@ -1,10 +1,10 @@
-# NOTE
+# Cordova
 
-!!! Do not forget to add `<script src="cordova.js" type="text/javascript" integrity="" crossorigin="anonymous"></script>` to your `index.html`.
+:warn: !!! Do not forget to add `<script src="cordova.js" type="text/javascript" integrity="" crossorigin="anonymous"></script>` to your `index.html`.
 
-# BUILD APPLICATION
+### Build application
 
-## WINDOWS + ANDROID
+#### Windows + android
 
 Do not use latest platform, some plugins may not work.
 
@@ -21,7 +21,7 @@ cordova platform add --nosave android
 cordova build android
 ```
 
-## MACOS + IOS
+#### MacOS + iOS
 
 !!! Under macos do not work with the project in vmware shared folder, copy it to internal filesystem.
 
@@ -40,9 +40,9 @@ cd platform/ios
 pod install
 ```
 
-# RUN APPLICATION
+### Run application
 
-## WINDOWS
+#### Windows
 
 ```shell
 # run on android device, connected to the USB port
@@ -55,7 +55,7 @@ Access app console from the browser:
 chrome://inspect/#devices
 ```
 
-## MACOS
+#### MacOS
 
 ```shell
 # view available devices under emulator
@@ -77,7 +77,7 @@ cordova run ios --target="iPhone-11-Pro-Max, 13.3" --nobuild
 cordova run ios --target="iPad-Pro--12-9-inch---4th-generation-, 13.5" --nobuild
 ```
 
-# UPLOAD APP TO ITUNES
+### Upload app to iTunes
 
 You can install and use tool:
 
