@@ -1,4 +1,6 @@
-# Move Repository
+# Git
+
+### Move Repository
 
 ```shell
 git remote rm origin
@@ -7,7 +9,7 @@ git push origin --all
 git push --tags
 ```
 
-# Sync forked repository
+### Sync forked repository
 
 ```shell
 git clone ssh://<YOUR-FORKED-REPO>
@@ -19,7 +21,7 @@ git push
 
 ```
 
-# Rename branch
+### Rename branch
 
 In the following example we rename `master` to `main`:
 
