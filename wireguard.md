@@ -1,13 +1,13 @@
 # Server
 
-## Install on CentOS
+### Install on CentOS
 
 ```shell
 dnf install -y elrepo-release epel-release
 dnf install -y kmod-wireguard wireguard-tools iptables
 ```
 
-## Setup
+### Setup
 
 ```shell
 NETWORK_ADDR=10.0.0.1/24
@@ -44,7 +44,7 @@ systemctl restart wg-quick@wg0.service
 # wg-quick save wg0
 ```
 
-# Client
+### Client
 
 ```shell
 ENDPOINT=dev.creationshop:51820
@@ -85,7 +85,7 @@ rm -rf /etc/wireguard/client.private.key /etc/wireguard/client.public.key /etc/w
 
 On client if you want to tunnel all traffic - use `0.0.0.0/0`, or if you want tot route only traffic to specific network via wireguard - use this network address, eg: `10.10.10.0/24`.
 
-# Docker
+### Docker
 
 ```shell
 d run -it --cap-add=NET_ADMIN --cap-add=SYS_ADMIN -p 51820:51820/tcp -p 51820:51820/udp --network private softvisio/core

@@ -1,4 +1,4 @@
-# Run:
+# Extend linux volume
 
 ```shell
 vgdisplay
@@ -6,7 +6,7 @@ vgdisplay
 
 Look at `Free PE / Size` to see how much free space you have.
 
-# Resize:
+### Resize
 
 ```shell
 lvextend /dev/mapper/fedora_devel-root -L +30G

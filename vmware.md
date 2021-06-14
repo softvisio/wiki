@@ -1,4 +1,6 @@
-# Compact `.vmdk`
+# VMWare
+
+### Compact `.vmdk`
 
 ```batch
 # fill free space with zeros
