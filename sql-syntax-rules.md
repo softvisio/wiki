@@ -1,4 +1,6 @@
-# Example
+# SQL Syntax rules
+
+## Example
 
 ```sql
 CREATE TABLE "test" (
@@ -11,7 +13,7 @@ CREATE UNIQUE INDEX IF NOT EXISTS "test_title_idx" ON "test" ("title");
 SELECT count(*) AS "total", COALESCE("name", 'no name') FROM "user" WHERE "id" IN (100, 101) GROUP BY "group";
 ```
 
-# Rules
+## Rules
 
 -   All keywords (SELECT, INSER, etc.) must be in upper case;
 
@@ -27,7 +29,7 @@ SELECT count(*) AS "total", COALESCE("name", 'no name') FROM "user" WHERE "id" I
 
 -   All functions names must be in lower camel case.
 
-## Indexes
+### Indexes
 
 -   Index name template `<table_name>_<column1_name>_<column2_name>_idx`.
 
@@ -39,7 +41,7 @@ SELECT count(*) AS "total", COALESCE("name", 'no name') FROM "user" WHERE "id" I
     CREATE INDEX "user_id_title_idx" ON "user" ("id", "title");
     ```
 
-## Sequences
+### Sequences
 
 -   Sequence name template `<table_name>_<column_name>_seq`.
 
@@ -49,7 +51,7 @@ SELECT count(*) AS "total", COALESCE("name", 'no name') FROM "user" WHERE "id" I
     CREATE SEQUENCE "user_id_seq" AS int8;
     ```
 
-## Triggers
+### Triggers
 
 -   Trigger name template `<table_name>_<triiger_event>_trigger`.
 
