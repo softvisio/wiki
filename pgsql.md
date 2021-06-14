@@ -1,6 +1,6 @@
 # PostgreSQL
 
-## Create database
+### Create database
 
 ```sql
 CREATE EXTENSION IF NOT EXISTS "softvisio";
@@ -30,13 +30,13 @@ REASSIGN OWNED BY "<username>" TO "postgres";
 DROP USER "<username>";
 ```
 
-## Unix timestamp with microseconds
+### Unix timestamp with microseconds
 
 ```sql
 "unix_timestamp" FLOAT NOT NULL DEFAULT EXTRACT(EPOCH FROM CURRENT_TIMESTAMP),
 ```
 
-## UUID
+### UUID
 
 [`uuid-ossp` extension documentation.](https://www.postgresql.org/docs/current/static/uuid-ossp.html)
 
@@ -52,7 +52,7 @@ CREATE EXTENSION IF NOT EXISTS "pgcrypto";
 "id" uuid PRIMARY KEY NOT NULL DEFAULT gen_random_uuid()
 ```
 
-## Notifications
+### Notifications
 
 ```sql
 PERFORM pg_notify( 'event-name', payload );

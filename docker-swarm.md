@@ -1,17 +1,19 @@
-## Join swarm
+# Docker swarm
+
+### Join swarm
 
 ```shell
 docker swarm join-token manager
 docker swarm join-token worker
 ```
 
-## Create network
+### Create network
 
 ```shell
 docker network create --driver overlay --subnet 10.1.0.0/16 --attachable private
 ```
 
-## Set node labels
+### Set node labels
 
 ```shell
 docker node update --label-add nginx=true `docker node inspect self --format "{{ .ID }}"`
@@ -21,13 +23,13 @@ docker node update --label-add redis=true `docker node inspect self --format "{{
 docker node update --label-add proxy=true <NODE-NAME>
 ```
 
-## Set service labels
+### Set service labels
 
 ```shell
 docker service update --label-add nginx-server-name=www.example.com <SERVICE-NAME>
 ```
 
-## Update service images
+### Update service images
 
 ```shell
 docker service update --image softvisio/<NAME> <SERVICE-NAME>
