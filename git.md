@@ -14,6 +14,10 @@
 
     Link to the `LFS` repository content.
 
+-   https://github.com/<OWNER\>/<NAME\>/releases/download/<TAG\>/<FILE-NAME\>
+
+    Downlooad release asset
+
 ### Move Repository
 
 ```shell
