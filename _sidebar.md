@@ -12,6 +12,6 @@
 -   [VMWare](vmware.md)
 -   [WireGuard](wireguard.md)
 
-Archive
+**Links**
 
 -   [Archive](/archive/)
