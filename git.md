@@ -2,21 +2,29 @@
 
 ### GitHub links
 
--   `https://<OWNER>.github.io/<NAME>/`
+-   Link to the docs site, returns data with the valid content type:
 
-    Link to the docs site, returns data with the valid content type.
+    ```text
+    https://<OWNER>.github.io/<NAME>/
+    ```
 
--   `https://raw.githubusercontent.com/<OWNER>/<NAME>/<BRANCH>/`
+-   Link to the content from the repository. Returns data **without** content type:
 
-    Link to the content from the repository. Returns data **without** content type.
+    ```text
+    https://raw.githubusercontent.com/<OWNER>/<NAME>/<BRANCH>/
+    ```
 
--   `https://media.githubusercontent.com/media/<OWNER>/<NAME>/<BRANCH>/`
+-   Link to the `LFS` repository content:
 
-    Link to the `LFS` repository content.
+    ```text
+    https://media.githubusercontent.com/media/<OWNER>/<NAME>/<BRANCH>/
+    ```
 
--   `https://github.com/<OWNER>/<NAME>/releases/download/<TAG>/<FILE-NAME>`
+-   Download release asset:
 
-    Downlooad release asset
+    ```text
+    https://github.com/<OWNER>/<NAME>/releases/download/<TAG>/<FILE-NAME>
+    ```
 
 ### Move Repository
 
