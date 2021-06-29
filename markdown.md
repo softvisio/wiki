@@ -53,3 +53,11 @@ To escape `` ` `` in inline code block use double backticks (` `` `):
 ```markdown
 Inline code block with escaped backtick: `` ` ``
 ```
+
+## Tables
+
+```markdown
+| Default Align | Left Align | Center Align | Right Align |
+| ------------- | :--------- | :----------: | ----------: |
+| cel 1-1       | cell 1-2   |   cell 1-3   |    cell 1-4 |
+```
