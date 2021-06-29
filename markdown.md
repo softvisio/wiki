@@ -2,7 +2,7 @@
 
 ## Collapsible block
 
-```md
+```markdown
 <details>
 	<summary>Title</summary>
 
@@ -13,7 +13,7 @@
 
 ## Tabs
 
-```md
+```markdown
 <!-- tabs:start -->
 
 #### **Tab 1**
@@ -31,7 +31,7 @@
 
 To instruct `prettier` to skip fenced code block formatting place `<!-- prettier-ignore -->` just before code block:
 
-````md
+````markdown
 <!-- prettier-ignore -->
 ```javascript
 const a = 1;
@@ -40,7 +40,7 @@ const a = 1;
 
 To escape ` ``` ` inside fenced code block use ` ```` ` (four or more backticks).
 
-`````md
+`````markdown
 ````markdown
 ```
 ...some markdown content
@@ -50,6 +50,6 @@ To escape ` ``` ` inside fenced code block use ` ```` ` (four or more backticks)
 
 To escape `` ` `` in inline code block use double backticks (` `` `):
 
-```md
+```markdown
 Inline code block with escaped backtick: `` ` ``
 ```
