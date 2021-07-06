@@ -34,3 +34,9 @@ docker service update --label-add nginx-server-name=www.example.com <SERVICE-NAM
 ```shell
 docker service update --image softvisio/<NAME> <SERVICE-NAME>
 ```
+
+### Continer log by name
+
+```shell
+docker logs $(d container ps --filter name= < NAME > --quiet) -f
+```
