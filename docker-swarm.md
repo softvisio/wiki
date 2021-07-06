@@ -38,5 +38,5 @@ docker service update --image softvisio/<NAME> <SERVICE-NAME>
 ### Continer log by name
 
 ```shell
-docker logs $(d container ps --filter name= < NAME > --quiet) -f
+docker logs $(docker container ps --filter name=$NAME --quiet) -f
 ```
