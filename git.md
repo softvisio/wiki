@@ -60,3 +60,11 @@ git push origin -u main
 
 git push origin --delete master
 ```
+
+### Restore deleted file
+
+```shell
+FILE=<FILE-PATH>
+
+git checkout $(git rev-list -n 1 HEAD -- "$FILE")^ -- "$FILE"
+```
