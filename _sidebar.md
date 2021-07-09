@@ -1,5 +1,5 @@
 -   [Cache control](cache-control.md)
--   [Cordova](/cordova/)
+-   [Cordova 🡢](/cordova/)
 -   [Docker swarm](docker-swarm.md)
 -   [Extend linux volume](extend-linux-volume.md)
 -   [Git](git.md)
