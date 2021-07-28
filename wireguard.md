@@ -19,10 +19,10 @@ mkdir -p /etc/wireguard
 pushd /etc/wireguard
 
 # generate server keys
-wg genkey | tee /etc/wireguard/server.private.key | wg pubkey >/etc/wireguard/server.public.key
+wg genkey | tee /etc/wireguard/server.private.key | wg pubkey > /etc/wireguard/server.public.key
 
 # generate server config
-cat <<EOF >/etc/wireguard/wg0.conf
+cat << EOF > /etc/wireguard/wg0.conf
 [Interface]
 PrivateKey = $(cat /etc/wireguard/server.private.key)
 Address    = $NETWORK_ADDR
@@ -51,8 +51,8 @@ ENDPOINT=dev.creationshop:51820
 CLIENT_ADDR=10.0.0.10
 
 # generate client keys
-wg genkey | tee /etc/wireguard/client.private.key | wg pubkey >/etc/wireguard/client.public.key
-wg genpsk >/etc/wireguard/client.preshared.key
+wg genkey | tee /etc/wireguard/client.private.key | wg pubkey > /etc/wireguard/client.public.key
+wg genpsk > /etc/wireguard/client.preshared.key
 
 # add peer
 wg set wg0 peer $(cat /etc/wireguard/client.public.key) persistent-keepalive 60 allowed-ips $CLIENT_ADDR/32
@@ -63,7 +63,7 @@ wg set wg0 peer $(cat /etc/wireguard/client.public.key) persistent-keepalive 60 
 wg-quick save wg0
 
 # generate client config
-cat <<EOF >/etc/wireguard/client.wireguard.conf
+cat << EOF > /etc/wireguard/client.wireguard.conf
 [Interface]
 PrivateKey          = $(cat /etc/wireguard/client.private.key)
 Address             = $CLIENT_ADDR/32

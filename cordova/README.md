@@ -89,7 +89,7 @@ or upload, using command line:
 
 ```shell
 # upload via command line
-xcrun altool --upload-app -f -u dzagashev@gmail.com <filename >.ipa
+xcrun altool --upload-app -f -u dzagashev@gmail.com < filename > .ipa
 ```
 
 If your account has 2FA enabled, first visit https://appleid.apple.com/ and generate an app password.
