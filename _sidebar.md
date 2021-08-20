@@ -15,7 +15,7 @@
 
 **Packages**
 
--   [@softvisio/app](https://softvisio.github.io/app/)
+-   [@softvisio/api](https://softvisio.github.io/api/)
 -   [@softvisio/cli](https://softvisio.github.io/cli/)
 -   [@softvisio/core](https://softvisio.github.io/core/)
 -   [@softvisio/datasets](https://softvisio.github.io/datasets/)
