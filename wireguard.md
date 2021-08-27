@@ -83,9 +83,11 @@ rm -rf /etc/wireguard/client.private.key /etc/wireguard/client.public.key /etc/w
 
 ### AllowedIPs
 
-On client if you want to tunnel all traffic - use `0.0.0.0/0`, or if you want tot route only traffic to specific network via wireguard - use this network address, eg: `10.10.10.0/24`.
+On client if you want to tunnel all traffic - use `0.0.0.0/0`, or if you want to route only traffic to the specific network via wireguard - use this network address, eg: `10.10.10.0/24`.
 
 ### Docker
+
+:info: wireguard kernel module must be installed on the host machine.
 
 ```shell
 d run -it --cap-add=NET_ADMIN --cap-add=SYS_ADMIN -p 51820:51820/tcp -p 51820:51820/udp --network private softvisio/core
@@ -94,6 +96,4 @@ dnf install -y elrepo-release epel-release
 dnf install -y kmod-wireguard wireguard-tools iptables
 
 # remove "sysctl -w net.ipv4.ip_forward=1" from PostUp
-
-# wireguard kernel module must be installed on the host machine.
 ```
