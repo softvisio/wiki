@@ -87,7 +87,7 @@ On client if you want to tunnel all traffic - use `0.0.0.0/0`, or if you want to
 
 ### Docker
 
-:info: wireguard kernel module must be installed on the host machine.
+:warning: wireguard kernel module must be installed on the host machine.
 
 ```shell
 d run -it --cap-add=NET_ADMIN --cap-add=SYS_ADMIN -p 51820:51820/tcp -p 51820:51820/udp --network private softvisio/core
