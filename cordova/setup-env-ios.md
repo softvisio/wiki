@@ -1,12 +1,12 @@
-# SETUP ENVIRONMENT IOS
+# Setup environment iOS
 
-## MACOS
+## macOS
 
 ```shell
 curl -fsSL https://raw.githubusercontent.com/softvisio/scripts/main/setup-host-macos.sh | /bin/bash
 ```
 
-### UPGRADE
+### Upgrade
 
 ```shell
 brew update
