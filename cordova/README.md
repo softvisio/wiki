@@ -1,6 +1,6 @@
 # Cordova
 
-:warn: !!! Do not forget to add `<script src="cordova.js" type="text/javascript" integrity="" crossorigin="anonymous"></script>` to your `index.html`.
+:warn: Do not forget to add `<script src="cordova.js" type="text/javascript" integrity="" crossorigin="anonymous"></script>` to your `index.html`.
 
 ### Build application
 
@@ -23,7 +23,7 @@ cordova build android
 
 #### MacOS + iOS
 
-!!! Under macos do not work with the project in vmware shared folder, copy it to internal filesystem.
+:warn: Under macos do not work with the project in vmware shared folder, copy it to internal filesystem.
 
 ```shell
 # add ios platform
