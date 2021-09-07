@@ -2,7 +2,7 @@
 
 ### Prepare environment
 
-```sh
+```shell
 curl -fsSL https://raw.githubusercontent.com/softvisio/scripts/main/setup-host-macos.sh | /bin/bash
 
 brew update
@@ -19,33 +19,33 @@ pod repo update
 
 -   Install cordova platform:
 
-    ```sh
+    ```shell
     npm up
     cordova platform add --nosave ios
     ```
 
 -   Update pods (if you will see errors, related to the pods):
 
-    ```
+    ```shell
     cd platform/ios
     pod install
     ```
 
 -   Open project workspace in `xcode`:
-    ```
+    ```shell
     open -a xcode platforms/ios/*.xcworkspace
     ```
     In xcode set apple team and select automanage signing.
 
 ### Build
 
-```sh
+```shell
 cordova build ios
 ```
 
 ### Release
 
-```
+```shell
 cordova build ios --release --device
 ```
 
@@ -100,7 +100,7 @@ For ios, macos creates certificates and povisioning profiles in xcode.
 
 -   Do not forget to add `Push Notifications` capability. Do not create any push notifications certificates because we will use keys;
 
-## Profile
+#### Profile
 
 Provisioning profile links certificate, identified and devices together.
 
