@@ -95,16 +95,13 @@ cordova build android --release
 
 ### Run
 
+Run on android device, connected to the USB port:
+
 ```shell
-# run on android device, connected to the USB port
 cordova run android --device
 ```
 
-Access app console from the browser:
-
-```text
-chrome://inspect/#devices
-```
+Access app console from the browser: [chrome://inspect/#devices](chrome://inspect/#devices).
 
 ### Certificates
 
