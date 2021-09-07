@@ -1,8 +1,6 @@
-# SETUP ENVIRONMENT ANDROID
+# Android
 
-## WINDOWS
-
-### Create build environment
+### Prepare environment
 
 -   Java server JRE
 
@@ -18,7 +16,7 @@
     -   [download sdk-tools-windows.zip](https://developer.android.com/studio/#downloads)
     -   unpack to devel/android/cmdline-tools/latest
 
-### Setup device
+### Prepare device
 
 -   Sony device drivers
 
@@ -28,7 +26,7 @@
 
 -   Enable / disable USB debugging: `Settings -> Advanced -> Developer options`.
 
-### Setup android emulator
+### Prepare android emulator
 
 -   Intel HEXM
 
@@ -68,3 +66,27 @@
     ```shell
     emulator -avd pixel
     ```
+
+### Prepare project
+
+### Build
+
+### Release
+
+### Run in simulator
+
+### Certificates
+
+```shell
+# setup build environment
+env-android
+
+# generate keystore
+keytool -genkey -v -keystore zdm@softvisio.net.jks -alias zdm@softvisio.net -keyalg RSA -keysize 2048 -validity 10000
+
+# convert keystore to pkcs12 format
+keytool -importkeystore -srckeystore zdm@softvisio.net.jks -destkeystore zdm@softvisio.net.pkcs12 -deststoretype pkcs12
+
+# .jks keystore can be removed
+rm zdm@softvisio.net.jks
+```
