@@ -69,11 +69,42 @@
 
 ### Prepare project
 
+-   Install cordova platform:
+
+    ```shell
+    env-android
+    npm up
+    cordova platform add --nosave android
+    ```
+
+    Do not use latest platform, some plugins may not work.
+
+    To reinstall everything from the scratch remove `node_modules`, `platforms`, `plugins` directories.
+
 ### Build
+
+```shell
+cordova build android
+```
 
 ### Release
 
-### Run in simulator
+```shell
+cordova build android --release
+```
+
+### Run
+
+```shell
+# run on android device, connected to the USB port
+cordova run android --device
+```
+
+Access app console from the browser:
+
+```text
+chrome://inspect/#devices
+```
 
 ### Certificates
 
