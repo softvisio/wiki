@@ -8,7 +8,7 @@ CREATE TABLE "test" (
 	title text NOT NULL
 );
 
-CREATE UNIQUE INDEX IF NOT EXISTS test_title_idx" ON "test (title);
+CREATE UNIQUE INDEX IF NOT EXISTS test_title_key ON test (title);
 
 SELECT count(*) AS total, COALESCE(name, 'no name') FROM user WHERE id IN (100, 101) GROUP BY group;
 ```
@@ -19,54 +19,65 @@ SELECT count(*) AS total, COALESCE(name, 'no name') FROM user WHERE id IN (100, 
 
 -   All identifiers (table, column, indexes, etc. names) must be in the snake_case.
 
-    -   Reserver row identifiers `NEW`, `OLD`, `EXCLUDED` must be unquoted upper case.
+    -   Reserved row identifiers `NEW`, `OLD`, `EXCLUDED` must be unquoted upper case.
 
 -   Subquery expressions: `EXISTS`, `IN`, `NOT IN`, `ANY`, `SOME`, `ALL` must be in upper case.
 
 -   Conditional expressions `CASE`, `COALECSE`, `NULLIF`, `CREATEST`, `LEAST` must be in upper case;
 
--   All type names must be in lower case.
+-   All type names must be in the `snake_case`.
 
--   All functions names must be in the snake_case.
+-   All functions names must be in the `snake_case`.
 
 ### Indexes
 
--   Index name template `<table_name>_<column1_name>_<column2_name>_idx`.
+Indexes must be unique across the schema.
 
-    Index names examples
+Index name must be in the `snake_case`.
 
-    ```sql
-    CREATE INDEX "user_id_idx" ON "user" ("id");
+Index name template `<table_name>_<column_name>..._<suffix>`, where the suffix is one of the following:
 
-    CREATE INDEX "user_id_title_idx" ON "user" ("id", "title");
-    ```
+-   'pkey' for a Primary Key constraint;
+-   `key` for a Unique constraint;
+-   `excl` for an Exclusion constraint;
+-   `idx` for any other kind of index;
+-   `fkey` for a Foreign key;
+-   `check` for a Check constraint;
+
+Examples
+
+```sql
+CREATE INDEX "user_id_idx" ON "user" ("id");
+
+CREATE INDEX "user_id_title_idx" ON "user" ("id", "title");
+```
 
 ### Sequences
 
--   Sequence name template `<table_name>_<column_name>_seq`.
+Sequence name template `<table_name>_<column_name>_seq`.
 
-    Sequence names examples
+Examples
 
-    ```sql
-    CREATE SEQUENCE "user_id_seq" AS int8;
-    ```
+```sql
+CREATE SEQUENCE "user_id_seq" AS int8;
+```
 
 ### Triggers
 
-    For `PostgreSQL` triggers are table-specific, so trigger name can be: `<colimn_name>?_<triger_event>`, ed: `before_update`, `some_column_after_insert`;
+`PostgreSQL` triggers are unique across the table, so trigger name can be: `[<column_name>...]_<triger_event>`, eg: `before_update`, `some_column_after_insert`;
 
--   For `SQLite` triggers are global, so name must be fully specified, template `<table_name>_<triger_event>_trigger`.
+`SQLite` triggers are global, so name must be fully specified, template `<table_name>_[<column_name>...]_<triger_event>_trigger`.
 
--   Trigger functions names must have same name as trigger or must have `_trigger` suffix.
+Trigger functions names must have same name as trigger and must have `_trigger` suffix.
 
-    Trigger names examples
+Examples:
 
-    ```sql
-    CREATE FUNCTION user_before_insert_trigger() RETURNS TRIGGER
+```sql
+CREATE FUNCTION user_before_insert_trigger() RETURNS TRIGGER
 
-    -- SQLite
-    CREATE TRIGGER user_before_insert_trigger BEFORE INSERT ON user FOR EACH ROW EXECUTE PROCEDURE user_before_insert_trigger();
+-- SQLite
+CREATE TRIGGER user_before_insert_trigger BEFORE INSERT ON user FOR EACH ROW EXECUTE PROCEDURE user_before_insert_trigger();
 
-    -- PostgreSQL
-    CREATE TRIGGER before_insert BEFORE INSERT ON user FOR EACH ROW EXECUTE PROCEDURE user_before_insert_trigger();
-    ```
+-- PostgreSQL
+CREATE TRIGGER before_insert BEFORE INSERT ON user FOR EACH ROW EXECUTE PROCEDURE user_before_insert_trigger();
+```
