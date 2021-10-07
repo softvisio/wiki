@@ -4,20 +4,20 @@
 
 ```sql
 CREATE TABLE "test" (
-	"id" uuid PRIMARY KEY NOT NULL DEFAULT get_random_uuid(),
-	"title" text NOT NULL
+	id uuid PRIMARY KEY NOT NULL DEFAULT get_random_uuid(),
+	title text NOT NULL
 );
 
-CREATE UNIQUE INDEX IF NOT EXISTS "test_title_idx" ON "test" ("title");
+CREATE UNIQUE INDEX IF NOT EXISTS test_title_idx" ON "test (title);
 
-SELECT count(*) AS "total", COALESCE("name", 'no name') FROM "user" WHERE "id" IN (100, 101) GROUP BY "group";
+SELECT count(*) AS total, COALESCE(name, 'no name') FROM user WHERE id IN (100, 101) GROUP BY group;
 ```
 
 ## Rules
 
 -   All keywords (SELECT, INSER, etc.) must be in upper case;
 
--   All identifiers (table, column, indexes, etc. names) must be double-quoted lower camel case strings.
+-   All identifiers (table, column, indexes, etc. names) must be in the snake_case.
 
     -   Reserver row identifiers `NEW`, `OLD`, `EXCLUDED` must be unquoted upper case.
 
@@ -27,7 +27,7 @@ SELECT count(*) AS "total", COALESCE("name", 'no name') FROM "user" WHERE "id" I
 
 -   All type names must be in lower case.
 
--   All functions names must be in lower camel case.
+-   All functions names must be in the snake_case.
 
 ### Indexes
 
@@ -53,7 +53,9 @@ SELECT count(*) AS "total", COALESCE("name", 'no name') FROM "user" WHERE "id" I
 
 ### Triggers
 
--   Trigger name template `<table_name>_<triiger_event>_trigger`.
+    For `PostgreSQL` triggers are table-specific, so trigger name can be: `<colimn_name>?_<triger_event>`, ed: `before_update`, `some_column_after_insert`;
+
+-   For `SQLite` triggers are global, so name must be fully specified, template `<table_name>_<triger_event>_trigger`.
 
 -   Trigger functions names must have same name as trigger or must have `_trigger` suffix.
 
@@ -62,5 +64,9 @@ SELECT count(*) AS "total", COALESCE("name", 'no name') FROM "user" WHERE "id" I
     ```sql
     CREATE FUNCTION user_before_insert_trigger() RETURNS TRIGGER
 
-    CREATE TRIGGER "user_before_insert_trigger" BEFORE INSERT ON "user" FOR EACH ROW EXECUTE PROCEDURE user_before_insert_trigger();
+    -- SQLite
+    CREATE TRIGGER user_before_insert_trigger BEFORE INSERT ON user FOR EACH ROW EXECUTE PROCEDURE user_before_insert_trigger();
+
+    -- PostgreSQL
+    CREATE TRIGGER before_insert BEFORE INSERT ON user FOR EACH ROW EXECUTE PROCEDURE user_before_insert_trigger();
     ```
