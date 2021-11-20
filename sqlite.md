@@ -36,13 +36,20 @@ By default, an index takes the collation from the table column, so you could cha
 
 ```sql
 CREATE TABLE a (
-	name1 text COLLATE NOCASE, -- this column will be case insensitive
-	name2 text               -- this column is case sensitive
+	name1 text COLLATE NOCASE, -- this column is case insensitive
+	name2 text                 -- this column is case sensitive
 );
 
 CREATE INDEX IF NOT EXISTS a_name1_nocase_idx ON a ( name1 COLLATE NOCASE, name2 COLLATE NOCASE );
 
+-- will return results, regardless to the case, because column is declared as case insensitive
 SELECT * FROM a WHERE name1 = 'UPPER_case' COLLATE NO CASE;
+
+-- will return only results in the same case
+SELECT * FROM a WHERE name2 = 'UPPER_case';
+
+-- will return results regardless to the case
+SELECT * FROM a WHERE name2 = 'UPPER_case' COLLATE NO CASE;
 ```
 
 ### FAQ
