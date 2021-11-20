@@ -28,6 +28,23 @@ DEFAULT(gen_random_uuid())
 SELECT sqlite_notify( 'event-name', payload );
 ```
 
+### Collation
+
+An index can be used to speed up a search only if it uses the same collation as the query.
+
+By default, an index takes the collation from the table column, so you could change the table definition:
+
+```sql
+CREATE TABLE a (
+	name1 text COLLATE NOCASE, -- this column will be case insensitive
+	name2 text               -- this column is case sensitive
+);
+
+CREATE INDEX IF NOT EXISTS a_name1_nocase_idx ON a ( name1 COLLATE NOCASE, name2 COLLATE NOCASE );
+
+SELECT * FROM a WHERE name1 = 'UPPER_case' COLLATE NO CASE;
+```
+
 ### FAQ
 
 SQLite will NOT use the second column of an index if the first column was an inequality expression (eg. customer > 33).
