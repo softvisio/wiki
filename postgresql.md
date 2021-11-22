@@ -41,19 +41,32 @@ DROP USER "<username>";
 [`uuid-ossp` extension documentation.](https://www.postgresql.org/docs/current/static/uuid-ossp.html)
 
 ```sql
-CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
-
-# use UUID v1 - based on MAC addr.
-"id" uuid PRIMARY KEY NOT NULL DEFAULT uuid_generate_v1()
-
 CREATE EXTENSION IF NOT EXISTS "pgcrypto";
 
-# use UUID v4 - random
+# use UUID v4
 "id" uuid PRIMARY KEY NOT NULL DEFAULT gen_random_uuid()
 ```
 
 ### Notifications
 
+String payload:
+
 ```sql
 PERFORM pg_notify( 'event-name', payload );
+```
+
+JSON payload:
+
+```sql
+PERFORM pg_notify( 'event-name', json_build_object( 'key1', 'value1', 'key2', 'value2' )::text );
+```
+
+### INSERT ON CONFLICT UPDATE RETURNING
+
+All inserted `key` fields must be unique, otherwise you will get error `Can not affect row a second time`. In the example below if `column` field is unique in the table - you must pre-filter data and throw away rows with the duplicate `column`.
+
+```sql
+INSERT INTO table ( column ) VALUES ( ? )
+ON CONFLICT ( key ) DO UPDATE SET column = EXCLUDED.column
+RETURNING *;
 ```
