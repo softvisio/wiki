@@ -6,12 +6,6 @@
 gpg --full-gen-key
 ```
 
-### Generate SSH key pairs
-
-```shell
-ssh-keygen -o -a 100 -t ed25519
-```
-
 ### Generate revocation certificate
 
 ```shell

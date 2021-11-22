@@ -1,5 +1,11 @@
 # SSH
 
+### Generate SSH key pairs
+
+```shell
+ssh-keygen -o -a 100 -t ed25519
+```
+
 ### Default autossh command line arguments
 
 ```shell
