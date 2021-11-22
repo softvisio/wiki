@@ -4,6 +4,7 @@
 -   [Extend linux volume](extend-linux-volume.md)
 -   [Git](git.md)
 -   [Google caldav](google-caldav.md)
+-   [GPG](gpg.md)
 -   [Markdown](markdown.md)
 -   [SQL syntax rules](sql-syntax-rules.md)
 -   [PostgreSQL](postgresql.md)
