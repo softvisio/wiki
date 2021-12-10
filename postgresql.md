@@ -70,3 +70,33 @@ INSERT INTO table ( column ) VALUES ( ? )
 ON CONFLICT ( key ) DO UPDATE SET column = EXCLUDED.column
 RETURNING *;
 ```
+
+### Lock records
+
+```javascript
+const res = await this.dbh.lock(dbh => {
+    // lock
+    const tasks = await dbh.select(sql`
+WITH cte AS (
+    SELECT
+		id
+	FROM task
+	WHERE
+		locked IS NULL OR NOT EXISTS ( SELECT FROM pg_stat_activity WHERE pid = task.locked AND datname = current_database() )
+	LIMIT 100 FOR UPDATE
+)
+UPDATE task SET locked = pg_backend_pid() FROM cte WHERE task.id = cte.id;
+`);
+
+	// process tasks
+	// ...
+
+	// unlock
+	UPDATE task SET locked = NULL WHERE locked = pg_backend_pid();
+});
+```
+
+```javascript
+// unlock all records
+UPDATE task SET locked = NULL WHERE locked IS NOT NULL AND NOT EXISTS ( SELECT FROM pg_stat_activity WHERE pid = task.locked AND datname = current_database() );
+```
