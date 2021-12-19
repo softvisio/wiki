@@ -3,37 +3,37 @@
 ### Create database
 
 ```sql
-create extension if not exists softvisio;
+CREATE EXTENSION IF NOT EXISTS softvisio;
 
-select create_database( 'test' ) AS password;
+SELECT create_database( 'test', 'en_US.UTF8' ) AS password;
 ```
 
 ### User management
 
 ```sql
 # create user
-create user <username> with encrypted password '<password>';
+CREATE USER <username> WITH ENCRYPTED PASSWORD '<password>';
 
 # change password for user
 \password <username>
 
 # grant priviledges
 /c <dbname>;
-grant all privileges on all tables in schema public to <username>;
+GRANT ALL PRIVILEGES ON ALL TABLES IN schema public To <username>;
 
 # to create extensions you need to temporary grant superuser permissions
-alter user <username> with superuser;
-alter user <username> with nosuperuser;
+ALTER USER <username> WITH SUPERUSER;
+ALTER USER <username> WITH NOSUPERUSER;
 
 # drop user
-reassign owned by <username> to postgres;
-drop user <username>;
+REASSIGN OWNED BY <username> TO postgres;
+DROP USER <username>;
 ```
 
 ### Unix timestamp with microseconds
 
 ```sql
-unix_timestamp float not null default extract( epoch from current_timestamp ),
+unix_timestamp float NOT NULL DEFAULT extract( EPOCH FROM CURRENT_TIMESTAMP ),
 ```
 
 ### UUID
@@ -41,10 +41,10 @@ unix_timestamp float not null default extract( epoch from current_timestamp ),
 [`uuid-ossp` extension documentation.](https://www.postgresql.org/docs/current/static/uuid-ossp.html)
 
 ```sql
-create extension if not exists pgcrypto;
+CREATE EXTENSION IF NOT EXISTS pgcrypto;
 
 # use UUID v4
-id uuid primary key not null default gen_random_uuid()
+id uuid PRIMARY KEY NOT NULL DEFAULT gen_random_uuid()
 ```
 
 ### Notifications
@@ -52,13 +52,13 @@ id uuid primary key not null default gen_random_uuid()
 String payload:
 
 ```sql
-perform pg_notify( 'event-name', payload );
+PERFORM pg_notify( 'event-name', payload );
 ```
 
 JSON payload:
 
 ```sql
-perform pg_notify( 'event-name', json_build_object( 'key1', 'value1', 'key2', 'value2' )::text );
+PERFORM pg_notify( 'event-name', json_build_object( 'key1', 'value1', 'key2', 'value2' )::text );
 ```
 
 ### INSERT ON CONFLICT UPDATE RETURNING
@@ -66,9 +66,9 @@ perform pg_notify( 'event-name', json_build_object( 'key1', 'value1', 'key2', 'v
 All inserted `key` fields must be unique, otherwise you will get error `Can not affect row a second time`. In the example below if `column` field is unique in the table - you must pre-filter data and throw away rows with the duplicate `column`.
 
 ```sql
-insert into table ( column ) values ( ? )
-on conflict ( key ) do update set column = excluded.column
-returning *;
+INSERT INTO table ( column ) VALUES ( ? )
+ON CONFLICT ( key ) DO UPDATE SET column = EXCLUDED.column
+RETURNING *;
 ```
 
 ### Lock records
@@ -81,35 +81,36 @@ returning *;
 
 ```javascript
 const res = await this.dbh.lock(dbh => {
+
     // lock
     const tasks = await dbh.select(sql`
-with cte as (
-    select
+WITH cte AS (
+    SELECT
 		id
-	from task
-	where
-		( locked >= 0 and not exists ( select from pg_stat_activity where pid = task.locked and datname = current_database() ) )
-	limit ?
-	for update
+	FROM task
+	WHERE
+		( locked >= 0 AND NOT EXISTS ( SELECT FROM pg_stat_activity WHERE pid = task.locked AND datname = current_database() ) )
+	LIMIT ?
+	FOR UPDATE
 )
-update
+UPDATE
 	task
-set
+SET
 	locked = pg_backend_pid()
-from
+FROM
 	cte
-where task.id = cte.id
+WHERE task.id = cte.id
 `);
 
 	// process tasks
 	// ...
 
 	// unlock
-	update task set locked = -1 where locked = pg_backend_pid();
+	UPDATE task SET locked = -1 WHERE locked = pg_backend_pid();
 });
 ```
 
 ```javascript
 // unlock all records
-update task set locked = 0 where locked > 0 and not exists ( select from pg_stat_activity where pid = task.locked and datname = current_database() );
+UPDATE task SET locked = 0 WHERE locked > 0 AND NOT EXISTS ( SELECT FROM pg_stat_activity WHERE pid = task.locked AND datname = current_database() );
 ```
