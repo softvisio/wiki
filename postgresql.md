@@ -5,7 +5,7 @@
 ```sql
 create extension if not exists softvisio;
 
-select create_database('test') AS password;
+select create_database( 'test' ) AS password;
 ```
 
 ### User management
@@ -73,6 +73,12 @@ returning *;
 
 ### Lock records
 
+`locked` column values:
+
+-   `-1` action done;
+-   `0` action pending;
+-   `>0` action locked, if pid exists;
+
 ```javascript
 const res = await this.dbh.lock(dbh => {
     // lock
@@ -82,7 +88,6 @@ with cte as (
 		id
 	from task
 	where
-		-- locked: -1 - done, 0 - pending, >0 locked, if pid exists
 		( locked >= 0 and not exists ( select from pg_stat_activity where pid = task.locked and datname = current_database() ) )
 	limit ?
 	for update
