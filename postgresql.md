@@ -83,7 +83,8 @@ WITH cte AS (
 	FROM task
 	WHERE
 		( locked IS NULL OR NOT EXISTS ( SELECT FROM pg_stat_activity WHERE pid = task.locked AND datname = current_database() ) )
-	LIMIT 100 FOR UPDATE
+	LIMIT ?
+	FOR UPDATE
 )
 UPDATE
 	task
