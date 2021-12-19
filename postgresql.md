@@ -82,10 +82,16 @@ WITH cte AS (
 		id
 	FROM task
 	WHERE
-		locked IS NULL OR NOT EXISTS ( SELECT FROM pg_stat_activity WHERE pid = task.locked AND datname = current_database() )
+		( locked IS NULL OR NOT EXISTS ( SELECT FROM pg_stat_activity WHERE pid = task.locked AND datname = current_database() ) )
 	LIMIT 100 FOR UPDATE
 )
-UPDATE task SET locked = pg_backend_pid() FROM cte WHERE task.id = cte.id;
+UPDATE
+	task
+SET
+	locked = pg_backend_pid()
+FROM
+	cte
+WHERE task.id = cte.id
 `);
 
 	// process tasks
