@@ -2,7 +2,7 @@
 
 ## Install "pip"
 
-```sh
+```shell
 curl -fSsLo d:\devel\python\get-pip.py https://bootstrap.pypa.io/get-pip.py
 
 python d:\devel\python\get-pip.py
@@ -12,7 +12,7 @@ python d:\devel\python\get-pip.py
 
 Edit `python310._pth`
 
-```txt
+```text
 python310.zip
 .
 Lib\site-packages
@@ -23,7 +23,7 @@ import site
 
 ## Install packages
 
-```sh
+```shell
 pip3 install --upgrade pynvim
 pip3 install --upgrade msgpack
 ```

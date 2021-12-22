@@ -73,44 +73,64 @@ RETURNING *;
 
 ### Lock records
 
-`locked` column values:
-
--   `-1` action done;
--   `0` action pending;
--   `>0` action locked, if pid exists;
-
 ```javascript
-const res = await this.dbh.lock(dbh => {
+// listen for free threads
+semaphore.on( "free", this.runTasks.bind( this ) );
+
+// wait for mutex
+await mutex.down();
+
+// wait for connection
+const abortSignal = await this.dbh.getAbortSignal();
+
+// queue is not empty
+if ( semaphore.waitingThreads ) return mutex.up();
+
+const limit = semaphore.totalFreeThreads;
+
+const res = await this.dbh.lock( dbh => {
 
     // lock
-    const tasks = await dbh.select(sql`
+    const tasks = await dbh.select( sql`
 WITH cte AS (
     SELECT
 		id
-	FROM task
+	FROM
+		task
 	WHERE
-		( locked >= 0 AND NOT EXISTS ( SELECT FROM pg_stat_activity WHERE pid = task.locked AND datname = current_database() ) )
+		( locked IS NULL OR NOT EXISTS ( SELECT FROM pg_stat_activity WHERE application_name = task.locked ) )
 	LIMIT ?
 	FOR UPDATE
 )
 UPDATE
 	task
 SET
-	locked = pg_backend_pid()
+	locked = ?
 FROM
 	cte
 WHERE task.id = cte.id
-`);
+`, [ limit, abortSignal.appLockId ] );
 
-	// process tasks
-	// ...
+// run threads
+for ( const task of tasks ) {
+	semaphore.runThread( async task => {
 
-	// unlock
-	UPDATE task SET locked = -1 WHERE locked = pg_backend_pid();
-});
+		// check abort signal
+		if ( abortSignal.aborted ) return;
+
+		// process task
+		// ...
+
+		// unlock task
+		await this.sbh.do( sql`UPDATE task SET locked = NULL WHERE id = ?`, [task.id] );
+	});
+}
+
+// unlock mutex
+this.#mutex.up();
 ```
 
 ```javascript
 // unlock all records
-UPDATE task SET locked = 0 WHERE locked > 0 AND NOT EXISTS ( SELECT FROM pg_stat_activity WHERE pid = task.locked AND datname = current_database() );
+UPDATE task SET locked = NULL WHERE locked IS NOT NULL AND NOT EXISTS ( SELECT FROM pg_stat_activity WHERE application_name = task.locked );
 ```

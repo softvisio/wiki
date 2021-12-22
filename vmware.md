@@ -22,7 +22,7 @@ for /R %f in (*.vmdk) do vmware-vdiskmanager -k "%f"
 
 Need to reinstall on every vmware update.
 
-```sh
+```shell
 git clone git@github.com:DrDonk/unlocker.git
 
 # from admin
@@ -35,6 +35,6 @@ call win-install.cmd
 -   Unsubscribe from the BETA program, System Preferences -> Updates -> Details;
 -   Change resolution
 
-```sh
+```shell
 sudo "/Library/Application Support/VMware Tools/vmware-resolutionSet" 1920 1080
 ```
