@@ -109,7 +109,7 @@ FROM
 	cte
 WHERE task.id = cte.id
 `,
-    [limit, abortSignal.pid]
+    [limit, abortSignal.mainPid]
 );
 
 // run threads
