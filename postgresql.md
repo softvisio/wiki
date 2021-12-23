@@ -75,7 +75,7 @@ RETURNING *;
 
 ```javascript
 // listen for free threads
-semaphore.on( "free", this.runTasks.bind( this ) );
+semaphore.on("free", this.runTasks.bind(this));
 
 // wait for mutex
 await mutex.down();
@@ -84,46 +84,46 @@ await mutex.down();
 const abortSignal = await this.dbh.getAbortSignal();
 
 // queue is not empty
-if ( semaphore.waitingThreads ) return mutex.up();
+if (semaphore.waitingThreads) return mutex.up();
 
 const limit = semaphore.totalFreeThreads;
 
-const res = await this.dbh.lock( dbh => {
-
-    // lock
-    const tasks = await dbh.select( sql`
+// lock
+const tasks = await dbh.select(
+    sql`
 WITH cte AS (
     SELECT
 		id
 	FROM
 		task
 	WHERE
-		( locked IS NULL OR NOT EXISTS ( SELECT FROM pg_stat_activity WHERE application_name = task.locked ) )
+		( lock >= 0 AND NOT EXISTS ( SELECT FROM pg_active_backend WHERE id = task.lock ) )
 	LIMIT ?
 	FOR UPDATE
 )
 UPDATE
 	task
 SET
-	locked = ?
+	lock = pg_backend_id( ? )
 FROM
 	cte
 WHERE task.id = cte.id
-`, [ limit, abortSignal.appLockId ] );
+`,
+    [limit, abortSignal.pid]
+);
 
 // run threads
-for ( const task of tasks ) {
-	semaphore.runThread( async task => {
+for (const task of tasks) {
+    semaphore.runThread(async task => {
+        // check abort signal
+        if (abortSignal.aborted) return;
 
-		// check abort signal
-		if ( abortSignal.aborted ) return;
+        // process task
+        // ...
 
-		// process task
-		// ...
-
-		// unlock task
-		await this.sbh.do( sql`UPDATE task SET locked = NULL WHERE id = ?`, [task.id] );
-	});
+        // unlock task
+        await this.sbh.do(sql`UPDATE task SET lock = NULL WHERE id = ?`, [task.id]);
+    });
 }
 
 // unlock mutex
@@ -132,5 +132,5 @@ this.#mutex.up();
 
 ```javascript
 // unlock all records
-UPDATE task SET locked = NULL WHERE locked IS NOT NULL AND NOT EXISTS ( SELECT FROM pg_stat_activity WHERE application_name = task.locked );
+UPDATE task SET lock = 0 WHERE lock != 0 AND NOT EXISTS ( SELECT FROM pg_active_backend WHERE id = task.lock );
 ```
