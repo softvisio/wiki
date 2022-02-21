@@ -6,11 +6,12 @@
     "homepage": "https://softvisio.github.io/wiki/",
     "bugs": {
         "url": "https://github.com/softvisio/wiki/issues",
-        "email": "zdm@softvisio.net"
+        "email": "zdm <zdm@softvisio.net>"
     },
     "repository": {
         "type": "git",
         "url": "https://github.com/softvisio/wiki.git"
     },
+    "license": "Proprietary Software",
     "author": "zdm <zdm@softvisio.net>"
 }
