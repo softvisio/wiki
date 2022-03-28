@@ -87,3 +87,9 @@ gcloud compute addresses create load-balancer \
     --region=us-central1 \
     --addresses=35.202.255.145
 ```
+
+### Enable service
+
+```shell
+gcloud services enable artifactregistry.googleapis.com
+```
