@@ -51,7 +51,8 @@ gcloud compute instances create test \
     --zone=us-central1-a \
     --machine-type=c2d-highcpu-4 \
     --metadata-from-file user-data=cloud-init.ubuntu.yaml \
-    --tags TAG1,TAG2
+    --tags TAG1,TAG2 \
+    --address=load-balancer
 ```
 
 #### Without external IP address
@@ -77,4 +78,12 @@ gcloud compute firewall-rules create allow-pgsql \
     --direction=INGRESS \
     --source-ranges=0.0.0.0/0 \
     --target-tags=http-server
+```
+
+### Reserve external address
+
+```shell
+gcloud compute addresses create load-balancer \
+    --region=us-central1 \
+    --addresses=35.202.255.145
 ```
