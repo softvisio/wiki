@@ -5,6 +5,7 @@
 -   [ExtJS](extjs.md)
 -   [Git](git.md)
 -   [Google caldav](google-caldav.md)
+-   [Google cloud](gcloud.md)
 -   [GPG](gpg.md)
 -   [Markdown](markdown.md)
 -   [SQL syntax rules](sql-syntax-rules.md)
