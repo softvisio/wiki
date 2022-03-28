@@ -51,7 +51,7 @@ gcloud compute instances create test \
     --metadata-from-file user-data=cloud-init.ubuntu.yaml
 ```
 
-#### Cloud-optimized system
+#### Container-optimized system
 
 [Documentation](https://cloud.google.com/container-optimized-os/docs/how-to/create-configure-instance#gcloud_1)
 
