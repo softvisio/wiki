@@ -67,3 +67,14 @@ gcloud compute instances add-tags test \
     --zone us-central1-a \
     --tags http-server
 ```
+
+### Allow port
+
+```shell
+gcloud compute firewall-rules create allow-pgsql \
+    --description="Allow incoming traffic on TCP port 5432" \
+    --allow=tcp:5432 \
+    --direction=INGRESS \
+    --source-ranges=0.0.0.0/0 \
+    --target-tags=http-server
+```
