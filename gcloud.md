@@ -48,7 +48,7 @@ gcloud compute instances create test \
     --image-project=ubuntu-os-cloud \
     --zone=us-central1-a \
     --machine-type=c2d-highcpu-4 \
-    --metadata-from-file user-data=cloud-init.yaml
+    --metadata-from-file user-data=cloud-init.ubuntu.yaml
 ```
 
 #### Cloud-optimized system
@@ -61,7 +61,7 @@ gcloud compute instances create test \
     --image-project=cos-cloud \
     --zone=us-central1-a \
     --machine-type=c2d-highcpu-4 \
-    --metadata-from-file user-data=filename
+    --metadata-from-file user-data=cloud-init.cos.yaml
 ```
 
 #### Without external IP address
