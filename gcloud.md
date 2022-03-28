@@ -40,6 +40,8 @@ gcloud compute ssh --zone=us-central1-a <INSTANCE-NAME>
 
 ### Create instance
 
+[Documentation](https://cloud.google.com/container-optimized-os/docs/how-to/create-configure-instance#gcloud_1)
+
 #### Ubuntu
 
 ```shell
@@ -48,24 +50,20 @@ gcloud compute instances create test \
     --image-project=ubuntu-os-cloud \
     --zone=us-central1-a \
     --machine-type=c2d-highcpu-4 \
-    --metadata-from-file user-data=cloud-init.ubuntu.yaml
-```
-
-#### Container-optimized system
-
-[Documentation](https://cloud.google.com/container-optimized-os/docs/how-to/create-configure-instance#gcloud_1)
-
-```shell
-gcloud compute instances create test \
-    --image-family=cos-stable \
-    --image-project=cos-cloud \
-    --zone=us-central1-a \
-    --machine-type=c2d-highcpu-4 \
-    --metadata-from-file user-data=cloud-init.cos.yaml
+    --metadata-from-file user-data=cloud-init.ubuntu.yaml \
+    --tags TAG1,TAG2
 ```
 
 #### Without external IP address
 
 ```shell
 --network-interface=no-address
+```
+
+### Add instance tags
+
+```shell
+gcloud compute instances add-tags test \
+    --zone us-central1-a \
+    --tags http-server
 ```
