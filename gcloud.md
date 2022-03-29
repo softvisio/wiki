@@ -1,7 +1,9 @@
 # Google cloud
 
 [Cloud DNS](https://cloud.google.com/compute/docs/internal-dns)
+
 [Cloud IP addresses](https://cloud.google.com/compute/docs/ip-addresses)
+
 [Cloud init](https://www.digitalocean.com/community/tutorials/an-introduction-to-cloud-config-scripting)
 
 ### List available OS images
