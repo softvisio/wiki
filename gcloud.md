@@ -71,16 +71,27 @@ gcloud compute instances add-tags test \
     --tags http-server
 ```
 
-### Allow port
+### Firewall
 
-```shell
-gcloud compute firewall-rules create allow-pgsql \
-    --description="Allow incoming traffic on TCP port 5432" \
-    --allow=tcp:5432 \
-    --direction=INGRESS \
-    --source-ranges=0.0.0.0/0 \
-    --target-tags=http-server
-```
+-   PostgreSQL port:
+
+    ```shell
+    gcloud compute firewall-rules create allow-pgsql \
+        --allow=tcp:5432 \
+        --direction=INGRESS \
+        --source-ranges=0.0.0.0/0 \
+        --target-tags=http-server
+    ```
+
+-   Softvisio proxy port:
+
+    ```shell
+    gcloud compute firewall-rules create allow-softvisio-proxy \
+        --allow=tcp:51930 \
+        --direction=INGRESS \
+        --source-ranges=0.0.0.0/0 \
+        --target-tags=http-server
+    ```
 
 ### Reserve external address
 
