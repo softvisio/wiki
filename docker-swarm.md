@@ -7,10 +7,23 @@ docker swarm join-token manager
 docker swarm join-token worker
 ```
 
-### Create network
+### Network
+
+-   Create network:
 
 ```shell
 docker network create --driver overlay --subnet 10.1.0.0/16 --attachable private
+```
+
+Use host network:
+
+```yaml
+services:
+    service:
+	    networks: [host]
+
+networks:
+	host: { name: host, external: true }
 ```
 
 ### Set node labels

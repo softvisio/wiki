@@ -73,7 +73,7 @@ gcloud compute instances add-tags test \
 
 ### Firewall
 
--   PostgreSQL port:
+Open PostgreSQL port:
 
 ```shell
 gcloud compute firewall-rules create allow-pgsql \
@@ -83,7 +83,7 @@ gcloud compute firewall-rules create allow-pgsql \
     --target-tags=http-server
 ```
 
--   Softvisio proxy port:
+Open softvisio proxy port:
 
 ```shell
 gcloud compute firewall-rules create allow-softvisio-proxy \
