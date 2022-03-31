@@ -48,10 +48,10 @@ Default type is: `n1-standard-1`, 1 cpu, 3.75 GB
 gcloud compute machine-types list --filter="zone:(us-central1-a) AND guestCpus=4 AND memoryMb>=8000"
 ```
 
-#### SSH
+#### Connect to the instance using SSH
 
 ```shell
-gcloud compute ssh --zone=us-central1-a <INSTANCE-NAME>
+gcloud compute ssh --zone=us-central1-a test
 ```
 
 ### Firewall
@@ -83,7 +83,9 @@ gcloud compute firewall-rules update default-allow-http --target-tags=nginx
 gcloud compute firewall-rules update default-allow-https --target-tags=nginx
 ```
 
-### Reserve external address
+### Addresses
+
+#### Reserve external address
 
 ```shell
 gcloud compute addresses create nginx \
