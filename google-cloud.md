@@ -20,7 +20,7 @@ gcloud compute instances create test \
     --machine-type=c2d-highcpu-4 \
     --metadata-from-file user-data=cloud-init.yaml \
     --tags TAG1,TAG2 \
-    --address=load-balancer
+    --address=nginx
 # --network-interface=no-address # withoout external address
 ```
 
@@ -29,7 +29,7 @@ gcloud compute instances create test \
 ```shell
 gcloud compute instances add-tags test \
     --zone us-central1-a \
-    --tags http-server
+    --tags nginx
 ```
 
 #### List available OS images
@@ -68,30 +68,37 @@ gcloud compute ssh --zone=us-central1-a <INSTANCE-NAME>
 
 ### Firewall
 
-Open PostgreSQL port:
+#### Open PostgreSQL port:
 
 ```shell
 gcloud compute firewall-rules create allow-pgsql \
     --allow=tcp:5432 \
     --direction=INGRESS \
     --source-ranges=0.0.0.0/0 \
-    --target-tags=http-server
+    --target-tags=nginx
 ```
 
-Open softvisio proxy port:
+#### Open softvisio proxy port:
 
 ```shell
 gcloud compute firewall-rules create allow-softvisio-proxy \
     --allow=tcp:51930 \
     --direction=INGRESS \
     --source-ranges=0.0.0.0/0 \
-    --target-tags=http-server
+    --target-tags=nginx
+```
+
+#### Set rules tags
+
+```shell
+gcloud compute firewall-rules update default-allow-http --target-tags nginx
+gcloud compute firewall-rules update default-allow-https --target-tags nginx
 ```
 
 ### Reserve external address
 
 ```shell
-gcloud compute addresses create load-balancer \
+gcloud compute addresses create nginx \
     --region=us-central1 \
     --addresses=35.202.255.145
 ```
