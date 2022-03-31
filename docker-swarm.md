@@ -12,7 +12,7 @@ docker swarm join-token worker
 -   Create network:
 
 ```shell
-docker network create --driver overlay --subnet 10.1.0.0/16 --attachable private
+docker network create --driver overlay --attachable swarm
 ```
 
 Use host network:
