@@ -76,7 +76,7 @@ gcloud compute firewall-rules create allow-softvisio-proxy \
     --target-tags=nginx
 ```
 
-#### Set rules tags
+#### Set rule tags
 
 ```shell
 gcloud compute firewall-rules update default-allow-http --target-tags=nginx
