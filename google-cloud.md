@@ -19,8 +19,8 @@ gcloud compute instances create test \
     --image-project=ubuntu-os-cloud \
     --machine-type=c2d-highcpu-4 \
     --metadata-from-file user-data=cloud-init.yaml \
-    --tags TAG1,TAG2 \
-    --address=nginx
+    --tags=nginx \
+    --address=nginx # use reserved external addresss
 # --network-interface=no-address # withoout external address
 ```
 
@@ -28,8 +28,8 @@ gcloud compute instances create test \
 
 ```shell
 gcloud compute instances add-tags test \
-    --zone us-central1-a \
-    --tags nginx
+    --zone=us-central1-a \
+    --tags=nginx
 ```
 
 #### List available OS images
@@ -48,18 +48,6 @@ Default type is: `n1-standard-1`, 1 cpu, 3.75 GB
 gcloud compute machine-types list --filter="zone:(us-central1-a) AND guestCpus=4 AND memoryMb>=8000"
 ```
 
-#### List instances
-
-```shell
-gcloud compute instances list
-```
-
-#### Delete instance
-
-```shell
-gcloud compute instances delete --zone=us-central1-a <INSTANCE-NAME>
-```
-
 #### SSH
 
 ```shell
@@ -68,7 +56,7 @@ gcloud compute ssh --zone=us-central1-a <INSTANCE-NAME>
 
 ### Firewall
 
-#### Open PostgreSQL port:
+#### Open PostgreSQL port
 
 ```shell
 gcloud compute firewall-rules create allow-pgsql \
@@ -78,7 +66,7 @@ gcloud compute firewall-rules create allow-pgsql \
     --target-tags=nginx
 ```
 
-#### Open softvisio proxy port:
+#### Open softvisio proxy port
 
 ```shell
 gcloud compute firewall-rules create allow-softvisio-proxy \
@@ -91,8 +79,8 @@ gcloud compute firewall-rules create allow-softvisio-proxy \
 #### Set rules tags
 
 ```shell
-gcloud compute firewall-rules update default-allow-http --target-tags nginx
-gcloud compute firewall-rules update default-allow-https --target-tags nginx
+gcloud compute firewall-rules update default-allow-http --target-tags=nginx
+gcloud compute firewall-rules update default-allow-https --target-tags=nginx
 ```
 
 ### Reserve external address
