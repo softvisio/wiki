@@ -9,10 +9,10 @@ docker swarm join-token worker
 
 ### Network
 
--   Create network:
+Create network:
 
 ```shell
-docker network create --driver overlay --attachable swarm
+docker network create --driver overlay --attachable main
 ```
 
 Use host network:
