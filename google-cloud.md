@@ -1,16 +1,18 @@
 # Google cloud
 
-[Cloud DNS](https://cloud.google.com/compute/docs/internal-dns)
+Links:
 
-[Cloud IP addresses](https://cloud.google.com/compute/docs/ip-addresses)
-
-[Cloud init](https://www.digitalocean.com/community/tutorials/an-introduction-to-cloud-config-scripting)
+-   [Cloud DNS](https://cloud.google.com/compute/docs/internal-dns)
+-   [Cloud IP addresses](https://cloud.google.com/compute/docs/ip-addresses)
+-   [Cloud init](https://www.digitalocean.com/community/tutorials/an-introduction-to-cloud-config-scripting)
 
 ### Compute
 
 #### Create instance
 
-[Documentation](https://cloud.google.com/container-optimized-os/docs/how-to/create-configure-instance#gcloud_1)
+Links:
+
+-   [Create instance](https://cloud.google.com/container-optimized-os/docs/how-to/create-configure-instance)
 
 ```shell
 gcloud compute instances create test \
