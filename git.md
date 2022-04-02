@@ -26,6 +26,18 @@
     https://github.com/<OWNER>/<NAME>/releases/download/<TAG>/<FILE-NAME>
     ```
 
+-   Download branch as archive:
+
+    ```text
+    https://github.com/<OWNER>/<NAME>/archive/<BRANCH>.tar.gz
+    ```
+
+-   Download tag as archive:
+
+    ```text
+    https://github.com/<OWNER>/<NAME>/archive/refs/tags/<TAG>.tar.gz
+    ```
+
 ### Move Repository
 
 ```shell
