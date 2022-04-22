@@ -25,7 +25,7 @@ Links:
 ```shell
 gcloud compute instances create test \
     --zone=us-central1-a \
-    --image-family=ubuntu-minimal-2004-lts \
+    --image-family=ubuntu-minimal-2204-lts \
     --image-project=ubuntu-os-cloud \
     --machine-type=c2d-highcpu-4 \
     --metadata-from-file user-data=cloud-init.yaml \
