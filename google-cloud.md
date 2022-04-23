@@ -8,11 +8,9 @@ Links:
 
 ### Init
 
-````shell
+```shell
 gcloud init --console-only
 ```
-
-
 
 ### Compute
 
@@ -110,4 +108,3 @@ gcloud compute addresses create nginx \
 ```shell
 gcloud services enable artifactregistry.googleapis.com
 ```
-````
