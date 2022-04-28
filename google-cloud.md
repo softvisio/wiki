@@ -51,7 +51,7 @@ gcc activate <prohect-name>
 Reserve static ip address for cluster entry point:
 
 ```shell
-gc compute addresses create nginx
+gce addresses create nginx
 ```
 
 Setup firewall:
