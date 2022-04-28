@@ -57,8 +57,18 @@ gce addresses create nginx
 Setup firewall:
 
 ```shell
+gce firewall-rules delete default-allow-rdp
+
 gce firewall-rules update default-allow-http --target-tags=nginx
 gcloud compute firewall-rules update default-allow-https --target-tags=nginx
+```
+
+```shell
+gce firewall-rules create allow-http \
+    --allow=tcp:80 \
+    --direction=INGRESS \
+    --source-ranges=0.0.0.0/0 \
+    --target-tags=nginx
 ```
 
 ```shell
@@ -162,35 +172,6 @@ gcloud compute machine-types list --filter="zone:(us-central1-a) AND guestCpus=4
 
 ```shell
 gcloud compute ssh --zone=us-central1-a test
-```
-
-### Firewall
-
-#### Open PostgreSQL port
-
-```shell
-gcloud compute firewall-rules create allow-pgsql \
-    --allow=tcp:5432 \
-    --direction=INGRESS \
-    --source-ranges=0.0.0.0/0 \
-    --target-tags=nginx
-```
-
-#### Open softvisio proxy port
-
-```shell
-gcloud compute firewall-rules create allow-softvisio-proxy \
-    --allow=tcp:51930 \
-    --direction=INGRESS \
-    --source-ranges=0.0.0.0/0 \
-    --target-tags=nginx
-```
-
-#### Set rule tags
-
-```shell
-gcloud compute firewall-rules update default-allow-http --target-tags=nginx
-gcloud compute firewall-rules update default-allow-https --target-tags=nginx
 ```
 
 ### Addresses
