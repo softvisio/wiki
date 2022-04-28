@@ -82,11 +82,38 @@ Create entry point instance:
 ```shell
 gce instances create test \
     --image-project=ubuntu-os-cloud --image-family=ubuntu-minimal-2204-lts \
-    --machine-type=n1-standard-1 \
+    --machine-type=e2-standard-4 \
     --metadata-from-file user-data=cloud-init.yaml \
     --address=nginx \
     --tags=nginx
 ```
+
+### Machine type
+
+Default type is: `n1-standard-1`, 1 cpu, 3.75 GB.
+
+List available machines for selected zone:
+
+```shell
+gce machine-types list --filter="zone:(us-central1-a) AND guestCpus=4 AND memoryMb>=8000"
+```
+
+Machine types:
+
+Types: [https://cloud.google.com/compute/docs/machine-types](https://cloud.google.com/compute/docs/machine-types).
+
+Prices: [https://cloud.google.com/compute/vm-instance-pricing](https://cloud.google.com/compute/vm-instance-pricing)
+
+`micro`, `small`, `medium` - is a machines with the shared vCPU.
+
+| Type        | Purpose               |
+| ----------- | --------------------- |
+| E2          | Costs optimized       |
+| N1, N2, N2D | Balanced              |
+| Tau T2D     | Scale-out optimized   |
+| M1, M2      | Memory-optimized      |
+| C2, C2D     | Compute-optimized     |
+| A2          | Accelerator-optimized |
 
 ### Compute
 
