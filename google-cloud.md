@@ -176,28 +176,10 @@ Used for `--image-project` and `--image-family` options.
 gcloud compute images list
 ```
 
-#### List available machines types
-
-Default type is: `n1-standard-1`, 1 cpu, 3.75 GB
-
-```shell
-gcloud compute machine-types list --filter="zone:(us-central1-a) AND guestCpus=4 AND memoryMb>=8000"
-```
-
 #### Connect to the instance using SSH
 
 ```shell
-gcloud compute ssh --zone=us-central1-a test
-```
-
-### Addresses
-
-#### Reserve external address
-
-```shell
-gcloud compute addresses create nginx \
-    --region=us-central1 \
-    --addresses=35.202.255.145
+gce ssh test
 ```
 
 ### Services
