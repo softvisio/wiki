@@ -125,6 +125,12 @@ Prices: [https://cloud.google.com/compute/vm-instance-pricing](https://cloud.goo
 | C2, C2D     | Compute-optimized     |
 | A2          | Accelerator-optimized |
 
+Some common machines:
+
+| Type     | vCPUs | RAM | Costs |
+| -------- | ----- | --- | ----- |
+| e2-small | 2     | 2   | 25$   |
+
 ### Compute
 
 #### Create instance
