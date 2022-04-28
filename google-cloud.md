@@ -12,6 +12,22 @@ Links:
 gcloud init --console-only
 ```
 
+### Create project
+
+Create project
+
+```shell
+gcloud projects create <project-id> --name <project-name>
+```
+
+Link billing account:
+
+```shell
+gcloud billing accounts list
+
+gcloud billing projects link <project-id> --billing-account <billing-account-id>
+```
+
 ### Compute
 
 #### Create instance
