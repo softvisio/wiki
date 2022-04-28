@@ -6,26 +6,44 @@ Links:
 -   [Cloud IP addresses](https://cloud.google.com/compute/docs/ip-addresses)
 -   [Cloud init](https://www.digitalocean.com/community/tutorials/an-introduction-to-cloud-config-scripting)
 
+NOTE:
+
+-   `gc` ia alias for `gcloud`;
+-   `gcc` ia alias for `gcloud config configurations`;
+-   `gce` ia alias for `gcloud compute`;
+
 ### Init
 
 ```shell
-gcloud init --console-only
+gc init --console-only
 ```
 
 ### Create project
 
 Create project
 
+Project id must be unique across all google cloud platform. So use project id in `<organization-name>-<project-name>` format.
+
+Create project:
+
 ```shell
-gcloud projects create <project-id> --name <project-name>
+gc projects create <project-id> --name <project-name>
 ```
 
 Link billing account:
 
 ```shell
-gcloud billing accounts list
+gc billing accounts list
 
-gcloud billing projects link <project-id> --billing-account <billing-account-id>
+gc billing projects link <project-id> --billing-account <billing-account-id>
+```
+
+After project is created you need to create project configuration `~/.config/gcloud/configurations/config_<project_name>`. Set project region and zone according to the ping latency value [https://www.gcping.com](https://www.gcping.com).
+
+Activate project configuration:
+
+```shell
+gcc activate <prohect-id>
 ```
 
 ### Compute
@@ -38,10 +56,9 @@ Links:
 
 ```shell
 gcloud compute instances create test \
-    --zone=us-central1-a \
-    --image-family=ubuntu-minimal-2204-lts \
     --image-project=ubuntu-os-cloud \
-    --machine-type=c2d-highcpu-4 \
+    --image-family=ubuntu-minimal-2204-lts \
+    --machine-type=n1-standard-1 \
     --metadata-from-file user-data=cloud-init.yaml \
     --tags=nginx \
     --address=nginx # use reserved external addresss
@@ -58,7 +75,7 @@ gcloud compute instances add-tags test \
 
 #### List available OS images
 
-Used for `--image-family` and `--image-project` options.
+Used for `--image-project` and `--image-family` options.
 
 ```shell
 gcloud compute images list
