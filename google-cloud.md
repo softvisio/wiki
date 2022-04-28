@@ -46,6 +46,48 @@ Activate project configuration:
 gcc activate <prohect-name>
 ```
 
+### Create project cluster
+
+Reserve static ip address for cluster entry point:
+
+```shell
+gc compute addresses create nginx
+```
+
+Setup firewall:
+
+```shell
+gce firewall-rules update default-allow-http --target-tags=nginx
+gcloud compute firewall-rules update default-allow-https --target-tags=nginx
+```
+
+```shell
+gce firewall-rules create allow-pgsql \
+    --allow=tcp:5432 \
+    --direction=INGRESS \
+    --source-ranges=0.0.0.0/0 \
+    --target-tags=nginx
+```
+
+```shell
+gce firewall-rules create allow-softvisio-proxy \
+    --allow=tcp:51930 \
+    --direction=INGRESS \
+    --source-ranges=0.0.0.0/0 \
+    --target-tags=nginx
+```
+
+Create entry point instance:
+
+```shell
+gce instances create test \
+    --image-project=ubuntu-os-cloud --image-family=ubuntu-minimal-2204-lts \
+    --machine-type=n1-standard-1 \
+    --metadata-from-file user-data=cloud-init.yaml \
+    --address=nginx \
+    --tags=nginx
+```
+
 ### Compute
 
 #### Create instance
