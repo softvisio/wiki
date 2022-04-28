@@ -143,29 +143,10 @@ Some common machines:
 
 ### Compute
 
-#### Create instance
-
-Links:
-
--   [Create instance](https://cloud.google.com/container-optimized-os/docs/how-to/create-configure-instance)
-
-```shell
-gcloud compute instances create test \
-    --image-project=ubuntu-os-cloud \
-    --image-family=ubuntu-minimal-2204-lts \
-    --machine-type=n1-standard-1 \
-    --metadata-from-file user-data=cloud-init.yaml \
-    --tags=nginx \
-    --address=nginx # use reserved external addresss
-# --network-interface=no-address # withoout external address
-```
-
 #### Set instance tags
 
 ```shell
-gcloud compute instances add-tags test \
-    --zone=us-central1-a \
-    --tags=nginx
+gce instances add-tags test --tags=nginx
 ```
 
 #### List available OS images
@@ -173,7 +154,7 @@ gcloud compute instances add-tags test \
 Used for `--image-project` and `--image-family` options.
 
 ```shell
-gcloud compute images list
+gce images list
 ```
 
 #### Connect to the instance using SSH
@@ -187,5 +168,5 @@ gce ssh test
 #### Enable service
 
 ```shell
-gcloud services enable artifactregistry.googleapis.com
+gc services enable artifactregistry.googleapis.com
 ```
