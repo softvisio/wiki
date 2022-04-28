@@ -8,19 +8,17 @@ Links:
 
 NOTE:
 
--   `gc` ia alias for `gcloud`;
--   `gcc` ia alias for `gcloud config configurations`;
--   `gce` ia alias for `gcloud compute`;
+-   `gc` is the alias for `gcloud`;
+-   `gcc` is the alias for `gcloud config configurations`;
+-   `gce` is the alias for `gcloud compute`;
 
-### Init
+### Init gcloud
 
 ```shell
 gc init --console-only
 ```
 
 ### Create project
-
-Create project
 
 Project id must be unique across all google cloud platform. So use project id in `<organization-name>-<project-name>` format.
 
@@ -38,12 +36,14 @@ gc billing accounts list
 gc billing projects link <project-id> --billing-account <billing-account-id>
 ```
 
-After project is created you need to create project configuration `~/.config/gcloud/configurations/config_<project_name>`. Set project region and zone according to the ping latency value [https://www.gcping.com](https://www.gcping.com).
+After project is created you need to create project configuration file at `~/.config/gcloud/configurations/config_<project_name>`.
+
+Set project region and zone according to the ping latency value [https://www.gcping.com](https://www.gcping.com).
 
 Activate project configuration:
 
 ```shell
-gcc activate <prohect-id>
+gcc activate <prohect-name>
 ```
 
 ### Compute
