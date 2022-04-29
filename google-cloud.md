@@ -95,12 +95,12 @@ gce firewall-rules create allow-softvisio-proxy \
 Create entry point instance:
 
 ```shell
-gce instances create nginx \
+gce instances create a0 \
+    --machine-type=e2-standard-2 \
     --image-project=ubuntu-os-cloud --image-family=ubuntu-minimal-2204-lts \
-    --machine-type=e2-standard-4 \
     --metadata-from-file user-data=cloud-init.yaml \
-    --address=nginx \
-    --tags=nginx
+    --tags=nginx \
+    --address=nginx
 ```
 
 ### Machine type
