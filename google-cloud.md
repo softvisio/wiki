@@ -8,14 +8,13 @@ Links:
 
 NOTE:
 
--   `gc` is the alias for `gcloud`;
--   `gcc` is the alias for `gcloud config configurations`;
+-   `gcp` is the alias for `gcloud config configurations`;
 -   `gce` is the alias for `gcloud compute`;
 
 ### Init gcloud
 
 ```shell
-gc init --console-only
+gcloud init --console-only
 ```
 
 ### Create project
@@ -25,15 +24,15 @@ Project id must be unique across all google cloud platform. So use project id in
 Create project:
 
 ```shell
-gc projects create <project-id> --name <project-name>
+gcloud projects create <project-id> --name <project-name>
 ```
 
 Link billing account:
 
 ```shell
-gc billing accounts list
+gcloud billing accounts list
 
-gc billing projects link <project-id> --billing-account <billing-account-id>
+gcloud billing projects link <project-id> --billing-account <billing-account-id>
 ```
 
 After project is created you need to create project configuration file at `~/.config/gcloud/configurations/config_<project_name>`.
@@ -43,7 +42,7 @@ Set project region and zone according to the ping latency value [https://www.gcp
 Activate project configuration:
 
 ```shell
-gcc activate <prohect-name>
+gcp activate <project-name>
 ```
 
 ### Create project cluster
@@ -168,5 +167,5 @@ gce ssh test
 #### Enable service
 
 ```shell
-gc services enable artifactregistry.googleapis.com
+gcloud services enable artifactregistry.googleapis.com
 ```
