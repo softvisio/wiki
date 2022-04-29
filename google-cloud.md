@@ -59,8 +59,10 @@ Setup firewall:
 gce firewall-rules delete default-allow-rdp
 
 gce firewall-rules update default-allow-http --target-tags=nginx
-gcloud compute firewall-rules update default-allow-https --target-tags=nginx
+gce firewall-rules update default-allow-https --target-tags=nginx
 ```
+
+Open `http` port:
 
 ```shell
 gce firewall-rules create allow-http \
@@ -70,6 +72,8 @@ gce firewall-rules create allow-http \
     --target-tags=nginx
 ```
 
+Open `PostgreSQL` port:
+
 ```shell
 gce firewall-rules create allow-pgsql \
     --allow=tcp:5432 \
@@ -77,6 +81,8 @@ gce firewall-rules create allow-pgsql \
     --source-ranges=0.0.0.0/0 \
     --target-tags=nginx
 ```
+
+Open `proxy` service port:
 
 ```shell
 gce firewall-rules create allow-softvisio-proxy \
