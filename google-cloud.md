@@ -47,49 +47,28 @@ gcp activate <project-name>
 
 ### Create project cluster
 
-Reserve static ip address for cluster entry point:
-
-```shell
-gce addresses create nginx
-```
-
 Setup firewall:
 
 ```shell
 gce firewall-rules delete default-allow-rdp
-
-gce firewall-rules update default-allow-http --target-tags=nginx
-gce firewall-rules update default-allow-https --target-tags=nginx
 ```
 
 Open `http` port:
 
 ```shell
-gce firewall-rules create allow-http \
-    --allow=tcp:80 \
-    --direction=INGRESS \
-    --source-ranges=0.0.0.0/0 \
-    --target-tags=nginx
+gce firewall-rules create allow-http --direction=INGRESS --source-ranges=0.0.0.0/0 --allow=tcp:80
 ```
 
 Open `PostgreSQL` port:
 
 ```shell
-gce firewall-rules create allow-pgsql \
-    --allow=tcp:5432 \
-    --direction=INGRESS \
-    --source-ranges=0.0.0.0/0 \
-    --target-tags=nginx
+gce firewall-rules create allow-pgsql --direction=INGRESS --source-ranges=0.0.0.0/0 --allow=tcp:5432
 ```
 
 Open `proxy` service port:
 
 ```shell
-gce firewall-rules create allow-softvisio-proxy \
-    --allow=tcp:51930 \
-    --direction=INGRESS \
-    --source-ranges=0.0.0.0/0 \
-    --target-tags=nginx
+gce firewall-rules create allow-softvisio-proxy --direction=INGRESS --source-ranges=0.0.0.0/0 --allow=tcp:51930
 ```
 
 Create entry point instance:
@@ -98,9 +77,31 @@ Create entry point instance:
 gce instances create a0 \
     --machine-type=e2-standard-2 \
     --image-project=ubuntu-os-cloud --image-family=ubuntu-minimal-2204-lts \
-    --metadata-from-file user-data=cloud-init.yaml \
-    --tags=nginx \
-    --address=nginx
+    --metadata-from-file user-data=cloud-init.yaml
+```
+
+Reserve regional static ip address for cluster entry point:
+
+```shell
+gce addresses create tcp-load-balancer
+```
+
+Create target pool:
+
+```shell
+gce target-pools create tcp-load-balancer
+```
+
+Add instances to the target pool:
+
+```shell
+gce target-pools add-instances tcp-load-balancer --instances=a0
+```
+
+Create load balancer forwarding rule:
+
+```shell
+gce forwarding-rules create tcp-load-balancer --target-pool=tcp-load-balancer --load-balancing-scheme=EXTERNAL --ports=0-65535 --address=tcp-load-balancer --ip-protocol=TCP
 ```
 
 ### Machine type
