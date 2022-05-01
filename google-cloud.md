@@ -24,7 +24,7 @@ Project id must be unique across all google cloud platform. So use project id in
 Create project:
 
 ```shell
-gcloud projects create <project-id> --name <project-name>
+gcloud projects create <project-id>
 ```
 
 Link billing account:
