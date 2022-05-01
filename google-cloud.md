@@ -101,7 +101,7 @@ gce target-pools add-instances tcp-load-balancer --instances=a0
 Create load balancer forwarding rule:
 
 ```shell
-gce forwarding-rules create tcp-load-balancer --target-pool=tcp-load-balancer --load-balancing-scheme=EXTERNAL --ports=0-65535 --address=tcp-load-balancer --ip-protocol=TCP
+gce forwarding-rules create tcp-load-balancer --target-pool=tcp-load-balancer --load-balancing-scheme=EXTERNAL --ports=1-65535 --address=tcp-load-balancer --ip-protocol=TCP
 ```
 
 ### Machine type
