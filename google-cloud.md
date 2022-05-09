@@ -45,6 +45,29 @@ Activate project configuration:
 gcp activate <project-name>
 ```
 
+### Initialize clustes
+
+```shell
+# create default ssl policies
+gce ssl-policies create compatible --profile=COMPATIBLE
+gce ssl-policies create modern --profile=MODERN
+gce ssl-policies create restricted --profile=RESTRICTED
+
+# create default healthchecks
+gce health-checks create tcp tcp --use-serving-port
+gce health-checks create http http --use-serving-port --request-path=/healthcheck
+
+# disable rdp
+gce firewall-rules delete default-allow-rdp
+
+# allow traffic from google load balancers and health checkers
+gce firewall-rules create allow-load-balancer --source-ranges=130.211.0.0/22,35.191.0.0/16 --action=allow --rules=tcp,udp
+
+# reserve ip addresses for load balancer
+gce addresses create load-balancer-ipv4 --ip-version=IPV4 --global
+gce addresses create load-balancer-ipv6 --ip-version=IPV6 --global
+```
+
 ### Create project cluster
 
 Setup firewall:
