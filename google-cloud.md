@@ -68,40 +68,30 @@ gce addresses create load-balancer-ipv4 --ip-version=IPV4 --global
 gce addresses create load-balancer-ipv6 --ip-version=IPV6 --global
 ```
 
-### Create project cluster
-
-Setup firewall:
-
-```shell
-gce firewall-rules delete default-allow-rdp
-```
-
-Open `http` port:
-
-```shell
-gce firewall-rules create allow-http --direction=INGRESS --source-ranges=0.0.0.0/0 --allow=tcp:80
-```
-
-Open `PostgreSQL` port:
-
-```shell
-gce firewall-rules create allow-pgsql --direction=INGRESS --source-ranges=0.0.0.0/0 --allow=tcp:5432
-```
-
-Open `proxy` service port:
-
-```shell
-gce firewall-rules create allow-softvisio-proxy --direction=INGRESS --source-ranges=0.0.0.0/0 --allow=tcp:51930
-```
-
-Create entry point instance:
+### Create instances
 
 ```shell
 gce instances create a0 \
-    --machine-type=e2-standard-2 \
+    --machine-type=e2-micro \
     --image-project=ubuntu-os-cloud --image-family=ubuntu-minimal-2204-lts \
     --metadata-from-file user-data=cloud-init.yaml
 ```
+
+### Create certificates
+
+Create certificate:
+
+```shell
+gce ssl-certificates create certificate --domains=httpbin.softvisio.net --global
+```
+
+Check certificates status
+
+```shell
+gce ssl-certificates list
+```
+
+### Create project cluster
 
 Reserve regional static ip address for cluster entry point:
 
