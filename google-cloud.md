@@ -168,6 +168,74 @@ yes | gce target-ssl-proxies delete https
 yes | gce backend-services delete http --global
 ```
 
+### PostgreSQL SSL load balancer
+
+Create instances group:
+
+```shell
+gce instance-groups unmanaged create pgsql
+gce instance-groups unmanaged add-instances pgsql --instances=a0
+gce instance-groups set-named-ports pgsql --named-ports tcp5432:5432
+```
+
+Create load balancer:
+
+```shell
+# create backend service
+gce backend-services create pgsql --global-health-checks --health-checks=tcp --protocol=tcp --port-name=tcp5432 --global
+
+# add instances group to the backend service
+gce backend-services add-backend pgsql --instance-group=pgsql --global
+
+# create ssl proxy
+gce target-ssl-proxies create pgsql --backend-service=pgsql --ssl-certificates=certificate --ssl-policy=restricted
+
+# create forwarding rule
+gce forwarding-rules create pgsql --load-balancing-scheme=external --ip-protocol=tcp --address=load-balancer-ipv4 --ports=5432 --target-ssl-proxy=pgsql --global
+```
+
+Remove load balancer:
+
+```shell
+yes | gce forwarding-rules delete pgsql --global
+yes | gce target-ssl-proxies delete pgsql
+yes | gce backend-services delete pgsql --global
+```
+
+### PostgreSQL TCP load balancer
+
+Create instances group:
+
+```shell
+gce instance-groups unmanaged create pgsql
+gce instance-groups unmanaged add-instances pgsql --instances=a0
+gce instance-groups set-named-ports pgsql --named-ports tcp5432:5432
+```
+
+Create load balancer:
+
+```shell
+# create backend service
+gce backend-services create pgsql --global-health-checks --health-checks=tcp --protocol=tcp --port-name=tcp5432 --global
+
+# add instances group to the backend service
+gce backend-services add-backend pgsql --instance-group=pgsql --global
+
+# create ssl proxy
+gce target-tcp-proxies create pgsql --backend-service=pgsql
+
+# create forwarding rule
+gce forwarding-rules create pgsql --load-balancing-scheme=external --ip-protocol=tcp --address=load-balancer-ipv4 --ports=5432 --target-tcp-proxy=pgsql --global
+```
+
+Remove load balancer:
+
+```shell
+yes | gce forwarding-rules delete pgsql --global
+yes | gce target-tcp-proxies delete pgsql
+yes | gce backend-services delete pgsql --global
+```
+
 ### Create project cluster
 
 Reserve regional static ip address for cluster entry point:
