@@ -90,10 +90,48 @@ Create certificate:
 gce ssl-certificates create certificate --domains=httpbin.softvisio.net --global
 ```
 
-Check certificates status
+Check certificates status:
 
 ```shell
 gce ssl-certificates list
+```
+
+### HTTPS load balancer
+
+Create instances group:
+
+```shell
+gce instance-groups unmanaged create http
+gce instance-groups unmanaged add-instances http --instances=a0
+gce instance-groups set-named-ports main --named-ports tcp80:80
+```
+
+Create load balancer:
+
+```shell
+# create backend service
+gce backend-services create http --global-health-checks --health-checks=tcp --protocol=http --port-name=tcp80 --global --cache-mode=USE_ORIGIN_HEADERS --enable-cdn
+
+# add instances group to the backend service
+gce backend-services add-backend http --instance-group=http --global
+
+# create url map
+gce url-maps create http --default-service=http
+
+# create https proxy
+gce target-https-proxies create https --ssl-certificates=certificate --ssl-policy=modern --url-map=http
+
+# create forwarding rule
+gce forwarding-rules create https --load-balancing-scheme=external --ip-protocol=tcp --address=load-balancer-ipv4 --ports=443 --target-https-proxy=https --global
+```
+
+Remove load balancer:
+
+```shell
+yes | gce forwarding-rules delete https --global
+yes | gce target-https-proxies delete https
+yes | gce url-maps delete http
+yes | gce backend-services delete http --global
 ```
 
 ### Create project cluster
