@@ -236,30 +236,27 @@ yes | gce target-tcp-proxies delete pgsql
 yes | gce backend-services delete pgsql --global
 ```
 
-### Create project cluster
+### PostgreSQL pool load balancer
 
-Reserve regional static ip address for cluster entry point:
+Create instances pool:
 
 ```shell
-gce addresses create tcp-load-balancer
+gce target-pools create pgsql
+gce target-pools add-instances pgsql --instances=a0
 ```
 
-Create target pool:
+Create load balancer:
 
 ```shell
-gce target-pools create tcp-load-balancer
+# create forwarding rule
+gce forwarding-rules create pgsql --target-pool=pgsql --load-balancing-scheme=external --ports=5432 --address=ipv4 --ip-protocol=tcp
 ```
 
-Add instances to the target pool:
+Remove load balancer:
 
 ```shell
-gce target-pools add-instances tcp-load-balancer --instances=a0
-```
-
-Create load balancer forwarding rule:
-
-```shell
-gce forwarding-rules create tcp-load-balancer --target-pool=tcp-load-balancer --load-balancing-scheme=EXTERNAL --ports=1-65535 --address=tcp-load-balancer --ip-protocol=TCP
+yes | gce forwarding-rules delete pgsql --global
+yes | gce target-pools delete pgsql --global
 ```
 
 ### Machine type
