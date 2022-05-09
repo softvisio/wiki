@@ -79,6 +79,11 @@ gce instances create a0 \
 
 ### Create certificates
 
+Before start:
+
+-   Create `dns` records for all used domains, using load valancer ip addresses.
+-   On `cloudflare` for each domain separately add CAA records for "pki.goog".
+
 Create certificate:
 
 ```shell
