@@ -96,6 +96,26 @@ Check certificates status:
 gce ssl-certificates list
 ```
 
+### HTTP load balancer
+
+Create redirect from `http` to `https`:
+
+```shell
+gce url-maps import http --global --source http.url-map.yaml
+
+gce target-http-proxies create http --url-map=http --global
+
+gce forwarding-rules create http --load-balancing-scheme=external --address=ipv4 --ports=80 --target-http-proxy=http --global
+```
+
+Remove load balancer:
+
+```shell
+yes | gce forwarding-rules delete http --global
+yes | gce target-http-proxies delete http
+yes | gce url-maps delete http
+```
+
 ### HTTPS load balancer
 
 Create instances group:
@@ -116,10 +136,10 @@ gce backend-services create http --global-health-checks --health-checks=tcp --pr
 gce backend-services add-backend http --instance-group=http --global
 
 # create url map
-gce url-maps create http --default-service=http
+gce url-maps create https --default-service=http
 
 # create https proxy
-gce target-https-proxies create https --ssl-certificates=certificate --ssl-policy=modern --url-map=http
+gce target-https-proxies create https --ssl-certificates=certificate --ssl-policy=modern --url-map=https
 
 # create forwarding rule
 gce forwarding-rules create https --load-balancing-scheme=external --address=ipv4 --ports=443 --target-https-proxy=https --global
@@ -130,7 +150,7 @@ Remove load balancer:
 ```shell
 yes | gce forwarding-rules delete https --global
 yes | gce target-https-proxies delete https
-yes | gce url-maps delete http
+yes | gce url-maps delete https
 yes | gce backend-services delete http --global
 ```
 
