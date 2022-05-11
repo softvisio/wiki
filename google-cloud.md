@@ -130,7 +130,7 @@ Create load balancer:
 
 ```shell
 # create backend service
-gce backend-services create http --global-health-checks --health-checks=tcp --protocol=http --port-name=tcp80 --global --cache-mode=USE_ORIGIN_HEADERS --enable-cdn
+gce backend-services create http --global-health-checks --health-checks=tcp --protocol=http --port-name=tcp80 --global --cache-mode=USE_ORIGIN_HEADERS --enable-cdn --custom-response-header="Strict-Transport-Security:max-age=63072000; includeSubdomains; preload"
 
 # add instances group to the backend service
 gce backend-services add-backend http --instance-group=http --global
