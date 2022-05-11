@@ -103,7 +103,7 @@ Create instances group:
 ```shell
 gce instance-groups unmanaged create http
 gce instance-groups unmanaged add-instances http --instances=a0
-gce instance-groups set-named-ports main --named-ports tcp80:80
+gce instance-groups set-named-ports http --named-ports tcp80:80
 ```
 
 Create load balancer:
@@ -141,7 +141,7 @@ Create instances group:
 ```shell
 gce instance-groups unmanaged create http
 gce instance-groups unmanaged add-instances http --instances=a0
-gce instance-groups set-named-ports main --named-ports tcp80:80
+gce instance-groups set-named-ports http --named-ports tcp80:80
 ```
 
 Create load balancer:
