@@ -122,7 +122,7 @@ gce url-maps create http --default-service=http
 gce target-https-proxies create https --ssl-certificates=certificate --ssl-policy=modern --url-map=http
 
 # create forwarding rule
-gce forwarding-rules create https --load-balancing-scheme=external --ip-protocol=tcp --address=ipv4 --ports=443 --target-https-proxy=https --global
+gce forwarding-rules create https --load-balancing-scheme=external --address=ipv4 --ports=443 --target-https-proxy=https --global
 ```
 
 Remove load balancer:
@@ -157,7 +157,7 @@ gce backend-services add-backend http --instance-group=http --global
 gce target-ssl-proxies create https --backend-service=http --ssl-certificates=certificate --proxy-header=PROXY_V1 --ssl-policy=modern
 
 # create forwarding rule
-gce forwarding-rules create https --load-balancing-scheme=external --ip-protocol=tcp --address=ipv4 --ports=443 --target-ssl-proxy=https --global
+gce forwarding-rules create https --load-balancing-scheme=external --address=ipv4 --ports=443 --target-ssl-proxy=https --global
 ```
 
 Remove load balancer:
@@ -191,7 +191,7 @@ gce backend-services add-backend pgsql --instance-group=pgsql --global
 gce target-ssl-proxies create pgsql --backend-service=pgsql --ssl-certificates=certificate --ssl-policy=restricted
 
 # create forwarding rule
-gce forwarding-rules create pgsql --load-balancing-scheme=external --ip-protocol=tcp --address=ipv4 --ports=5432 --target-ssl-proxy=pgsql --global
+gce forwarding-rules create pgsql --load-balancing-scheme=external --address=ipv4 --ports=5432 --target-ssl-proxy=pgsql --global
 ```
 
 Remove load balancer:
@@ -225,7 +225,7 @@ gce backend-services add-backend pgsql --instance-group=pgsql --global
 gce target-tcp-proxies create pgsql --backend-service=pgsql
 
 # create forwarding rule
-gce forwarding-rules create pgsql --load-balancing-scheme=external --ip-protocol=tcp --address=ipv4 --ports=5432 --target-tcp-proxy=pgsql --global
+gce forwarding-rules create pgsql --load-balancing-scheme=external --address=ipv4 --ports=5432 --target-tcp-proxy=pgsql --global
 ```
 
 Remove load balancer:
@@ -249,7 +249,7 @@ Create load balancer:
 
 ```shell
 # create forwarding rule
-gce forwarding-rules create pgsql --target-pool=pgsql --load-balancing-scheme=external --ports=5432 --address=ipv4 --ip-protocol=tcp
+gce forwarding-rules create pgsql --load-balancing-scheme=external --address=ipv4 --ports=5432 --target-pool=pgsql
 ```
 
 Remove load balancer:
