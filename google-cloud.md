@@ -154,40 +154,6 @@ yes | gce url-maps delete https
 yes | gce backend-services delete http --global
 ```
 
-### HTTP SSL load balancer
-
-Create instances group:
-
-```shell
-gce instance-groups unmanaged create http
-gce instance-groups unmanaged add-instances http --instances=a0
-gce instance-groups set-named-ports http --named-ports tcp80:80
-```
-
-Create load balancer:
-
-```shell
-# create backend service
-gce backend-services create http --global-health-checks --health-checks=tcp --protocol=tcp --port-name=tcp80 --global
-
-# add instances group to the backend service
-gce backend-services add-backend http --instance-group=http --global
-
-# create https proxy
-gce target-ssl-proxies create https --backend-service=http --ssl-certificates=certificate --proxy-header=PROXY_V1 --ssl-policy=modern
-
-# create forwarding rule
-gce forwarding-rules create https --load-balancing-scheme=external --address=ipv4 --ports=443 --target-ssl-proxy=https --global
-```
-
-Remove load balancer:
-
-```shell
-yes | gce forwarding-rules delete https --global
-yes | gce target-ssl-proxies delete https
-yes | gce backend-services delete http --global
-```
-
 ### PostgreSQL SSL load balancer
 
 Create instances group:
