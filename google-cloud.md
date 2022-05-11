@@ -30,7 +30,7 @@ gcloud projects create <project-id>
 Link billing account:
 
 ```shell
-gcloud billing accounts list
+gcloud beta billing accounts list
 
 gcloud beta billing projects link <project-id> --billing-account <billing-account-id>
 ```
@@ -45,7 +45,7 @@ Activate project configuration:
 gcp activate <project-name>
 ```
 
-### Initialize clustes
+### Initialize cluster
 
 ```shell
 # create default ssl policies
