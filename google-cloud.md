@@ -58,7 +58,7 @@ gce health-checks create tcp tcp --use-serving-port
 gce health-checks create http http --use-serving-port --request-path=/healthcheck
 
 # disable rdp
-gce firewall-rules delete default-allow-rdp
+gce firewall-rules update default-allow-rdp --disabled
 
 # allow traffic from google load balancers and health checkers
 gce firewall-rules create allow-load-balancer --source-ranges=130.211.0.0/22,35.191.0.0/16 --action=allow --rules=tcp,udp
