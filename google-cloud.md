@@ -96,6 +96,14 @@ Check certificates status:
 gce ssl-certificates list
 ```
 
+### Create instances group
+
+```shell
+gce instance-groups unmanaged create main
+gce instance-groups unmanaged add-instances main --instances=a0
+gce instance-groups set-named-ports main --named-ports=tcp80:80,tcp5432:5432
+```
+
 ### HTTP load balancer
 
 Create redirect from `http` to `https`:
@@ -118,14 +126,6 @@ yes | gce url-maps delete http
 
 ### HTTPS load balancer
 
-Create instances group:
-
-```shell
-gce instance-groups unmanaged create http
-gce instance-groups unmanaged add-instances http --instances=a0
-gce instance-groups set-named-ports http --named-ports tcp80:80
-```
-
 Create load balancer:
 
 ```shell
@@ -133,7 +133,7 @@ Create load balancer:
 gce backend-services create http --global-health-checks --health-checks=tcp --protocol=http --port-name=tcp80 --global --cache-mode=USE_ORIGIN_HEADERS --enable-cdn --custom-response-header="Strict-Transport-Security:max-age=63072000; includeSubdomains; preload"
 
 # add instances group to the backend service
-gce backend-services add-backend http --instance-group=http --global
+gce backend-services add-backend http --instance-group=main --global
 
 # create url map
 gce url-maps create https --default-service=http
@@ -156,12 +156,10 @@ yes | gce backend-services delete http --global
 
 ### PostgreSQL SSL load balancer
 
-Create instances group:
+SSL load balancer not works with the `psql` client. Use firewall rule for the specific instance until this will be solved:
 
 ```shell
-gce instance-groups unmanaged create pgsql
-gce instance-groups unmanaged add-instances pgsql --instances=a0
-gce instance-groups set-named-ports pgsql --named-ports tcp5432:5432
+gce firewall-rules create allow-pgsql --source-ranges=0.0.0.0/0 --action=allow --rules=tcp:5432
 ```
 
 Create load balancer:
@@ -171,7 +169,7 @@ Create load balancer:
 gce backend-services create pgsql --global-health-checks --health-checks=tcp --protocol=tcp --port-name=tcp5432 --global
 
 # add instances group to the backend service
-gce backend-services add-backend pgsql --instance-group=pgsql --global
+gce backend-services add-backend pgsql --instance-group=main --global
 
 # create ssl proxy
 gce target-ssl-proxies create pgsql --backend-service=pgsql --ssl-certificates=certificate --ssl-policy=restricted
@@ -186,63 +184,6 @@ Remove load balancer:
 yes | gce forwarding-rules delete pgsql --global
 yes | gce target-ssl-proxies delete pgsql
 yes | gce backend-services delete pgsql --global
-```
-
-### PostgreSQL TCP load balancer
-
-Create instances group:
-
-```shell
-gce instance-groups unmanaged create pgsql
-gce instance-groups unmanaged add-instances pgsql --instances=a0
-gce instance-groups set-named-ports pgsql --named-ports tcp5432:5432
-```
-
-Create load balancer:
-
-```shell
-# create backend service
-gce backend-services create pgsql --global-health-checks --health-checks=tcp --protocol=tcp --port-name=tcp5432 --global
-
-# add instances group to the backend service
-gce backend-services add-backend pgsql --instance-group=pgsql --global
-
-# create ssl proxy
-gce target-tcp-proxies create pgsql --backend-service=pgsql
-
-# create forwarding rule
-gce forwarding-rules create pgsql --load-balancing-scheme=external --address=ipv4 --ports=5432 --target-tcp-proxy=pgsql --global
-```
-
-Remove load balancer:
-
-```shell
-yes | gce forwarding-rules delete pgsql --global
-yes | gce target-tcp-proxies delete pgsql
-yes | gce backend-services delete pgsql --global
-```
-
-### PostgreSQL pool load balancer
-
-Create instances pool:
-
-```shell
-gce target-pools create pgsql
-gce target-pools add-instances pgsql --instances=a0
-```
-
-Create load balancer:
-
-```shell
-# create forwarding rule
-gce forwarding-rules create pgsql --load-balancing-scheme=external --address=ipv4 --ports=5432 --target-pool=pgsql
-```
-
-Remove load balancer:
-
-```shell
-yes | gce forwarding-rules delete pgsql --global
-yes | gce target-pools delete pgsql --global
 ```
 
 ### Machine type
