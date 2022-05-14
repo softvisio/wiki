@@ -35,7 +35,7 @@ gcloud beta billing accounts list
 gcloud beta billing projects link <project-id> --billing-account <billing-account-id>
 ```
 
-After beta project is created you need to create project configuration file at `~/.config/gcloud/configurations/config_<project_name>`.
+After project is created you need to create project configuration file at `~/.config/gcloud/configurations/config_<project_name>`.
 
 Set project region and zone according to the ping latency value [https://www.gcping.com](https://www.gcping.com).
 
