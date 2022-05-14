@@ -60,6 +60,10 @@ gce health-checks create http http --use-serving-port --request-path=/healthchec
 # disable rdp
 gce firewall-rules update default-allow-rdp --disabled
 
+# create nat
+gce routers create nat --network default
+gce routers nats create nat --router=nat --auto-allocate-nat-external-ips --nat-all-subnet-ip-ranges --enable-dynamic-port-allocation
+
 # allow traffic from google load balancers and health checkers
 gce firewall-rules create allow-load-balancer --source-ranges=130.211.0.0/22,35.191.0.0/16 --action=allow --rules=tcp,udp
 
@@ -74,6 +78,7 @@ gce addresses create ipv6 --ip-version=IPV6 --global
 gce instances create a0 \
     --machine-type=e2-micro \
     --image-project=ubuntu-os-cloud --image-family=ubuntu-minimal-2204-lts \
+    --network-interface=no-address \
     --metadata-from-file user-data=cloud-init.yaml
 ```
 
