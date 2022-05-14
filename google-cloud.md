@@ -8,13 +8,14 @@ Links:
 
 NOTE:
 
--   `gcp` is the alias for `gcloud config configurations`;
+-   `gc` is the alias for `gcloud`;
 -   `gce` is the alias for `gcloud compute`;
+-   `gcp` is the alias for `gcloud config configurations`;
 
 ### Init gcloud
 
 ```shell
-gcloud init --console-only
+gc init --console-only
 ```
 
 ### Create project
@@ -24,15 +25,15 @@ Project id must be unique across all google cloud platform. So use project id in
 Create project:
 
 ```shell
-gcloud projects create <project-id>
+gc projects create <project-id>
 ```
 
 Link billing account:
 
 ```shell
-gcloud beta billing accounts list
+gc beta billing accounts list
 
-gcloud beta billing projects link <project-id> --billing-account <billing-account-id>
+gc beta billing projects link <project-id> --billing-account <billing-account-id>
 ```
 
 After project is created you need to create project configuration file at `~/.config/gcloud/configurations/config_<project_name>`.
@@ -255,5 +256,5 @@ gce images list
 #### Enable service
 
 ```shell
-gcloud services enable artifactregistry.googleapis.com
+gc services enable artifactregistry.googleapis.com
 ```
