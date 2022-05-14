@@ -245,12 +245,6 @@ Used for `--image-project` and `--image-family` options.
 gce images list
 ```
 
-#### Connect to the instance using SSH
-
-```shell
-gce ssh test
-```
-
 ### Services
 
 #### Enable service
