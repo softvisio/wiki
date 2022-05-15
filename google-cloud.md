@@ -216,21 +216,21 @@ Prices: [https://cloud.google.com/compute/vm-instance-pricing](https://cloud.goo
 
 Some common machines:
 
-| Type          |       vCPUs | RAM | Costs ($) |
-| ------------- | ----------: | --: | --------: |
-| e2-micro \*   | shared 0.25 |   1 |         7 |
-| e2-small \*   |  shared 0.5 |   2 |        13 |
-| e2-medium \*  |    shared 1 |   4 |        25 |
-| e2-standard-2 |           2 |   8 |        50 |
-| e2-standard-4 |           4 |  16 |        98 |
-| e2-standard-8 |           8 |  32 |       196 |
-| e2-highcpu-2  |           2 |   2 |        37 |
-| e2-highcpu-4  |           4 |   4 |        73 |
-| n2-standard-2 |           2 |   8 |        57 |
-| n2-standard-4 |           4 |  16 |       114 |
-| n2-standard-8 |           8 |  32 |       228 |
-| n2-highcpu-2  |           2 |   2 |        42 |
-| n2-highcpu-4  |           4 |   4 |        84 |
+| Type          | vCPUs | RAM | Costs ($ / month) |
+| ------------- | ----: | --: | ----------------: |
+| e2-micro \*   |  0.25 |   1 |                 7 |
+| e2-small \*   |   0.5 |   2 |                13 |
+| e2-medium \*  |     1 |   4 |                25 |
+| e2-standard-2 |     2 |   8 |                50 |
+| e2-standard-4 |     4 |  16 |                98 |
+| e2-standard-8 |     8 |  32 |               196 |
+| e2-highcpu-2  |     2 |   2 |                37 |
+| e2-highcpu-4  |     4 |   4 |                73 |
+| n2-standard-2 |     2 |   8 |                57 |
+| n2-standard-4 |     4 |  16 |               114 |
+| n2-standard-8 |     8 |  32 |               228 |
+| n2-highcpu-2  |     2 |   2 |                42 |
+| n2-highcpu-4  |     4 |   4 |                84 |
 
 \* `micro`, `small`, `medium` - is a machines with the shared vCPUs.
 
