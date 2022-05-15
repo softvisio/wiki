@@ -61,16 +61,16 @@ gce health-checks create http http --use-serving-port --request-path=/healthchec
 # disable rdp
 gce firewall-rules update default-allow-rdp --disabled
 
-# create nat
-gce routers create nat --network default
-gce routers nats create nat --router=nat --auto-allocate-nat-external-ips --nat-all-subnet-ip-ranges --enable-dynamic-port-allocation
-
 # allow traffic from google load balancers and health checkers
 gce firewall-rules create allow-load-balancer --source-ranges=130.211.0.0/22,35.191.0.0/16 --action=allow --rules=tcp,udp
 
 # reserve ip addresses for load balancer
-gce addresses create ipv4 --ip-version=IPV4 --global
-gce addresses create ipv6 --ip-version=IPV6 --global
+gce addresses create public-ipv4 --ip-version=IPV4 --global
+gce addresses create private-ipv4 --ip-version=IPV4 --global
+
+# create nat
+gce routers create nat --network default
+gce routers nats create nat --router=nat --auto-allocate-nat-external-ips --nat-all-subnet-ip-ranges --enable-dynamic-port-allocation
 ```
 
 ### Create instances
@@ -119,7 +119,7 @@ gce url-maps import http --global --source http.url-map.yaml
 
 gce target-http-proxies create http --url-map=http --global
 
-gce forwarding-rules create http --load-balancing-scheme=external --address=ipv4 --ports=80 --target-http-proxy=http --global
+gce forwarding-rules create http --load-balancing-scheme=external --address=public-ipv4 --ports=80 --target-http-proxy=http --global
 ```
 
 Remove load balancer:
@@ -148,7 +148,7 @@ gce url-maps create https --default-service=http
 gce target-https-proxies create https --ssl-certificates=certificate --ssl-policy=modern --url-map=https
 
 # create forwarding rule
-gce forwarding-rules create https --load-balancing-scheme=external --address=ipv4 --ports=443 --target-https-proxy=https --global
+gce forwarding-rules create https --load-balancing-scheme=external --address=public-ipv4 --ports=443 --target-https-proxy=https --global
 ```
 
 Remove load balancer:
@@ -181,7 +181,7 @@ gce backend-services add-backend pgsql --global --instance-group=nginx
 gce target-ssl-proxies create pgsql --backend-service=pgsql --ssl-certificates=certificate --ssl-policy=restricted
 
 # create forwarding rule
-gce forwarding-rules create pgsql --load-balancing-scheme=external --address=ipv4 --ports=5432 --target-ssl-proxy=pgsql --global
+gce forwarding-rules create pgsql --load-balancing-scheme=external --address=private-ipv4 --ports=5432 --target-ssl-proxy=pgsql --global
 ```
 
 Remove load balancer:
