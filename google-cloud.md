@@ -62,14 +62,14 @@ gce health-checks create http http --use-serving-port --request-path=/healthchec
 gce firewall-rules update default-allow-rdp --disabled
 
 # allow traffic from google load balancers and health checkers
-gce firewall-rules create allow-load-balancer --source-ranges=130.211.0.0/22,35.191.0.0/16 --action=allow --rules=tcp,udp
+gce firewall-rules create allow-load-balancer --source-ranges=130.211.0.0/22,35.191.0.0/16 --action=ALLOW --rules=tcp,udp
 
 # reserve ip addresses for load balancer
 gce addresses create public-ipv4 --ip-version=IPV4 --global
 gce addresses create private-ipv4 --ip-version=IPV4 --global
 
 # create nat
-gce routers create nat --network default
+gce routers create nat --network=default
 gce routers nats create nat --router=nat --auto-allocate-nat-external-ips --nat-all-subnet-ip-ranges --enable-dynamic-port-allocation
 ```
 
@@ -115,11 +115,11 @@ gce instance-groups set-named-ports nginx --named-ports=tcp80:80,tcp5432:5432
 Create redirect from `http` to `https`:
 
 ```shell
-gce url-maps import http --global --source http.url-map.yaml
+gce url-maps import http --global --source=http.url-map.yaml
 
 gce target-http-proxies create http --url-map=http --global
 
-gce forwarding-rules create http --load-balancing-scheme=external --address=public-ipv4 --ports=80 --target-http-proxy=http --global
+gce forwarding-rules create http --load-balancing-scheme=EXTERNAL --address=public-ipv4 --ports=80 --target-http-proxy=http --global
 ```
 
 Remove load balancer:
@@ -136,7 +136,7 @@ Create load balancer:
 
 ```shell
 # create backend service
-gce backend-services create http --global-health-checks --health-checks=tcp --protocol=http --port-name=tcp80 --global --custom-response-header="Strict-Transport-Security:max-age=63072000; includeSubdomains; preload" # --cache-mode=USE_ORIGIN_HEADERS --enable-cdn
+gce backend-services create http --global-health-checks --health-checks=tcp --protocol=HTTP --port-name=tcp80 --global --custom-response-header="Strict-Transport-Security:max-age=63072000; includeSubdomains; preload" # --cache-mode=USE_ORIGIN_HEADERS --enable-cdn
 
 # add instances group to the backend service
 gce backend-services add-backend http --global --instance-group=nginx
@@ -148,7 +148,7 @@ gce url-maps create https --default-service=http
 gce target-https-proxies create https --ssl-certificates=certificate --ssl-policy=modern --url-map=https
 
 # create forwarding rule
-gce forwarding-rules create https --load-balancing-scheme=external --address=public-ipv4 --ports=443 --target-https-proxy=https --global
+gce forwarding-rules create https --load-balancing-scheme=EXTERNAL --address=public-ipv4 --ports=443 --target-https-proxy=https --global
 ```
 
 Remove load balancer:
@@ -165,14 +165,14 @@ yes | gce backend-services delete http --global
 SSL load balancer not works with the `psql` client. Use firewall rule for the specific instance until this will be solved:
 
 ```shell
-gce firewall-rules create allow-pgsql --source-ranges=0.0.0.0/0 --action=allow --rules=tcp:5432
+gce firewall-rules create allow-pgsql --source-ranges=0.0.0.0/0 --action=ALLOW --rules=tcp:5432
 ```
 
 Create load balancer:
 
 ```shell
 # create backend service
-gce backend-services create pgsql --global-health-checks --health-checks=tcp --protocol=tcp --port-name=tcp5432 --global
+gce backend-services create pgsql --global-health-checks --health-checks=tcp --protocol=TCP --port-name=tcp5432 --global
 
 # add instances group to the backend service
 gce backend-services add-backend pgsql --global --instance-group=nginx
@@ -181,7 +181,7 @@ gce backend-services add-backend pgsql --global --instance-group=nginx
 gce target-ssl-proxies create pgsql --backend-service=pgsql --ssl-certificates=certificate --ssl-policy=restricted
 
 # create forwarding rule
-gce forwarding-rules create pgsql --load-balancing-scheme=external --address=private-ipv4 --ports=5432 --target-ssl-proxy=pgsql --global
+gce forwarding-rules create pgsql --load-balancing-scheme=EXTERNAL --address=private-ipv4 --ports=5432 --target-ssl-proxy=pgsql --global
 ```
 
 Remove load balancer:
