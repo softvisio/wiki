@@ -162,12 +162,6 @@ yes | gce backend-services delete http --global
 
 ### PostgreSQL SSL load balancer
 
-SSL load balancer not works with the `psql` client. Use firewall rule for the specific instance until this will be solved:
-
-```shell
-gce firewall-rules create allow-pgsql --source-ranges=0.0.0.0/0 --action=ALLOW --rules=tcp:5432
-```
-
 Create load balancer:
 
 ```shell
@@ -178,17 +172,20 @@ gce backend-services create pgsql --global-health-checks --health-checks=tcp --p
 gce backend-services add-backend pgsql --global --instance-group=nginx
 
 # create ssl proxy
-gce target-ssl-proxies create pgsql --backend-service=pgsql --ssl-certificates=certificate --ssl-policy=restricted
+# gce target-ssl-proxies create pgsql --backend-service=pgsql --ssl-certificates=certificate --ssl-policy=restricted
+gce target-tcp-proxies create pgsql --backend-service=pgsql
 
 # create forwarding rule
-gce forwarding-rules create pgsql --load-balancing-scheme=EXTERNAL --address=private-ipv4 --ports=5432 --target-ssl-proxy=pgsql --global
+# gce forwarding-rules create pgsql --load-balancing-scheme=EXTERNAL --address=private-ipv4 --ports=5432 --target-ssl-proxy=pgsql --global
+gce forwarding-rules create pgsql --load-balancing-scheme=EXTERNAL --address=private-ipv4 --ports=5432 --target-tcp-proxy=pgsql --global
 ```
 
 Remove load balancer:
 
 ```shell
 yes | gce forwarding-rules delete pgsql --global
-yes | gce target-ssl-proxies delete pgsql
+# yes | gce target-ssl-proxies delete pgsql
+yes | gce target-tcp-proxies delete pgsql
 yes | gce backend-services delete pgsql --global
 ```
 
