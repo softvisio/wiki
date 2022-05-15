@@ -62,7 +62,7 @@ gce health-checks create http http --use-serving-port --request-path=/healthchec
 gce firewall-rules update default-allow-rdp --disabled
 
 # allow traffic from google load balancers and health checkers
-gce firewall-rules create allow-load-balancer --source-ranges=130.211.0.0/22,35.191.0.0/16 --action=ALLOW --rules=tcp,udp
+gce firewall-rules create allow-load-balancer --source-ranges=35.191.0.0/16,130.211.0.0/22 --action=ALLOW --rules=tcp,udp
 
 # reserve ip addresses for load balancer
 gce addresses create public-ipv4 --ip-version=IPV4 --global
