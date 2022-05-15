@@ -107,7 +107,7 @@ gce ssl-certificates list
 ```shell
 gce instance-groups unmanaged create nginx
 gce instance-groups unmanaged add-instances nginx --instances=a0
-gce instance-groups set-named-ports nginx --named-ports=tcp80:80,tcp5432:5432
+gce instance-groups set-named-ports nginx --named-ports=http:80,pgsql:5432
 ```
 
 ### HTTP load balancer
@@ -136,7 +136,7 @@ Create load balancer:
 
 ```shell
 # create backend service
-gce backend-services create http --global-health-checks --health-checks=tcp --protocol=HTTP --port-name=tcp80 --global --custom-response-header="Strict-Transport-Security:max-age=63072000; includeSubdomains; preload" # --cache-mode=USE_ORIGIN_HEADERS --enable-cdn
+gce backend-services create http --global-health-checks --health-checks=tcp --protocol=HTTP --port-name=http --global --custom-response-header="Strict-Transport-Security:max-age=63072000; includeSubdomains; preload" # --cache-mode=USE_ORIGIN_HEADERS --enable-cdn
 
 # add instances group to the backend service
 gce backend-services add-backend http --global --instance-group=nginx
@@ -172,7 +172,7 @@ Create load balancer:
 
 ```shell
 # create backend service
-gce backend-services create pgsql --global-health-checks --health-checks=tcp --protocol=TCP --port-name=tcp5432 --global
+gce backend-services create pgsql --global-health-checks --health-checks=tcp --protocol=TCP --port-name=pgsql --global
 
 # add instances group to the backend service
 gce backend-services add-backend pgsql --global --instance-group=nginx
