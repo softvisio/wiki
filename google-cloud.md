@@ -138,7 +138,7 @@ Create load balancer:
 <!-- prettier-ignore -->
 ```shell
 # create backend service
-gce backend-services create http --global-health-checks --health-checks=tcp --protocol=HTTP --port-name=http --global --custom-response-header="Strict-Transport-Security:max-age=63072000; includeSubdomains; preload" # --cache-mode=USE_ORIGIN_HEADERS --enable-cdn
+gce backend-services create http --global-health-checks --health-checks=tcp --protocol=HTTP --port-name=http --global --custom-response-header="Strict-Transport-Security:max-age=63072000; includeSubdomains; preload" --cache-mode=USE_ORIGIN_HEADERS --enable-cdn
 
 # add instances group to the backend service
 gce backend-services add-backend http --global --instance-group=nginx

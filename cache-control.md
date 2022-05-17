@@ -11,9 +11,9 @@ Nginx doesn't cache response when:
 
 Nginx caches a response only if the origin server includes either the `expires` header with a date and time in the future, or the `cache-control` header with the `max-age` directive set to a non‑zero value.
 
-Nginx does not use conditional headers, like `if-modified-since`, etc., in the client request.
+Nginx compares client request `if-modified-since` header with the cached `last-modified` header value, returns `304` if content wasn't updated.
 
-Nginx doesn't process `cache-control` header from client request, so it is impossible to use `no-cache` to skip nginx vache.
+Nginx doesn't process `cache-control` header from client request, so it is impossible to use `no-cache` to skip nginx cache. The only way is to use `proxy_cache_bypass` directive.
 
 ### Browser
 
