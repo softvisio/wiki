@@ -93,7 +93,7 @@ Before start:
 Create certificate:
 
 ```shell
-gce ssl-certificates create certificate --domains=httpbin.softvisio.net --global
+gce ssl-certificates create < domain-com > --domains= < domain.com > --global
 ```
 
 Check certificates status:
@@ -145,7 +145,7 @@ gce backend-services add-backend http --global --instance-group=nginx
 gce url-maps create https --default-service=http
 
 # create https proxy
-gce target-https-proxies create https --ssl-certificates=certificate --ssl-policy=modern --url-map=https
+gce target-https-proxies create https --ssl-certificates= --url-map=https < domain-com > --ssl-policy=modern
 
 # create forwarding rule
 gce forwarding-rules create https --load-balancing-scheme=EXTERNAL --address=public-ipv4 --ports=443 --target-https-proxy=https --global
