@@ -15,15 +15,13 @@ Nginx compares client request `if-modified-since` header with the cached `last-m
 
 Nginx doesn't process `cache-control` header from client request, so it is impossible to use `no-cache` to skip nginx cache. The only way is to use `proxy_cache_bypass` directive.
 
-### Browser
-
-If `must-revalidate`, `proxy-revalidate` are used - browser sends `cache-control: max-age=0` in request.
-
-#### Chrome
+### Chrome
 
 -   On `F5` chrome always revalidates main html page.
 
 -   When chrome revalidates content it sends `cache-control: max-age=0` and `if-modified-since`.
+
+-   If `must-revalidate`, `proxy-revalidate` are used - browser sends `cache-control: max-age=0` in request.
 
 ### Configuration examples
 
