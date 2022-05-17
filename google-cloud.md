@@ -12,13 +12,13 @@ NOTE:
 -   `gce` is the alias for `gcloud compute`;
 -   `gcp` is the alias for `gcloud config configurations`;
 
-### Init gcloud
+## Init gcloud
 
 ```shell
 gc init --console-only
 ```
 
-### Create project
+## Create project
 
 Project id must be unique across all google cloud platform. So use project id in `<organization-name>-<project-name>` format.
 
@@ -46,7 +46,7 @@ Activate project configuration:
 gcp activate <project-name>
 ```
 
-### Initialize cluster
+## Initialize cluster
 
 ```shell
 # create default ssl policies
@@ -73,7 +73,7 @@ gce routers create nat --network=default
 gce routers nats create nat --router=nat --auto-allocate-nat-external-ips --nat-all-subnet-ip-ranges --enable-dynamic-port-allocation
 ```
 
-### Create instances
+## Create instances
 
 ```shell
 gce instances create a0 \
@@ -83,7 +83,7 @@ gce instances create a0 \
     --metadata-from-file user-data=cloud-init.yaml
 ```
 
-### Create certificates
+## Create certificates
 
 Before start:
 
@@ -103,7 +103,7 @@ Check certificates status:
 gce ssl-certificates list
 ```
 
-### Create instances group
+## Create instances group
 
 ```shell
 gce instance-groups unmanaged create nginx
@@ -111,7 +111,7 @@ gce instance-groups unmanaged add-instances nginx --instances=a0
 gce instance-groups set-named-ports nginx --named-ports=http:80,pgsql:5432
 ```
 
-### HTTP load balancer
+## HTTP load balancer
 
 Create redirect from `http` to `https`:
 
@@ -131,7 +131,7 @@ yes | gce target-http-proxies delete http
 yes | gce url-maps delete http
 ```
 
-### HTTPS load balancer
+## HTTPS load balancer
 
 Create load balancer:
 
@@ -162,7 +162,7 @@ yes | gce url-maps delete https
 yes | gce backend-services delete http --global
 ```
 
-### PostgreSQL SSL load balancer
+## PostgreSQL SSL load balancer
 
 Create load balancer:
 
@@ -192,7 +192,7 @@ yes | gce target-tcp-proxies delete pgsql
 yes | gce backend-services delete pgsql --global
 ```
 
-### Machine type
+## Machine type
 
 Default type is: `n1-standard-1`, 1 cpu, 3.75 GB.
 
@@ -237,15 +237,15 @@ Some common machines:
 
 \* `micro`, `small`, `medium` - is a machines with the shared vCPUs.
 
-### Compute
+## Compute
 
-#### Set instance tags
+### Set instance tags
 
 ```shell
 gce instances add-tags test --tags=nginx
 ```
 
-#### List available OS images
+### List available OS images
 
 Used for `--image-project` and `--image-family` options.
 
@@ -253,9 +253,9 @@ Used for `--image-project` and `--image-family` options.
 gce images list
 ```
 
-### Services
+## Services
 
-#### Enable service
+### Enable service
 
 ```shell
 gc services enable artifactregistry.googleapis.com
