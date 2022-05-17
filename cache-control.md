@@ -7,7 +7,13 @@ Nginx doesn't cache response when:
 -   `private`, `no-cache` or `no-store` directives are used.
 -   `set-cookie` headers is exists in response.
 -   `proxy_buffering` is set to `off`.
--   `max-age=0` or `s-maxage=0`.
+-   `max-age` is not specified or `max-age=0` or `s-maxage=0`.
+
+Nginx caches a response only if the origin server includes either the `expires` header with a date and time in the future, or the `cache-control` header with the `max-age` directive set to a non‑zero value.
+
+Nginx does not use conditional headers, like `if-modified-since`, etc., in the client request.
+
+Nginx doesn't process `cache-control` header from client request, so it is impossible to use `no-cache` to skip nginx vache.
 
 If `must-revalidate`, `proxy-revalidate` are used nginx sends request to backend without `if-modified-since` header. If content is not modified - returns `304` to the browser.
 
@@ -24,11 +30,10 @@ If `must-revalidate`, `proxy-revalidate` are used - browser sends `cache-control
 
 #### Always revalidate
 
-For `nginx` the only working solution is to use `x-accel-expires` header. `X-Accel-Expires` header must always placed before `Cache-Control`.
+Cache for 1 second, revalidate:
 
 ```text
-x-accel-expires: @1
-cache-control: public, max-age=0
+cache-control: public, max-age=1
 ```
 
 #### Cache forever
