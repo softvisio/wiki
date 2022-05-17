@@ -93,7 +93,7 @@ Before start:
 Create certificate:
 
 ```shell
-gce ssl-certificates create < domain-com > --domains= < domain.com > --global
+gce ssl-certificates create \<domain-com\> --global --domains= \<domain.com\>
 ```
 
 Check certificates status:
@@ -145,7 +145,7 @@ gce backend-services add-backend http --global --instance-group=nginx
 gce url-maps create https --default-service=http
 
 # create https proxy
-gce target-https-proxies create https --ssl-certificates= --url-map=https < domain-com > --ssl-policy=modern
+gce target-https-proxies create https --ssl-certificates= --url-map=https \<domain-com\> --ssl-policy=modern
 
 # create forwarding rule
 gce forwarding-rules create https --load-balancing-scheme=EXTERNAL --address=public-ipv4 --ports=443 --target-https-proxy=https --global
@@ -172,7 +172,7 @@ gce backend-services create pgsql --global-health-checks --health-checks=tcp --p
 gce backend-services add-backend pgsql --global --instance-group=nginx
 
 # create ssl proxy
-# gce target-ssl-proxies create pgsql --backend-service=pgsql --ssl-certificates=certificate --ssl-policy=restricted
+# gce target-ssl-proxies create pgsql --backend-service=pgsql --ssl-certificates=\<domain-com\> --ssl-policy=restricted
 gce target-tcp-proxies create pgsql --backend-service=pgsql
 
 # create forwarding rule
