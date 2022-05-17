@@ -15,8 +15,6 @@ Nginx does not use conditional headers, like `if-modified-since`, etc., in the c
 
 Nginx doesn't process `cache-control` header from client request, so it is impossible to use `no-cache` to skip nginx vache.
 
-If `must-revalidate`, `proxy-revalidate` are used nginx sends request to backend without `if-modified-since` header. If content is not modified - returns `304` to the browser.
-
 ### Browser
 
 If `must-revalidate`, `proxy-revalidate` are used - browser sends `cache-control: max-age=0` in request.
