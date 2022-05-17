@@ -147,7 +147,7 @@ gce backend-services add-backend http --global --instance-group=nginx
 gce url-maps create https --default-service=http
 
 # create https proxy
-gce target-https-proxies create https --ssl-certificates= --url-map=https <domain-com> --ssl-policy=modern
+gce target-https-proxies create https --url-map=https --ssl-policy=modern --ssl-certificates=<domain-com>
 
 # create forwarding rule
 gce forwarding-rules create https --load-balancing-scheme=EXTERNAL --address=public-ipv4 --ports=443 --target-https-proxy=https --global
