@@ -22,13 +22,12 @@ If `must-revalidate`, `proxy-revalidate` are used - browser sends `cache-control
 #### Chrome
 
 -   On `F5` chrome always revalidates main html page.
+
 -   When chrome revalidates content it sends `cache-control: max-age=0` and `if-modified-since`.
 
 ### Configuration examples
 
-#### Always revalidate
-
-Cache for 1 second, revalidate:
+#### Cache for 1 second, revalidate
 
 ```text
 cache-control: public, max-age=1
