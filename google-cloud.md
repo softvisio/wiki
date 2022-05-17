@@ -92,8 +92,9 @@ Before start:
 
 Create certificate:
 
+<!-- prettier-ignore -->
 ```shell
-gce ssl-certificates create \<domain-com\> --global --domains= \<domain.com\>
+gce ssl-certificates create <domain-com> --global --domains= <domain.com>
 ```
 
 Check certificates status:
@@ -134,6 +135,7 @@ yes | gce url-maps delete http
 
 Create load balancer:
 
+<!-- prettier-ignore -->
 ```shell
 # create backend service
 gce backend-services create http --global-health-checks --health-checks=tcp --protocol=HTTP --port-name=http --global --custom-response-header="Strict-Transport-Security:max-age=63072000; includeSubdomains; preload" # --cache-mode=USE_ORIGIN_HEADERS --enable-cdn
@@ -145,7 +147,7 @@ gce backend-services add-backend http --global --instance-group=nginx
 gce url-maps create https --default-service=http
 
 # create https proxy
-gce target-https-proxies create https --ssl-certificates= --url-map=https \<domain-com\> --ssl-policy=modern
+gce target-https-proxies create https --ssl-certificates= --url-map=https <domain-com> --ssl-policy=modern
 
 # create forwarding rule
 gce forwarding-rules create https --load-balancing-scheme=EXTERNAL --address=public-ipv4 --ports=443 --target-https-proxy=https --global
@@ -164,6 +166,7 @@ yes | gce backend-services delete http --global
 
 Create load balancer:
 
+<!-- prettier-ignore -->
 ```shell
 # create backend service
 gce backend-services create pgsql --global-health-checks --health-checks=tcp --protocol=TCP --port-name=pgsql --global
@@ -172,7 +175,7 @@ gce backend-services create pgsql --global-health-checks --health-checks=tcp --p
 gce backend-services add-backend pgsql --global --instance-group=nginx
 
 # create ssl proxy
-# gce target-ssl-proxies create pgsql --backend-service=pgsql --ssl-certificates=\<domain-com\> --ssl-policy=restricted
+# gce target-ssl-proxies create pgsql --backend-service=pgsql --ssl-certificates=<domain-com> --ssl-policy=restricted
 gce target-tcp-proxies create pgsql --backend-service=pgsql
 
 # create forwarding rule
