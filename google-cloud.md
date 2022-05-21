@@ -108,7 +108,7 @@ gce ssl-certificates list
 ```shell
 gce instance-groups unmanaged create nginx
 gce instance-groups unmanaged add-instances nginx --instances=a0
-gce instance-groups set-named-ports nginx --named-ports=http:80,pgsql:5432
+gce instance-groups set-named-ports nginx --named-ports=http:80,pgsql:5432,proxy:8099
 ```
 
 ## HTTP load balancer
@@ -195,6 +195,33 @@ yes | gce forwarding-rules delete pgsql --global
 # yes | gce target-ssl-proxies delete pgsql
 yes | gce target-tcp-proxies delete pgsql
 yes | gce backend-services delete pgsql --global
+```
+
+## Proxy SSL load balancer
+
+Create load balancer:
+
+<!-- prettier-ignore -->
+```shell
+# create backend service
+gce backend-services create proxy --global-health-checks --health-checks=tcp --protocol=TCP --port-name=proxy --global
+
+# add instances group to the backend service
+gce backend-services add-backend proxy --global --instance-group=nginx
+
+# create ssl proxy
+gce target-ssl-proxies create proxy --backend-service=proxy --ssl-policy=restricted --ssl-certificates=<domain-com>
+
+# create forwarding rule
+gce forwarding-rules create proxy --load-balancing-scheme=EXTERNAL --address=private-ipv4 --ports=8099 --target-ssl-proxy=8099 --global
+```
+
+Remove load balancer:
+
+```shell
+yes | gce forwarding-rules delete proxy --global
+yes | gce target-ssl-proxies delete proxy
+yes | gce backend-services delete proxy --global
 ```
 
 ## Machine type
