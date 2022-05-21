@@ -108,7 +108,7 @@ gce ssl-certificates list
 ```shell
 gce instance-groups unmanaged create nginx
 gce instance-groups unmanaged add-instances nginx --instances=a0
-gce instance-groups set-named-ports nginx --named-ports=http:80,pgsql:5432,proxy:8099
+gce instance-groups set-named-ports nginx --named-ports=http:80,pgsql:5432,proxy:8085
 ```
 
 ## HTTP load balancer
@@ -213,7 +213,7 @@ gce backend-services add-backend proxy --global --instance-group=nginx
 gce target-ssl-proxies create proxy --backend-service=proxy --ssl-policy=restricted --ssl-certificates=<domain-com>
 
 # create forwarding rule
-gce forwarding-rules create proxy --load-balancing-scheme=EXTERNAL --address=private-ipv4 --ports=8099 --target-ssl-proxy=8099 --global
+gce forwarding-rules create proxy --load-balancing-scheme=EXTERNAL --address=private-ipv4 --ports=8085 --target-ssl-proxy=8085 --global
 ```
 
 Remove load balancer:
