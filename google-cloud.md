@@ -213,7 +213,7 @@ gce backend-services add-backend proxy --global --instance-group=nginx
 gce target-ssl-proxies create proxy --backend-service=proxy --ssl-policy=restricted --ssl-certificates=<domain-com>
 
 # create forwarding rule
-gce forwarding-rules create proxy --load-balancing-scheme=EXTERNAL --address=private-ipv4 --ports=8085 --target-ssl-proxy=8085 --global
+gce forwarding-rules create proxy --load-balancing-scheme=EXTERNAL --address=private-ipv4 --ports=8085 --target-ssl-proxy=proxy --global
 ```
 
 Remove load balancer:
