@@ -120,11 +120,10 @@ Create redirect from `http` to `https`:
 
 ```shell
 gce target-http-proxies create http --url-map=http --global
-
 gce forwarding-rules create http --load-balancing-scheme=EXTERNAL --address=public-ipv4 --ports=80 --target-http-proxy=http --global
 ```
 
-Remove load balancer:
+Remove:
 
 ```shell
 yes | gce forwarding-rules delete http --global
@@ -134,94 +133,110 @@ yes | gce url-maps delete http
 
 ## HTTPS load balancer
 
+Create backend service:
+
+```shell
+gce backend-services create http \
+    --global-health-checks --health-checks=tcp \
+    --protocol=HTTP --port-name=http \
+    --global \
+    --custom-response-header="Strict-Transport-Security:max-age=63072000; includeSubdomains; preload" \
+    --cache-mode=USE_ORIGIN_HEADERS --enable-cdn --serve-while-stale=0
+
+gce backend-services add-backend http --global --instance-group=nginx
+```
+
 Create load balancer:
 
 <!-- prettier-ignore -->
 ```shell
-# create backend service
-gce backend-services create http \
-	--global-health-checks --health-checks=tcp \
-	--protocol=HTTP --port-name=http \
-	--global \
-	--custom-response-header="Strict-Transport-Security:max-age=63072000; includeSubdomains; preload" \
-	--cache-mode=USE_ORIGIN_HEADERS --enable-cdn --serve-while-stale=0
-
-# add instances group to the backend service
-gce backend-services add-backend http --global --instance-group=nginx
-
-# create url map
 gce url-maps create https --default-service=http
-
-# create https proxy
 gce target-https-proxies create https --url-map=https --ssl-policy=modern --ssl-certificates=<domain-com>
-
-# create forwarding rule
 gce forwarding-rules create https --load-balancing-scheme=EXTERNAL --address=public-ipv4 --ports=443 --target-https-proxy=https --global
 ```
 
-Remove load balancer:
+Remove:
 
 ```shell
 yes | gce forwarding-rules delete https --global
 yes | gce target-https-proxies delete https
 yes | gce url-maps delete https
+
 yes | gce backend-services delete http --global
 ```
 
-## PostgreSQL SSL load balancer
+## PostgreSQL service
+
+Create backend service:
+
+```shell
+gce backend-services create pgsql --global-health-checks --health-checks=tcp --protocol=TCP --port-name=pgsql --global
+gce backend-services add-backend pgsql --global --instance-group=nginx
+```
 
 Create load balancer:
 
 <!-- prettier-ignore -->
 ```shell
-# create backend service
-gce backend-services create pgsql --global-health-checks --health-checks=tcp --protocol=TCP --port-name=pgsql --global
-
-# add instances group to the backend service
-gce backend-services add-backend pgsql --global --instance-group=nginx
-
-# create ssl proxy
 # gce target-ssl-proxies create pgsql --backend-service=pgsql --ssl-certificates=<domain-com> --ssl-policy=restricted
 gce target-tcp-proxies create pgsql --backend-service=pgsql
 
-# create forwarding rule
 # gce forwarding-rules create pgsql --load-balancing-scheme=EXTERNAL --address=private-ipv4 --ports=5432 --target-ssl-proxy=pgsql --global
 gce forwarding-rules create pgsql --load-balancing-scheme=EXTERNAL --address=private-ipv4 --ports=5432 --target-tcp-proxy=pgsql --global
 ```
 
-Remove load balancer:
+Remove:
 
 ```shell
 yes | gce forwarding-rules delete pgsql --global
 # yes | gce target-ssl-proxies delete pgsql
 yes | gce target-tcp-proxies delete pgsql
+
 yes | gce backend-services delete pgsql --global
 ```
 
-## Proxy SSL load balancer
+## Proxy service
 
-Create load balancer:
+Create backend service:
 
-<!-- prettier-ignore -->
 ```shell
-# create backend service
 gce backend-services create proxy --global-health-checks --health-checks=tcp --protocol=TCP --port-name=proxy --global
-
-# add instances group to the backend service
 gce backend-services add-backend proxy --global --instance-group=nginx
-
-# create ssl proxy
-gce target-ssl-proxies create proxy --backend-service=proxy --ssl-policy=restricted --ssl-certificates=<domain-com>
-
-# create forwarding rule
-gce forwarding-rules create proxy --load-balancing-scheme=EXTERNAL --address=private-ipv4 --ports=8085 --target-ssl-proxy=proxy --global
 ```
 
-Remove load balancer:
+Create HTTP:80 to HTTPS:443 redirect:
 
 ```shell
-yes | gce forwarding-rules delete proxy --global
-yes | gce target-ssl-proxies delete proxy
+gce target-http-proxies create proxy-http --url-map=http --global
+gce forwarding-rules create proxy-http --load-balancing-scheme=EXTERNAL --address=private-ipv4 --ports=80 --target-http-proxy=proxy-http --global
+```
+
+Create HTTPS:443 proxy:
+
+```shell
+gce target-ssl-proxies create proxy-ssl --backend-service=proxy --proxy-header=PROXY_V1 --ssl-policy=restricted --ssl-certificates=proxy-softvisio-net
+gce forwarding-rules create proxy-ssl --load-balancing-scheme=EXTERNAL --address=private-ipv4 --ports=443 --target-ssl-proxy=proxy-ssl --global
+```
+
+Create TCP:8085 proxy:
+
+```shell
+gce target-tcp-proxies create proxy-tcp --proxy-header=PROXY_V1 --backend-service=proxy
+gce forwarding-rules create proxy-tcp --load-balancing-scheme=EXTERNAL --address=private-ipv4 --ports=8085 --target-tcp-proxy=proxy-tcp --global
+```
+
+Remove:
+
+```shell
+yes | gce forwarding-rules delete proxy-tcp --global
+yes | gce target-tcp-proxies delete proxy-tcp
+
+yes | gce forwarding-rules delete proxy-ssl --global
+yes | gce target-ssl-proxies delete proxy-ssl
+
+yes | gce forwarding-rules delete proxy-http --global
+yes | gce target-http-proxies delete proxy-http
+
 yes | gce backend-services delete proxy --global
 ```
 
