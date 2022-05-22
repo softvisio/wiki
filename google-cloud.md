@@ -197,6 +197,12 @@ yes | gce backend-services delete pgsql --global
 
 ## Proxy service
 
+Reserve IP address:
+
+```shell
+gce addresses create proxy-ipv4 --ip-version=IPV4 --global
+```
+
 Create backend service:
 
 ```shell
@@ -204,40 +210,32 @@ gce backend-services create proxy --global-health-checks --health-checks=tcp --p
 gce backend-services add-backend proxy --global --instance-group=nginx
 ```
 
-Create HTTP:80 to HTTPS:443 redirect:
-
-```shell
-gce target-http-proxies create proxy-http --url-map=http --global
-gce forwarding-rules create proxy-http --load-balancing-scheme=EXTERNAL --address=private-ipv4 --ports=80 --target-http-proxy=proxy-http --global
-```
-
-Create HTTPS:443 proxy:
-
-```shell
-gce target-ssl-proxies create proxy-ssl --backend-service=proxy --proxy-header=PROXY_V1 --ssl-policy=restricted --ssl-certificates=proxy-softvisio-net
-gce forwarding-rules create proxy-ssl --load-balancing-scheme=EXTERNAL --address=private-ipv4 --ports=443 --target-ssl-proxy=proxy-ssl --global
-```
-
-Create TCP:8085 proxy:
+Create TCP:80 proxy
 
 ```shell
 gce target-tcp-proxies create proxy-tcp --proxy-header=PROXY_V1 --backend-service=proxy
-gce forwarding-rules create proxy-tcp --load-balancing-scheme=EXTERNAL --address=private-ipv4 --ports=8085 --target-tcp-proxy=proxy-tcp --global
+gce forwarding-rules create proxy-tcp --load-balancing-scheme=EXTERNAL --address=proxy-ipv4 --ports=80 --target-tcp-proxy=proxy-tcp --global
+```
+
+Create SSL:443 proxy:
+
+```shell
+gce target-ssl-proxies create proxy-ssl --backend-service=proxy --proxy-header=PROXY_V1 --ssl-policy=restricted --ssl-certificates=proxy-softvisio-net
+gce forwarding-rules create proxy-ssl --load-balancing-scheme=EXTERNAL --address=proxy-ipv4 --ports=443 --target-ssl-proxy=proxy-ssl --global
 ```
 
 Remove:
 
 ```shell
 yes | gce forwarding-rules delete proxy-tcp --global
-yes | gce target-tcp-proxies delete proxy-tcp
+yes | gce target-http-proxies delete proxy-tcp
 
 yes | gce forwarding-rules delete proxy-ssl --global
 yes | gce target-ssl-proxies delete proxy-ssl
 
-yes | gce forwarding-rules delete proxy-http --global
-yes | gce target-http-proxies delete proxy-http
-
 yes | gce backend-services delete proxy --global
+
+yes | gce addresses delete proxy-ipv4 --global
 ```
 
 ## Machine type
