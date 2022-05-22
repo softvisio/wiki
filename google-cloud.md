@@ -58,7 +58,10 @@ gce ssl-policies create restricted --profile=RESTRICTED
 gce health-checks create tcp tcp --use-serving-port
 gce health-checks create http http --use-serving-port --request-path=/healthcheck
 
-# disable rdp
+# create default url maps
+gce url-maps import http --global --source=http.url-map.yaml
+
+# disable rdp firewall rule
 gce firewall-rules update default-allow-rdp --disabled
 
 # allow traffic from google load balancers and health checkers
@@ -116,8 +119,6 @@ gce instance-groups set-named-ports nginx --named-ports=http:80,pgsql:5432,proxy
 Create redirect from `http` to `https`:
 
 ```shell
-gce url-maps import http --global --source=http.url-map.yaml
-
 gce target-http-proxies create http --url-map=http --global
 
 gce forwarding-rules create http --load-balancing-scheme=EXTERNAL --address=public-ipv4 --ports=80 --target-http-proxy=http --global
