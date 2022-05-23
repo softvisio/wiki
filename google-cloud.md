@@ -228,7 +228,7 @@ Remove:
 
 ```shell
 yes | gce forwarding-rules delete proxy-tcp --global
-yes | gce target-http-proxies delete proxy-tcp
+yes | gce target-tcp-proxies delete proxy-tcp
 
 yes | gce forwarding-rules delete proxy-ssl --global
 yes | gce target-ssl-proxies delete proxy-ssl
