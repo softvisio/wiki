@@ -174,23 +174,28 @@ gce backend-services create pgsql --global-health-checks --health-checks=tcp --p
 gce backend-services add-backend pgsql --global --instance-group=nginx
 ```
 
-Create load balancer:
+Create TCP load balancer:
 
 <!-- prettier-ignore -->
 ```shell
-# gce target-ssl-proxies create pgsql --backend-service=pgsql --ssl-certificates=<domain-com> --ssl-policy=restricted
 gce target-tcp-proxies create pgsql --backend-service=pgsql
-
-# gce forwarding-rules create pgsql --load-balancing-scheme=EXTERNAL --address=private-ipv4 --ports=5432 --target-ssl-proxy=pgsql --global
 gce forwarding-rules create pgsql --load-balancing-scheme=EXTERNAL --address=private-ipv4 --ports=5432 --target-tcp-proxy=pgsql --global
+```
+
+Create SSL load balancer (this not works with `psql` client):
+
+<!-- prettier-ignore -->
+```shell
+gce target-ssl-proxies create pgsql --backend-service=pgsql --ssl-certificates=<domain-com> --ssl-policy=restricted
+gce forwarding-rules create pgsql --load-balancing-scheme=EXTERNAL --address=private-ipv4 --ports=5432 --target-ssl-proxy=pgsql --global
 ```
 
 Remove:
 
 ```shell
 yes | gce forwarding-rules delete pgsql --global
-# yes | gce target-ssl-proxies delete pgsql
 yes | gce target-tcp-proxies delete pgsql
+yes | gce target-ssl-proxies delete pgsql
 
 yes | gce backend-services delete pgsql --global
 ```
