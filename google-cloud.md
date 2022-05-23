@@ -210,11 +210,11 @@ gce backend-services create proxy --global-health-checks --health-checks=tcp --p
 gce backend-services add-backend proxy --global --instance-group=nginx
 ```
 
-Create TCP:80 proxy
+Create TCP:8085 proxy
 
 ```shell
 gce target-tcp-proxies create proxy-tcp --proxy-header=PROXY_V1 --backend-service=proxy
-gce forwarding-rules create proxy-tcp --load-balancing-scheme=EXTERNAL --address=proxy-ipv4 --ports=80 --target-tcp-proxy=proxy-tcp --global
+gce forwarding-rules create proxy-tcp --load-balancing-scheme=EXTERNAL --address=proxy-ipv4 --ports=8085 --target-tcp-proxy=proxy-tcp --global
 ```
 
 Create SSL:443 proxy:
