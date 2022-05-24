@@ -136,21 +136,21 @@ yes | gce url-maps delete http
 Create backend service:
 
 ```shell
-gce backend-services create http \
+gce backend-services create nginx \
     --global-health-checks --health-checks=tcp \
     --protocol=HTTP --port-name=http \
     --global \
     --custom-response-header="Strict-Transport-Security:max-age=63072000; includeSubdomains; preload" \
     --cache-mode=USE_ORIGIN_HEADERS --enable-cdn --serve-while-stale=0
 
-gce backend-services add-backend http --global --instance-group=nginx
+gce backend-services add-backend nginx --global --instance-group=nginx
 ```
 
 Create load balancer:
 
 <!-- prettier-ignore -->
 ```shell
-gce url-maps create https --default-service=http
+gce url-maps create https --default-service=nginx
 gce target-https-proxies create https --url-map=https --ssl-policy=modern --ssl-certificates=<domain-com>
 gce forwarding-rules create https --load-balancing-scheme=EXTERNAL --address=public-ipv4 --ports=443 --target-https-proxy=https --global
 ```
