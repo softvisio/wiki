@@ -140,6 +140,7 @@ gce backend-services create nginx \
     --global-health-checks --health-checks=tcp \
     --protocol=HTTP --port-name=http \
     --global \
+    --timeout=600s \
     --custom-response-header="Strict-Transport-Security:max-age=63072000; includeSubdomains; preload" \
     --cache-mode=USE_ORIGIN_HEADERS --enable-cdn --serve-while-stale=0
 
@@ -170,7 +171,7 @@ yes | gce backend-services delete http --global
 Create backend service:
 
 ```shell
-gce backend-services create pgsql --global-health-checks --health-checks=tcp --protocol=TCP --port-name=pgsql --global
+gce backend-services create pgsql --global-health-checks --health-checks=tcp --timeout=600s --protocol=TCP --port-name=pgsql --global
 gce backend-services add-backend pgsql --global --instance-group=nginx
 ```
 
@@ -178,7 +179,7 @@ Create SSL load balancer (not works with `psql` client, need to create SSL tunne
 
 <!-- prettier-ignore -->
 ```shell
-gce target-ssl-proxies create pgsql --backend-service=pgsql --ssl-certificates=<domain-com> --ssl-policy=restricted
+gce target-ssl-proxies create pgsql --backend-service=pgsql --ssl-policy=restricted --ssl-certificates=<domain-com>
 gce forwarding-rules create pgsql --load-balancing-scheme=EXTERNAL --address=private-ipv4 --ports=5432 --target-ssl-proxy=pgsql --global
 ```
 
@@ -196,7 +197,7 @@ yes | gce backend-services delete pgsql --global
 Create backend service:
 
 ```shell
-gce backend-services create proxy --global-health-checks --health-checks=tcp --protocol=TCP --port-name=proxy --global
+gce backend-services create proxy --global-health-checks --health-checks=tcp --protocol=TCP --timeout=600s --port-name=proxy --global
 gce backend-services add-backend proxy --global --instance-group=nginx
 ```
 
