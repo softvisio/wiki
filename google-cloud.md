@@ -140,7 +140,7 @@ gce backend-services create nginx \
     --global-health-checks --health-checks=tcp \
     --protocol=HTTP --port-name=http \
     --global \
-    --timeout=600s \
+    --timeout=60s \
     --custom-response-header="Strict-Transport-Security:max-age=63072000; includeSubdomains; preload" \
     --cache-mode=USE_ORIGIN_HEADERS --enable-cdn --serve-while-stale=0
 
@@ -197,7 +197,11 @@ yes | gce backend-services delete pgsql --global
 Create backend service:
 
 ```shell
-gce backend-services create proxy --global-health-checks --health-checks=tcp --protocol=TCP --timeout=600s --port-name=proxy --global
+gce backend-services create proxy \
+    --global-health-checks --health-checks=tcp \
+    --protocol=TCP \
+    --timeout=60s --port-name=proxy --global
+
 gce backend-services add-backend proxy --global --instance-group=nginx
 ```
 
