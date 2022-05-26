@@ -162,7 +162,7 @@ yes | gce forwarding-rules delete https --global
 yes | gce target-https-proxies delete https
 yes | gce url-maps delete https
 
-yes | gce backend-services delete http --global
+yes | gce backend-services delete nginx --global
 ```
 
 ## PostgreSQL service
