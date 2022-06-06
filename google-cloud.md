@@ -296,5 +296,27 @@ gce images list
 ### Enable service
 
 ```shell
-gc services enable artifactregistry.googleapis.com
+# compute
+gc services enable compute.googleapis.com
+
+# maps
+gc services enable places-backend.googleapis.com
+gc services enable geocoding-backend.googleapis.com
+gc services enable maps-backend.googleapis.com
+gc services enable timezone-backend.googleapis.com
+```
+
+### Create API key
+
+```shell
+gc alpha services api-keys create --display-name=maps.local \
+    --api-target=service=places-backend.googleapis.com \
+    --api-target=service=geocoding-backend.googleapis.com \
+    --allowed-referrers=localhost
+```
+
+### Get API key
+
+```shell
+gc alpha services api-keys get-key-string --format="get(keyString)" $(gc alpha services api-keys list --format="get(uid)" --filter=displayName=maps.local)
 ```
