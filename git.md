@@ -80,3 +80,13 @@ FILE=<FILE-PATH>
 
 git checkout $(git rev-list -n 1 HEAD -- "$FILE")^ -- "$FILE"
 ```
+
+### Remove untracked files
+
+```shell
+# files
+git clean --force
+
+# directories
+git clean --force -d
+```
