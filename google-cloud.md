@@ -46,6 +46,14 @@ Activate project configuration:
 gcp activate <project-name>
 ```
 
+## Change project billing
+
+1. Goto [https://console.cloud.google.com/cloud-resource-manager](https://console.cloud.google.com/cloud-resource-manager).
+
+2. In left-side panel add new user with the following roles: `Browser`, `Project Billing Manager`.
+
+3. New user must to change billing account for this project to the own account here: [https://console.cloud.google.com/billing/projects](https://console.cloud.google.com/billing/projects).
+
 ## Initialize cluster
 
 ```shell
