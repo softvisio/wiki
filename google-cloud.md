@@ -72,10 +72,10 @@ gce url-maps import http --global --source=http.url-map.yaml
 # disable rdp firewall rule
 gce firewall-rules update default-allow-rdp --disabled
 
-# allow traffic from google cloud load balancers and health checkers
+# allow traffic from Google cloud load balancers and health checkers
 gce firewall-rules create allow-gcloud-load-balancer --source-ranges=35.191.0.0/16,130.211.0.0/22 --action=ALLOW --rules=tcp,udp
 
-# allo HTTP traffic from cloudflare
+# allow http traffic from CloudFlare
 gce firewall-rules create allow-cloudflare-http --source-ranges=$(curl -fsSL https://www.cloudflare.com/ips-v4 | xargs | sed -e "s/ /,/g") --action=ALLOW --rules=tcp:80
 
 # reserve ip addresses for load balancer
