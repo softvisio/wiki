@@ -38,7 +38,7 @@
     https://github.com/<OWNER>/<NAME>/archive/refs/tags/<TAG>.tar.gz
     ```
 
-### Move Repository
+### Move repository
 
 ```shell
 git remote rm origin
@@ -89,4 +89,16 @@ git clean --force
 
 # directories
 git clean --force -d
+```
+
+### Delete commited changesets
+
+```shell
+git reset --hard <sha1-commit-id>
+```
+
+If changesets were pushed:
+
+```shell
+git push origin HEAD --force
 ```
