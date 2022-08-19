@@ -36,5 +36,14 @@ autossh -f -N -L *:22225:zproxy.lum-superproxy.io:22225 root@serp
 # -f - Run in background.
 # -N - Do not execute a remote command.  This is useful for just forwarding ports.
 # * - any ip, 127.0.0.7 - listen for the specific ip only.
+
 autossh -f -N -L *:3306:/var/run/docker.sock root@serp
+```
+
+PostgresSQL tunnel:
+
+```shell
+gce ssh a0 -- -N -L *:5433:/var/run/postgresql/.s.PGSQL.5432
+
+psql -h localhost -p 5433
 ```
