@@ -114,7 +114,7 @@ with:
 --address=public-ipv4
 ```
 
-`public-ipv4` nust be regional (created without --global flag).
+where `public-ipv4` must be regional (created without `--global` flag).
 
 ## Create certificates
 
