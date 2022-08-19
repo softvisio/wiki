@@ -102,6 +102,20 @@ gce instances create a0 \
     --metadata-from-file user-data=cloud-init.yaml
 ```
 
+To create instance with external reserved ip address assigned replace:
+
+```shell
+--network-interface=no-address
+```
+
+with:
+
+```shell
+--address=public-ipv4
+```
+
+`public-ipv4` nust be regional (created without --global flag).
+
 ## Create certificates
 
 Before start:
