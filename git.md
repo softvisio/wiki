@@ -67,11 +67,10 @@ In the following example we rename `master` to `main`:
 git sw master
 git branch -m main
 git push origin -u main
-
-# in bitbucket repository settings change main branch to "main"
-
 git push origin --delete master
 ```
+
+On `GitHub` repository `settings/branches` switch default branch to the `main`.
 
 ### Restore deleted file
 
