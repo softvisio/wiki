@@ -69,7 +69,7 @@ gce health-checks create http http --use-serving-port --request-path=/healthchec
 # create default url maps
 gce url-maps import http --global --source=http.url-map.yaml
 
-# disable rdp firewall rule
+# disable default firewall rules
 gce firewall-rules update default-allow-rdp --disabled
 
 # allow traffic from Google cloud load balancers and health checkers
