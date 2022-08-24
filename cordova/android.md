@@ -2,9 +2,9 @@
 
 ### Prepare environment
 
--   Java server JRE
+-   Java SE JDK
 
-    -   [download server jre 8 x86_64](https://www.oracle.com/technetwork/java/javase/downloads/index.html)
+    -   [download latest JDK](https://www.oracle.com/java/technologies/downloads/#jdk18-windows)
     -   unpack to devel/android/java
 
 -   Gradle:
