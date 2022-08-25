@@ -27,6 +27,10 @@ pod repo update
 -   Update pods (if you will see errors, related to the pods):
 
     ```shell
+    brew upgrade cocoapods
+    brew install cocoapods
+    brew link --overwrite cocoapods
+
     cd platform/ios
     pod install
     ```
