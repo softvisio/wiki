@@ -13,6 +13,18 @@ npm up -g
 pod repo update
 ```
 
+Check, that you have latest `xcode` version installer. To update:
+
+```shell
+brew install mas
+
+mas list
+mas search xcode
+mas install <id>
+mas upgrade <id>
+
+```
+
 ### Prepare project
 
 -   Copy project from the VMWare host directory to the local filesystem.
@@ -114,9 +126,7 @@ Provisioning profile links certificate, identified and devices together.
 
 #### Create certificates
 
--   xcode -> Preferences -> Accounts
-    -   Add apple account;
-    -   Manage certificates -> add certificate: development, distributuion;
+xcode -> preferences -> account tab (at the top) -> select team -> press manage certificates -> create certificate (at the bottom)
 
 #### Remove old certificates
 
