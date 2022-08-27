@@ -16,6 +16,46 @@
     -   [download sdk-tools-windows.zip](https://developer.android.com/studio/#downloads)
     -   unpack to devel/android/cmdline-tools/latest
 
+### Prepare project
+
+-   Install cordova platform:
+
+    ```shell
+    env-android
+    npm up
+    cordova platform add android
+    ```
+
+    Do not use latest platform, some plugins may not work.
+
+    To reinstall everything from the scratch remove `node_modules`, `platforms`, `plugins` directories.
+
+### Build
+
+```shell
+cordova build android
+```
+
+### Release
+
+```shell
+cordova build android --release
+```
+
+### Run
+
+Run on android device, connected to the USB port:
+
+```shell
+cordova run android --device
+```
+
+Access app console from the browser:
+
+```text
+chrome://inspect/#devices
+```
+
 ### Prepare device
 
 -   Sony device drivers
@@ -66,46 +106,6 @@
     ```shell
     emulator -avd pixel
     ```
-
-### Prepare project
-
--   Install cordova platform:
-
-    ```shell
-    env-android
-    npm up
-    cordova platform add --nosave android
-    ```
-
-    Do not use latest platform, some plugins may not work.
-
-    To reinstall everything from the scratch remove `node_modules`, `platforms`, `plugins` directories.
-
-### Build
-
-```shell
-cordova build android
-```
-
-### Release
-
-```shell
-cordova build android --release
-```
-
-### Run
-
-Run on android device, connected to the USB port:
-
-```shell
-cordova run android --device
-```
-
-Access app console from the browser:
-
-```text
-chrome://inspect/#devices
-```
 
 ### Certificates
 
