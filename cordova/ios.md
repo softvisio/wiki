@@ -6,23 +6,21 @@ Of you have cordova platform install or build errors:
 
 -   Cheche, that you have latest `xcode` version installed. If new `xcode` version is exists but not available in updates - you need to upgrade `macos` to the latest release.
 
--   Update `pods`:
+-   Update `cocoapods`:
 
-```shell
-brew upgrade cocoapods
+    ```shell
+    brew upgrade cocoapods
 
-pod repo update
-```
+    pod repo update
+    ```
 
--   Update pods (if you will see errors, related to the pods):
+-   Update platform `pods`:
 
     ```shell
     cd platform/ios
 
     pod install --verbose
     ```
-
--
 
 ### Prepare environment
 
@@ -33,9 +31,9 @@ curl -fsSL https://raw.githubusercontent.com/softvisio/scripts/main/setup-host-m
 brew update
 brew upgrade node cocoapods
 
-npm up -g
-
 pod repo update
+
+npm up -g
 ```
 
 ### Prepare project
@@ -51,9 +49,11 @@ pod repo update
     ```
 
 -   Open project workspace in `xcode`:
+
     ```shell
     open -a xcode platforms/ios/*.xcworkspace
     ```
+
     In `xcode` set apple team and select automanage signing.
 
 ### Build
