@@ -19,6 +19,8 @@ If you have cordova platform install or build errors:
     ```shell
     cd platform/ios
 
+    pod deintegrate
+    pod setup
     pod install --verbose
     ```
 
