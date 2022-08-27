@@ -2,7 +2,7 @@
 
 ### Errors
 
-Of you have cordova platform install or build errors:
+If you have cordova platform install or build errors:
 
 -   Cheche, that you have latest `xcode` version installed. If new `xcode` version is exists but not available in updates - you need to upgrade `macos` to the latest release.
 
