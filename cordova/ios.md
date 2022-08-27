@@ -109,6 +109,17 @@ If your account has 2FA enabled, first visit https://appleid.apple.com/ and gene
 
 ---
 
+### Manage certificates
+
+#### Create certificates
+
+xcode -> preferences -> account tab (at the top) -> select team -> press manage certificates -> create certificate (at the bottom)
+
+#### Remove old certificates
+
+-   Revoke certificate on [https://developer.apple.com/account/resources/certificates/list](https://developer.apple.com/account/resources/certificates/list);
+-   Delete certificate in `Keychain Access Tool`: Finder -> Applications -> Utils -> Keychain Access -> My Certificates;
+
 ### Sign
 
 For ios, macos creates certificates and povisioning profiles in xcode.
@@ -124,14 +135,3 @@ For ios, macos creates certificates and povisioning profiles in xcode.
 Provisioning profile links certificate, identified and devices together.
 
 -   Create new provisioning profile, select `Distribution / App Store`;
-
-### Certificates
-
-#### Create certificates
-
-xcode -> preferences -> account tab (at the top) -> select team -> press manage certificates -> create certificate (at the bottom)
-
-#### Remove old certificates
-
--   Revoke certificate on [https://developer.apple.com/account/resources/certificates/list](https://developer.apple.com/account/resources/certificates/list);
--   Delete certificate in `Keychain Access Tool`: Finder -> Applications -> Utils -> Keychain Access -> My Certificates;
