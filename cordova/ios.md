@@ -1,10 +1,33 @@
 # iOS
 
-### Prepare environment
+### Errors
 
-Check, that you have latest `xcode` version installed.
+Of you have cordova platform install or build errors:
+
+-   Cheche, that you have latest `xcode` version installed. If new `xcode` version is exists but not available in updates - you need to upgrade `macos` to the latest release.
+
+-   Update `pods`:
 
 ```shell
+brew upgrade cocoapods
+
+pod repo update
+```
+
+-   Update pods (if you will see errors, related to the pods):
+
+    ```shell
+    cd platform/ios
+
+    pod install --verbose
+    ```
+
+-
+
+### Prepare environment
+
+```shell
+# this is not mandatory
 curl -fsSL https://raw.githubusercontent.com/softvisio/scripts/main/setup-host-macos.sh | /bin/bash
 
 brew update
@@ -23,21 +46,15 @@ pod repo update
 
     ```shell
     npm up
-    cordova platform add --nosave ios
-    ```
 
--   Update pods (if you will see errors, related to the pods):
-
-    ```shell
-    cd platform/ios
-    pod install --verbose
+    cordova platform add ios
     ```
 
 -   Open project workspace in `xcode`:
     ```shell
     open -a xcode platforms/ios/*.xcworkspace
     ```
-    In xcode set apple team and select automanage signing.
+    In `xcode` set apple team and select automanage signing.
 
 ### Build
 
