@@ -2,27 +2,17 @@
 
 ### Prepare environment
 
+Check, that you have latest `xcode` version installed.
+
 ```shell
 curl -fsSL https://raw.githubusercontent.com/softvisio/scripts/main/setup-host-macos.sh | /bin/bash
 
 brew update
-brew upgrade node
+brew upgrade node cocoapods
 
 npm up -g
 
 pod repo update
-```
-
-Check, that you have latest `xcode` version installer. To update:
-
-```shell
-brew install mas
-
-mas list
-mas search xcode
-mas install <id>
-mas upgrade <id>
-
 ```
 
 ### Prepare project
@@ -39,12 +29,8 @@ mas upgrade <id>
 -   Update pods (if you will see errors, related to the pods):
 
     ```shell
-    brew upgrade cocoapods
-    brew install cocoapods
-    brew link --overwrite cocoapods
-
     cd platform/ios
-    pod install
+    pod install --verbose
     ```
 
 -   Open project workspace in `xcode`:
