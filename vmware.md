@@ -1,11 +1,15 @@
 # VMWare
 
+### Screen resolution
+
+Use this screen resolution for `windows` and `macos`: `1400 x 610`
+
 ### Compact `.vmdk`
 
-```batch
+```shell
 # fill free space with zeros
-cat /dev/zero >/wipefile
-rm -rf /wipefile
+cat /dev/zero > ~/wipefile
+rm -rf ~/wipefile
 ```
 
 ```batch
