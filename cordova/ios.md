@@ -6,6 +6,8 @@ If you have cordova platform install or build errors:
 
 -   Cheche, that you have latest `xcode` version installed. If new `xcode` version is exists but not available in updates - you need to upgrade `macos` to the latest release.
 
+-   Build project in `xcode` (product -> build) and apply all recommended fixes to config (using panel at the left) until it will built siccessfully.
+
 -   Update `cocoapods`:
 
     ```shell
@@ -85,7 +87,7 @@ npm up -g
     open -a xcode platforms/ios/*.xcworkspace
     ```
 
-    In `xcode` set apple team and select automanage signing.
+    In `xcode` set apple team and select automanage signing for development anf release. Try to build project in `xcode` and apply all recommended patches for config.
 
 ### Build
 
