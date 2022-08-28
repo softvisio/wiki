@@ -35,14 +35,17 @@ xcode-select --install
 # install brew
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
-# set the patb for the active devel dir
+# set the patb to the active devel dir
 # sudo xcode-select -s /Applications/Xcode.app/Contents/Developer
 
-# install packages
+# install brew packages
 brew install wget mc node cocoapods ios-sim
 
-# setup pod
+# setup cocoapods environment
 pod setup
+
+# update cocoapods repositories
+pod repo update
 
 # npm install --global ios-sim npm
 npm install --global cordova
@@ -51,11 +54,16 @@ npm install --global cordova
 Update `macos` environment:
 
 ```shell
+# update brew to the lates version
 brew update
-brew upgrade node cocoapods
 
+# update brew packages to the latest varions
+brew upgrade
+
+# update cocoapods repositories
 pod repo update
 
+# update global node packages
 npm up -g
 ```
 
