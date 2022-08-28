@@ -26,10 +26,31 @@ If you have cordova platform install or build errors:
 
 ### Prepare environment
 
-```shell
-# this is not mandatory
-curl -fsSL https://raw.githubusercontent.com/softvisio/scripts/main/setup-host-macos.sh | /bin/bash
+Init `macos` environment:
 
+```shell
+# install xcode devel tools
+xcode-select --install
+
+# install brew
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+# set the patb for the active devel dir
+# sudo xcode-select -s /Applications/Xcode.app/Contents/Developer
+
+# install packages
+brew install wget mc node cocoapods ios-sim
+
+# setup pod
+pod setup
+
+# npm install --global ios-sim npm
+npm install --global cordova
+```
+
+Update `macos` environment:
+
+```shell
 brew update
 brew upgrade node cocoapods
 
