@@ -23,7 +23,7 @@
     ```shell
     env-android
     npm up
-    cordova platform add android
+    cordova platform add --nosave android
     ```
 
     Do not use latest platform, some plugins may not work.

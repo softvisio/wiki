@@ -78,7 +78,7 @@ npm up -g
     ```shell
     npm up
 
-    cordova platform add ios
+    cordova platform add --nosave ios
     ```
 
 -   Open project workspace in `xcode`:
