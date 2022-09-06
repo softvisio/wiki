@@ -3,6 +3,7 @@
 -   [Docker swarm](docker-swarm.md)
 -   [Extend linux volume](extend-linux-volume.md)
 -   [ExtJS](extjs.md)
+    [Firebase](firebase.md)
 -   [Git](git.md)
 -   [Google caldav](google-caldav.md)
 -   [Google cloud](google-cloud.md)
