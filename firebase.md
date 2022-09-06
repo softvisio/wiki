@@ -14,7 +14,8 @@ const message = {
     },
 
     data: {
-        notification_foreground: "true", // cordova-plugin-firebasex, disply notification also if app in foreground
+        // cordova-plugin-firebasex, disply notification also if app in foreground
+        notification_foreground: "true",
     },
 
     // https://firebase.google.com/docs/reference/admin/node/firebase-admin.messaging.androidconfig.md#androidconfig_interface
@@ -45,14 +46,19 @@ const message = {
                 },
             ],
 
-            renotify: true, // replace notification with the same tag
+            // replace notification with the same tag, tag is required
+            renotify: true,
+
             requireInteraction: false,
             silent: false,
             tag: "",
-            vibration: [200, 100, 200], // required if silent is true, https://developer.mozilla.org/en-US/docs/Web/API/Vibration_API#vibration_patterns
+
+            // required if silent is true, https://developer.mozilla.org/en-US/docs/Web/API/Vibration_API#vibration_patterns
+            vibration: [200, 100, 200],
         },
 
         fcmOptions: {
+            // must be relative url, not used, if actions specified
             link: "/",
         },
     },
