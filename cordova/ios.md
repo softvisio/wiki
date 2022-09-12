@@ -41,7 +41,17 @@ xcode-select --install
 # sudo xcode-select -s /Applications/Xcode.app/Contents/Developer
 
 # install brew packages
-brew install wget mc node cocoapods ios-sim
+brew install bash wget mc nvim node cocoapods ios-sim
+
+# setup bash
+sudo bash << EOF
+	echo /usr/local/bin/bash >> /etc/shells
+EOF
+
+chsh -s /usr/local/bin/bash
+
+# install public dotfiles
+source <(curl -fsSL https://raw.githubusercontent.com/softvisio/scripts/main/update-dotfiles.sh) public
 
 # setup cocoapods environment
 pod setup
