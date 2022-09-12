@@ -31,7 +31,9 @@ If you have cordova platform install or build errors:
 Init `macos` environment:
 
 ```shell
-curl -fsSL https://raw.githubusercontent.com/softvisio/scripts/main/setup-host-macos.sh | /bin/bash
+/bin/bash <(curl -fsSL https://raw.githubusercontent.com/softvisio/scripts/main/setup-host-macos.sh)
+
+# TODO restart terminal
 ```
 
 Update `macos` environment:
