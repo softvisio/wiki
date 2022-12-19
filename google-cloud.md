@@ -359,6 +359,8 @@ Open resources management: [https://console.cloud.google.com/cloud-resource-mana
 
 Add new user with the following permissions: - `Owner`; - or `Viewer` + `Project Billing Manager`;
 
+On the current and target Cloud Billing account: `Billing Account User` + `Billing Account Viewer` OR `Billing Account Administrator`.
+
 ### Rename billing account
 
 Open billing accounts: [https://console.cloud.google.com/billing?authuser=zdm@softvisio.net](https://console.cloud.google.com/billing?authuser=zdm@softvisio.net).
