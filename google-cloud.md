@@ -350,3 +350,21 @@ gc alpha services api-keys create --display-name=maps.local \
 ```shell
 gc alpha services api-keys get-key-string --format="get(keyString)" $(gc alpha services api-keys list --format="get(uid)" --filter=displayName=maps.local)
 ```
+
+## Billing account management
+
+### Add billling manager
+
+Open resources management: [https://console.cloud.google.com/cloud-resource-manager?authuser=zdm@softvisio.net](https://console.cloud.google.com/cloud-resource-manager?authuser=zdm@softvisio.net).
+
+Add new user with the following permissions: - `Owner`; - or `Viewer` + `Project Billing Manager`;
+
+### Rename billing account
+
+Open billing accounts: [https://console.cloud.google.com/billing?authuser=zdm@softvisio.net](https://console.cloud.google.com/billing?authuser=zdm@softvisio.net).
+
+Open required billing account.
+
+At the top-left menu select `Account management`.
+
+At the top press `Rename` button.
