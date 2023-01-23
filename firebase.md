@@ -80,17 +80,21 @@ const message = {
 
 ### Setup firebase
 
-1. Goto firebase console;
+1. Goto firebase console.
 
-2. Create new android app:
+2. Create new firebase project, linked to the gcloud project.
+
+3. Open project settings -> `Service account`. Click `Generate new private key`. Use downloaded file in backend config.
+
+4. Create new android app:
 
     - download `google-services.json`, this file will be used in cordova push notifications plugin;
 
-3. Create new iOS app:
+5. Create new iOS app:
 
     - set `TeamID`;
     - download `GoogleService-Info.plist` for use in cordova;
 
-4. Setup APNS connection:
+6. Setup APNS connection:
     - goto `project settings / cloud messaging / ios app configuration / your app`;
     - add APNs Authentication Key, use `.p8` file, `KeyID`, `TeamID`;
