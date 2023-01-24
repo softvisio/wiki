@@ -3,7 +3,7 @@
     "version": "0.0.0",
     "private": true,
     "description": "Wiki",
-    "homepage": "https://softvisio-node.github.io/wiki/",
+    "homepage": "https://softvisio.github.io/wiki/",
     "bugs": {
         "url": "https://github.com/softvisio/wiki/issues",
         "email": "zdm <zdm@softvisio.net>"
