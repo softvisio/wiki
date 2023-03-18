@@ -3,7 +3,7 @@
 ## Example
 
 ```sql
-CREATE TABLE "test" (
+CREATE TABLE test (
 	id uuid PRIMARY KEY NOT NULL DEFAULT get_random_uuid(),
 	title text NOT NULL
 );
@@ -47,9 +47,9 @@ Index name template `<table_name>_<column_name>..._<suffix>`, where the suffix i
 Examples
 
 ```sql
-CREATE INDEX "user_id_idx" ON "user" ("id");
+CREATE INDEX user_id_idx ON "user" ( id );
 
-CREATE INDEX "user_id_title_idx" ON "user" ("id", "title");
+CREATE INDEX user_id_title_idx ON "user" ( id, title );
 ```
 
 ### Sequences
@@ -59,7 +59,7 @@ Sequence name template `<table_name>_<column_name>_seq`.
 Examples
 
 ```sql
-CREATE SEQUENCE "user_id_seq" AS int8;
+CREATE SEQUENCE user_id_seq AS int8;
 ```
 
 ### Triggers
