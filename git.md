@@ -101,3 +101,13 @@ If changesets were pushed:
 ```shell
 git push origin HEAD --force
 ```
+
+### Delete file from commits
+
+```sh
+git filter-repo --force --partial --invert-paths --path-match <FILE-PATH>
+
+git reflog expire --expire-unreachable=now --all
+
+git gc --prune=now --aggressive
+```
