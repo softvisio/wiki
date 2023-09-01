@@ -93,7 +93,7 @@ Simple cluster without `load balancer` and `NAT`:
 gce addresses create public-ipv4
 ```
 
-If you are plannign to use `load balancer`:
+If you are plannign to use `load balancer` and `NAT` (paid services):
 
 ```shell
 # reserve global ip address for load balancer
