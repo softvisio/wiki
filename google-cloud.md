@@ -84,10 +84,20 @@ gce firewall-rules create allow-cloudflare-ipv4-http --source-ranges=$(curl -fsS
 # allow http traffic from CloudFlare ipv6
 yes | gce firewall-rules delete allow-cloudflare-ipv6-http
 gce firewall-rules create allow-cloudflare-ipv6-http --source-ranges=$(curl -fsSL https://www.cloudflare.com/ips-v6 | xargs | sed -e "s/ /,/g") --action=ALLOW --rules=tcp:80
+```
 
-# reserve ip addresses for load balancer
+Simple cluster without `load balancer` and `NAT`:
+
+```shell
+# reserve regional ip address for main instance
+gce addresses create public-ipv4
+```
+
+If you are plannign to use `load balancer`:
+
+```shell
+# reserve global ip address for load balancer
 gce addresses create public-ipv4 --ip-version=IPV4 --global
-gce addresses create private-ipv4 --ip-version=IPV4 --global
 
 # create nat
 gce routers create nat --network=default
@@ -198,6 +208,13 @@ yes | gce backend-services delete nginx --global
 ```
 
 ## PostgreSQL service
+
+Reserve private IP address
+
+```shell
+# reserve ip addresses for load balancer
+gce addresses create private-ipv4 --ip-version=IPV4 --global
+```
 
 Create backend service:
 
