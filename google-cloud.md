@@ -28,6 +28,8 @@ Create project:
 gc projects create <project-id>
 ```
 
+Enabled GCE API : https://console.developers.google.com/apis/api/compute.googleapis.com/overview?authuser=zdm@softvisio.net&project=<PROJECT-ID>
+
 Link billing account:
 
 ```shell
