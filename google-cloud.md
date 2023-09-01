@@ -370,7 +370,11 @@ Open resources management: [https://console.cloud.google.com/cloud-resource-mana
 
 In the left-side panel add new user with the following roles: - `Viewer`; - `Project Billing Manager`;
 
-Other roles, which can be useful: - `Owner`; - `Viewer` + `Billing Account Administrator`; - `Billing Account User` + `Billing Account Viewer`;
+Other roles, which can be useful:
+
+-   `Owner`;
+-   `Viewer` + `Billing Account Administrator`;
+-   `Billing Account User` + `Billing Account Viewer`;
 
 ### Change billing account
 
