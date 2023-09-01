@@ -372,3 +372,16 @@ Open required billing account.
 At the top-left menu select `Account management`.
 
 At the top press `Rename` button.
+
+### OAuth access
+
+Gcloud OAuth
+
+Go to https://console.cloud.google.com/apis/credentials?authuser=zdm@softvisio.net.
+
+Create OAuth client credentials:
+
+URL: https://domain
+Redirect URL: https://domain/api/oauth.html
+
+Save credentials, update backend config witj clientId anf clientSecret.
