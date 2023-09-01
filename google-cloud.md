@@ -48,14 +48,6 @@ Activate project configuration:
 gcp activate <project-name>
 ```
 
-## Change project billing
-
-1. Goto [https://console.cloud.google.com/cloud-resource-manager](https://console.cloud.google.com/cloud-resource-manager).
-
-2. In left-side panel add new user with the following roles: `Browser`, `Project Billing Manager`.
-
-3. New user must to change billing account for this project to the own account here: [https://console.cloud.google.com/billing/projects](https://console.cloud.google.com/billing/projects).
-
 ## Initialize cluster
 
 ```shell
@@ -372,19 +364,25 @@ gc alpha services api-keys get-key-string --format="get(keyString)" $(gc alpha s
 
 ## Billing account management
 
-### Add billling manager
+### Add billing manager
 
 Open resources management: [https://console.cloud.google.com/cloud-resource-manager?authuser=zdm@softvisio.net](https://console.cloud.google.com/cloud-resource-manager?authuser=zdm@softvisio.net).
 
-Add new user with the following permissions: - `Owner`; - or `Viewer` + `Project Billing Manager`;
+In the left-side panel add new user with the following roles: - `Viewer`; - `Project Billing Manager`;
 
-On the current and target Cloud Billing account: `Billing Account User` + `Billing Account Viewer` OR `Billing Account Administrator`.
+Other roles, which can be useful: - `Owner`; - `Viewer` + `Billing Account Administrator`; - `Billing Account User` + `Billing Account Viewer`;
+
+### Change billing account
+
+Oppen [https://console.cloud.google.com/billing/projects](https://console.cloud.google.com/billing/projects).
+
+Change billing account for the project.
 
 ### Rename billing account
 
 Open billing accounts: [https://console.cloud.google.com/billing?authuser=zdm@softvisio.net](https://console.cloud.google.com/billing?authuser=zdm@softvisio.net).
 
-Open required billing account.
+Open needed billing account by clucking on it's nane.
 
 At the top-left menu select `Account management`.
 
