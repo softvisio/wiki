@@ -34,7 +34,7 @@ cache-control: public, max-age=1
 #### Cache forever
 
 ```text
-cache-control: public, max-age=30672000, immutable
+cache-control: public, max-age=30672000
 ```
 
 #### Do not cache
