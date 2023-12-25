@@ -76,6 +76,10 @@ gce firewall-rules create allow-cloudflare-ipv4-http --source-ranges=$(curl -fsS
 # allow http traffic from CloudFlare ipv6
 yes | gce firewall-rules delete allow-cloudflare-ipv6-http
 gce firewall-rules create allow-cloudflare-ipv6-http --source-ranges=$(curl -fsSL https://www.cloudflare.com/ips-v6 | xargs | sed -e "s/ /,/g") --action=ALLOW --rules=tcp:80,tcp:443
+
+# allow http traffic from ipv4
+yes | gce firewall-rules delete allow-ipv4-http
+gce firewall-rules create allow-ipv4-http --action=ALLOW --rules=tcp:80,tcp:443
 ```
 
 Simple cluster without `load balancer` and `NAT`:
