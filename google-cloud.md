@@ -105,7 +105,7 @@ gce routers nats create nat --router=nat --auto-allocate-nat-external-ips --nat-
 ```shell
 gce instances create a0 \
     --machine-type=e2-micro \
-    --image-project=ubuntu-os-cloud --image-family=ubuntu-minimal-2204-lts \
+    --image-project=ubuntu-os-cloud --image-family=ubuntu-minimal-2404-lts \
     --network-interface=no-address \
     --metadata-from-file user-data=cloud-init.yaml
 ```
