@@ -165,3 +165,14 @@ ORDER BY
     location <-> 'POINT( 0 0 )'::geography DESC
 ;
 ```
+
+#### Update extendion
+
+```sql
+SELECT postgis_full_version();
+
+SELECT * FROM pg_available_extensions WHERE name = 'postgis';
+
+SELECT postgis_extensions_upgrade();
+
+```
