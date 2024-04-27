@@ -168,7 +168,7 @@ ORDER BY
 ;
 ```
 
-#### Update extendion
+#### Update extension
 
 ```sql
 SELECT postgis_full_version();
