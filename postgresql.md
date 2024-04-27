@@ -134,3 +134,34 @@ this.#mutex.up();
 // unlock all records
 UPDATE task SET lock = 0 WHERE lock != 0 AND NOT EXISTS ( SELECT FROM pg_active_backend WHERE id = task.lock );
 ```
+
+### PostGIS
+
+-   Default SRID is `4326`.
+
+-   Coordinates order: longitude, latitude.
+
+```sql
+CREATE TABLE IF NOT EXISTS item (
+    id serial8 PRIMARY KEY,
+    location geography ( 'POINT' ) NOT NULL
+);
+
+CREATE INDEX item_location_idx ON item USING GIST ( location );
+
+INSERT INTO item ( location ) VALUES
+    ( 'POINT( 0 0 )' ),
+    ( 'POINT( 1 1 )' )
+;
+
+SELECT id,
+    st_distance( location, 'POINT( 0 0 )'::geography, true ) AS distance,
+    st_dWithin( location, 'POINT( 0 0 )'::geography, 156899, true ) AS within
+FROM
+    item
+WHERE
+    st_dWithin( location::geometry, 'POINT( 0 0 )'::geography::geometry, 156899, true )
+ORDER BY
+    location <-> 'POINT( 0 0 )'::geography DESC
+;
+```
