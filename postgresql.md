@@ -142,6 +142,8 @@ UPDATE task SET lock = 0 WHERE lock != 0 AND NOT EXISTS ( SELECT FROM pg_active_
 -   Coordinates order: longitude, latitude.
 
 ```sql
+CREATE EXTENSION IF NOT EXISTS postgis;
+
 CREATE TABLE IF NOT EXISTS item (
     id serial8 PRIMARY KEY,
     location geography ( 'POINT' ) NOT NULL
@@ -175,4 +177,17 @@ SELECT * FROM pg_available_extensions WHERE name = 'postgis';
 
 SELECT postgis_extensions_upgrade();
 
+```
+
+### Extensions
+
+```sql
+-- get available extensions
+ELECT * FROM pg_available_extensions;
+
+-- get updatable extensions
+SELECT * FROM pg_available_extensions WHERE installed_version IS NOT NULL AND installed_version != default_version;
+
+-- create extension in the specific schema
+CREATE EXTENSION <extension-name> SCHEMA <schema-name>;
 ```
