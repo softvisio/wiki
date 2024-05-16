@@ -35,15 +35,19 @@ autossh -f -N -L *:22225:zproxy.lum-superproxy.io:22225 root@serp
 ```shell
 # -f - Run in background.
 # -N - Do not execute a remote command.  This is useful for just forwarding ports.
-# * - any ip, 127.0.0.7 - listen for the specific ip only.
+# * - any ip, 127.0.0.1 - listen for the specific ip only.
 
-autossh -f -N -L *:3306:/var/run/docker.sock root@serp
+# docker example
+autossh -f -N -L *:3306:/var/run/docker.sock root@host
 ```
 
 PostgresSQL tunnel:
 
 ```shell
-gce ssh a0 -- -N -L *:5433:/var/run/postgresql/.s.PGSQL.5432
+autossh -f -N -L *:5432:/var/run/postgresql/.s.PGSQL.5432.sock root@host
 
-psql -h localhost -p 5433
+# google cloud
+gce ssh a0 -- -N -L *:5432:/var/run/postgresql/.s.PGSQL.5432
+
+psql -h localhost -p 5432
 ```
