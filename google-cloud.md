@@ -28,7 +28,7 @@ Create project:
 gc projects create <project-id>
 ```
 
-Enabled GCE API : https://console.developers.google.com/apis/api/compute.googleapis.com/overview?authuser=zdm@softvisio.net&project=<PROJECT-ID>
+Enabled GCE API : https://console.developers.google.com/apis/api/compute.googleapis.com/overview?authuser=root@softvisio.net&project=<PROJECT-ID>
 
 Link billing account:
 
@@ -370,7 +370,7 @@ gc alpha services api-keys get-key-string --format="get(keyString)" $(gc alpha s
 
 ### Add billing manager
 
-Open resources management: [https://console.cloud.google.com/cloud-resource-manager?authuser=zdm@softvisio.net](https://console.cloud.google.com/cloud-resource-manager?authuser=zdm@softvisio.net).
+Open resources management: [https://console.cloud.google.com/cloud-resource-manager?authuser=root@softvisio.net](https://console.cloud.google.com/cloud-resource-manager?authuser=root@softvisio.net).
 
 In the left-side panel add new user with the following roles: - `Viewer`; - `Project Billing Manager`;
 
@@ -388,7 +388,7 @@ Change billing account for the project.
 
 ### Rename billing account
 
-Open billing accounts: [https://console.cloud.google.com/billing?authuser=zdm@softvisio.net](https://console.cloud.google.com/billing?authuser=zdm@softvisio.net).
+Open billing accounts: [https://console.cloud.google.com/billing?authuser=root@softvisio.net](https://console.cloud.google.com/billing?authuser=root@softvisio.net).
 
 Open needed billing account by clucking on it's nane.
 
@@ -400,7 +400,7 @@ At the top press `Rename` button.
 
 ### Gcloud OAuth
 
-Go to https://console.cloud.google.com/apis/credentials?authuser=zdm@softvisio.net.
+Go to https://console.cloud.google.com/apis/credentials?authuser=root@softvisio.net.
 
 Create OAuth client credentials:
 
