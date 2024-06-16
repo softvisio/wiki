@@ -19,7 +19,7 @@ autossh -M 0 -o "ServerAliveInterval 30" -o "ServerAliveCountMax 3"
 
 # -f - Run in background.
 # -N - Do not execute a remote command.  This is useful for just forwarding ports.
-autossh -f -N -R *:80:127.0.0.1:80 -R *:443:127.0.0.1:443 root@serp
+autossh -f -N -R *:80:127.0.0.1:80 -R *:443:127.0.0.1:443 root@host
 ```
 
 ### Forward local port
@@ -27,7 +27,7 @@ autossh -f -N -R *:80:127.0.0.1:80 -R *:443:127.0.0.1:443 root@serp
 ```shell
 # -f - Run in background.
 # -N - Do not execute a remote command.  This is useful for just forwarding ports.
-autossh -f -N -L *:22225:zproxy.lum-superproxy.io:22225 root@serp
+autossh -f -N -L *:22225:zproxy.lum-superproxy.io:22225 root@host
 ```
 
 ### Forward local port to the remote unix socket
