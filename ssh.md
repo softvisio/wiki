@@ -44,7 +44,7 @@ autossh -f -N -L *:3306:/var/run/docker.sock root@host
 PostgresSQL tunnel:
 
 ```shell
-autossh -f -N -L *:5432:/var/run/postgresql/.s.PGSQL.5432.sock root@host
+autossh -f -N -L *:5432:/var/run/postgresql/.s.PGSQL.5432 root@host
 
 # google cloud
 gce ssh a0 -- -N -L *:5432:/var/run/postgresql/.s.PGSQL.5432
