@@ -36,8 +36,8 @@ By default, an index takes the collation from the table column, so you could cha
 
 ```sql
 CREATE TABLE a (
-	name1 text COLLATE NOCASE, -- this column is case insensitive
-	name2 text                 -- this column is case sensitive
+    name1 text COLLATE NOCASE, -- this column is case insensitive
+    name2 text                 -- this column is case sensitive
 );
 
 CREATE INDEX IF NOT EXISTS a_name1_nocase_idx ON a ( name1 COLLATE NOCASE, name2 COLLATE NOCASE );

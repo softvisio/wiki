@@ -4,7 +4,7 @@
 
 ```markdown
 <details>
-	<summary>Title</summary>
+    <summary>Title</summary>
 
     ...content
 

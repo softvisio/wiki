@@ -4,8 +4,8 @@
 
 ```sql
 CREATE TABLE test (
-	id uuid PRIMARY KEY NOT NULL DEFAULT get_random_uuid(),
-	title text NOT NULL
+    id uuid PRIMARY KEY NOT NULL DEFAULT get_random_uuid(),
+    title text NOT NULL
 );
 
 CREATE UNIQUE INDEX IF NOT EXISTS test_title_key ON test (title);

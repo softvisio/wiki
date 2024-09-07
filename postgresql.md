@@ -93,20 +93,20 @@ const tasks = await dbh.select(
     sql`
 WITH cte AS (
     SELECT
-		id
-	FROM
-		task
-	WHERE
-		( lock >= 0 AND NOT EXISTS ( SELECT FROM pg_active_backend WHERE id = task.lock ) )
-	LIMIT ?
-	FOR UPDATE
+        id
+    FROM
+        task
+    WHERE
+        ( lock >= 0 AND NOT EXISTS ( SELECT FROM pg_active_backend WHERE id = task.lock ) )
+    LIMIT ?
+    FOR UPDATE
 )
 UPDATE
-	task
+    task
 SET
-	lock = pg_backend_id( ? )
+    lock = pg_backend_id( ? )
 FROM
-	cte
+    cte
 WHERE task.id = cte.id
 `,
     [limit, abortSignal.pid]
