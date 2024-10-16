@@ -15,7 +15,6 @@
     "license": "Proprietary Software",
     "author": "root <root@softvisio.net>",
     "scripts": {
-        "build": "softvisio-cli docs build",
-        "dev": "docsify serve --port 80"
+        "build": "softvisio-cli docs build"
     }
 }
