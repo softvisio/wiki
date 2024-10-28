@@ -400,11 +400,11 @@ At the top press `Rename` button.
 
 ### Gcloud OAuth
 
-Go to https://console.cloud.google.com/apis/credentials?authuser=dzagashev@gmail.com.
+Go to <https://console.cloud.google.com/apis/credentials?authuser=dzagashev@gmail.com>.
 
 Create OAuth client credentials:
 
-URL: https://domain
-Redirect URL: https://domain/api/oauth.html
+URL: <https://domain>
+Redirect URL: <https://domain/api/oauth.html>
 
 Save credentials, update backend config witj clientId anf clientSecret.
