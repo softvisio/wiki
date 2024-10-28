@@ -28,7 +28,7 @@ Create project:
 gc projects create <project-id>
 ```
 
-Enabled GCE API : <https://console.developers.google.com/apis/api/compute.googleapis.com/overview?authuser=dzagashev@gmail.com&project=<PROJECT-ID>>
+Enabled GCE API : \<https://console.developers.google.com/apis/api/compute.googleapis.com/overview?authuser=dzagashev@gmail.com\&project=<PROJECT-ID>>
 
 Link billing account:
 
@@ -40,7 +40,7 @@ gc beta billing projects link <project-id> --billing-account <billing-account-id
 
 After project is created you need to create project configuration file at `~/.config/gcloud/configurations/config_<project_name>`.
 
-Set project region and zone according to the ping latency value [https://www.gcping.com](https://www.gcping.com).
+Set project region and zone according to the ping latency value <https://www.gcping.com>.
 
 Activate project configuration:
 
@@ -287,9 +287,9 @@ gce machine-types list --filter="zone:(us-central1-a) AND guestCpus=4 AND memory
 
 Machine types:
 
-Types: [https://cloud.google.com/compute/docs/machine-types](https://cloud.google.com/compute/docs/machine-types).
+Types: <https://cloud.google.com/compute/docs/machine-types>.
 
-Prices: [https://cloud.google.com/compute/vm-instance-pricing](https://cloud.google.com/compute/vm-instance-pricing)
+Prices: <https://cloud.google.com/compute/vm-instance-pricing>
 
 | Type        | Purpose               |
 | ----------- | --------------------- |
@@ -370,7 +370,7 @@ gc alpha services api-keys get-key-string --format="get(keyString)" $(gc alpha s
 
 ### Add billing manager
 
-Open resources management: [https://console.cloud.google.com/cloud-resource-manager?authuser=dzagashev@gmail.com](https://console.cloud.google.com/cloud-resource-manager?authuser=dzagashev@gmail.com).
+Open resources management: <https://console.cloud.google.com/cloud-resource-manager?authuser=dzagashev@gmail.com>.
 
 In the left-side panel add new user with the following roles: - `Viewer`; - `Project Billing Manager`;
 
@@ -382,13 +382,13 @@ Other roles, which can be useful:
 
 ### Change billing account
 
-Oppen [https://console.cloud.google.com/billing/projects](https://console.cloud.google.com/billing/projects).
+Oppen <https://console.cloud.google.com/billing/projects>.
 
 Change billing account for the project.
 
 ### Rename billing account
 
-Open billing accounts: [https://console.cloud.google.com/billing?authuser=dzagashev@gmail.com](https://console.cloud.google.com/billing?authuser=dzagashev@gmail.com).
+Open billing accounts: <https://console.cloud.google.com/billing?authuser=dzagashev@gmail.com>.
 
 Open needed billing account by clucking on it's nane.
 

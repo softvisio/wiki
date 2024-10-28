@@ -123,7 +123,7 @@ xcode -> preferences -> account tab (at the top) -> select team -> press manage 
 
 #### Remove old certificates
 
--   Revoke certificate on [https://developer.apple.com/account/resources/certificates/list](https://developer.apple.com/account/resources/certificates/list);
+-   Revoke certificate on <https://developer.apple.com/account/resources/certificates/list>;
 -   Delete certificate in `Keychain Access Tool`: Finder -> Applications -> Utils -> Keychain Access -> My Certificates;
 
 ### Sign
