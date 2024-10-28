@@ -31,13 +31,17 @@ vmware -v
 
 # copy to shared vm's folder: /var/www/vmware
 
-vmrun -T server -h https://127.0.0.1:8443 -u root -p <root-password> register "\[standard] Windows XP Home Edition SP3/Windows XP Home Edition SP3.vmx"
+```sh
+vmrun -T server -h https://127.0.0.1:8443 -u root -p "[standard] Windows XP Home Edition SP3/Windows XP Home Edition SP3.vmx" < root-password > register
+```
 
 Possibly will be needed to set video card settings to: "1 monitor" if related errors occured
 
 # unregister vm
 
-vmrun -T server -h https://127.0.0.1:8443 -u root -p <root-password> unregister "\[standard] Windows XP Home Edition SP3/Windows XP Home Edition SP3.vmx"
+```sh
+vmrun -T server -h https://127.0.0.1:8443 -u root -p "[standard] Windows XP Home Edition SP3/Windows XP Home Edition SP3.vmx" < root-password > unregister
+```
 
 or via vmware workstation interface
 
