@@ -28,7 +28,7 @@ Create project:
 gc projects create <project-id>
 ```
 
-Enabled GCE API : https://console.developers.google.com/apis/api/compute.googleapis.com/overview?authuser=dzagashev@gmail.com&project=<PROJECT-ID>
+Enabled GCE API : <https://console.developers.google.com/apis/api/compute.googleapis.com/overview?authuser=dzagashev@gmail.com&project=<PROJECT-ID>>
 
 Link billing account:
 
