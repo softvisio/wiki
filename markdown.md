@@ -2,14 +2,16 @@
 
 ## Collapsible block
 
-```markdown
+````markdown
 <details>
     <summary>Title</summary>
 
-    ...content
+```
+Some content under spoiler
+```
 
 </details>
-```
+````
 
 ## Tabs
 
