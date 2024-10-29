@@ -133,7 +133,6 @@ Before start:
 
 Create certificate:
 
-<!-- prettier-ignore -->
 ```shell
 gce ssl-certificates create <domain-com> --global --domains= <domain.com>
 ```
@@ -186,7 +185,6 @@ gce backend-services add-backend nginx --global --instance-group=nginx
 
 Create load balancer:
 
-<!-- prettier-ignore -->
 ```shell
 gce url-maps create https --default-service=nginx
 gce target-https-proxies create https --url-map=https --ssl-policy=modern --ssl-certificates=<domain-com>
@@ -221,7 +219,6 @@ gce backend-services add-backend pgsql --global --instance-group=nginx
 
 Create SSL load balancer (not works with `psql` client, need to create SSL tunnel first):
 
-<!-- prettier-ignore -->
 ```shell
 gce target-ssl-proxies create pgsql --backend-service=pgsql --ssl-policy=restricted --ssl-certificates=<domain-com>
 gce forwarding-rules create pgsql --load-balancing-scheme=EXTERNAL --address=private-ipv4 --ports=5432 --target-ssl-proxy=pgsql --global
