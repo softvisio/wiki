@@ -4,62 +4,66 @@
 
 ```javascript
 const message = {
-    token: "",
-    topic: "",
+    "token": "",
+    "topic": "",
 
-    notification: {
-        title: "",
-        body: "",
-        imageUrl: "https://example.com/favicon.ico",
+    "notification": {
+        "title": "",
+        "body": "",
+        "imageUrl": "https://example.com/favicon.ico",
     },
 
-    data: {
+    "data": {
+
         // cordova-plugin-firebasex, disply notification also if app in foreground
-        notification_foreground: "true",
+        "notification_foreground": "true",
     },
 
     // https://firebase.google.com/docs/reference/admin/node/firebase-admin.messaging.androidconfig.md#androidconfig_interface
-    android: {
+    "android": {
+
         // https://firebase.google.com/docs/reference/admin/node/firebase-admin.messaging.androidnotification.md#androidnotification_interface
-        notification: {},
+        "notification": {},
     },
 
     // https://firebase.google.com/docs/reference/admin/node/firebase-admin.messaging.apnsconfig.md#apnsconfig_interface
-    apns: {},
+    "apns": {},
 
     // https://firebase.google.com/docs/reference/admin/node/firebase-admin.messaging.webpushconfig.md#webpushconfig_interface
-    webpush: {
-        // https://firebase.google.com/docs/reference/admin/node/firebase-admin.messaging.webpushnotification.md#webpushnotification_interface
-        notification: {
-            icon: "/favicon.ico",
+    "webpush": {
 
-            actions: [
+        // https://firebase.google.com/docs/reference/admin/node/firebase-admin.messaging.webpushnotification.md#webpushnotification_interface
+        "notification": {
+            "icon": "/favicon.ico",
+
+            "actions": [
                 {
-                    action: "action1",
-                    icon: "/favicon.ico",
-                    title: "Action 1",
+                    "action": "action1",
+                    "icon": "/favicon.ico",
+                    "title": "Action 1",
                 },
                 {
-                    action: "action2",
-                    icon: "/favicon.ico",
-                    title: "Action 2",
+                    "action": "action2",
+                    "icon": "/favicon.ico",
+                    "title": "Action 2",
                 },
             ],
 
             // replace notification with the same tag, tag is required
-            renotify: true,
+            "renotify": true,
 
-            requireInteraction: false,
-            silent: false,
-            tag: "",
+            "requireInteraction": false,
+            "silent": false,
+            "tag": "",
 
             // required if silent is true, https://developer.mozilla.org/en-US/docs/Web/API/Vibration_API#vibration_patterns
-            vibration: [200, 100, 200],
+            "vibration": [ 200, 100, 200 ],
         },
 
-        fcmOptions: {
+        "fcmOptions": {
+
             // must be relative url, not used, if actions specified
-            link: "/",
+            "link": "/",
         },
     },
 };
