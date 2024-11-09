@@ -131,8 +131,8 @@ where:
 git ls-files --format "%(objectmode) %(path)" | grep "^100755"
 
 # make file in "_tests" and "bin" directories executable
-git ls-files _tests bin | xargs -d "\n" git update-index --chmod=+x
+git ls-files -z _tests bin | xargs -0 git update-index --chmod=+x
 
 # make ".sh" file executable
-git ls-files | grep ".sh$" | xargs -d "\n" git update-index --chmod=+x
+git ls-files -z *.sh | xargs -0 git update-index --chmod=+x
 ```
