@@ -114,9 +114,21 @@ git gc --prune=now --aggressive
 
 ### Chnod
 
+Mode: XXXYYY
+
+where:
+
+-   XXX:
+    100 - regular file
+    120 - symlink
+
+-   YYY:
+    644 - rw-r--r--
+    755 - rwxr-xr-x
+
 ```shell
 # list execulable files
-git ls-files -s | grep 100755
+git ls-files --format "%(objectmode) %(path)" | grep "^100755"
 
 # make file in "_tests" and "bin" directories executable
 git ls-files _tests bin | xargs -d "\n" git update-index --chmod=+x
