@@ -114,17 +114,19 @@ git gc --prune=now --aggressive
 
 ### Chnod
 
-Mode: XXXYYY
+Mode: `XXXYYY`
 
 where:
 
--   XXX:
-    100 - regular file
-    120 - symlink
+-   `XXX`:
 
--   YYY:
-    644 - rw-r--r--
-    755 - rwxr-xr-x
+    -   `100` - regular file
+    -   `120` - symlink
+
+-   `YYY`:
+
+    -   `644` - `rw-r--r--`
+    -   `755` - `rwxr-xr-x`
 
 ```shell
 # list execulable files
