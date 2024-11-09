@@ -111,3 +111,16 @@ git reflog expire --expire-unreachable=now --all
 
 git gc --prune=now --aggressive
 ```
+
+### Chnod
+
+```shell
+# list execulable files
+git ls-files -s | grep 100755
+
+# make file in "_tests" and "bin" directories executable
+git ls-files _tests bin | xargs -d "\n" git update-index --chmod=+x
+
+# make ".sh" file executable
+git ls-files | grep ".sh$" | xargs -d "\n" git update-index --chmod=+x
+```
