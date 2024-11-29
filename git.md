@@ -2,37 +2,37 @@
 
 ### GitHub links
 
--   Link to the docs site, returns data with the valid content type:
+- Link to the docs site, returns data with the valid content type:
 
     ```text
     https://<OWNER>.github.io/<NAME>/
     ```
 
--   Link to the content from the repository. Returns data **without** content type:
+- Link to the content from the repository. Returns data **without** content type:
 
     ```text
     https://raw.githubusercontent.com/<OWNER>/<NAME>/<BRANCH>/
     ```
 
--   Link to the `LFS` repository content:
+- Link to the `LFS` repository content:
 
     ```text
     https://media.githubusercontent.com/media/<OWNER>/<NAME>/<BRANCH>/
     ```
 
--   Download release asset:
+- Download release asset:
 
     ```text
     https://github.com/<OWNER>/<NAME>/releases/download/<TAG>/<FILE-NAME>
     ```
 
--   Download branch as archive:
+- Download branch as archive:
 
     ```text
     https://github.com/<OWNER>/<NAME>/archive/<BRANCH>.tar.gz
     ```
 
--   Download tag as archive:
+- Download tag as archive:
 
     ```text
     https://github.com/<OWNER>/<NAME>/archive/refs/tags/<TAG>.tar.gz
@@ -118,22 +118,22 @@ Mode: `XXXYYY`
 
 where:
 
--   `XXX`:
+- `XXX`:
 
-    -   `100` - regular file
-    -   `120` - symlink
+    - `100` - regular file
+    - `120` - symlink
 
--   `YYY`:
+- `YYY`:
 
-    -   `644` - `rw-r--r--`
-    -   `755` - `rwxr-xr-x`
+    - `644` - `rw-r--r--`
+    - `755` - `rwxr-xr-x`
 
 ```shell
 # list execulable files
 git ls-files --format "%(objectmode) %(path)" | grep "^100755"
 
-# make file in "_tests" and "bin" directories executable
-git ls-files -z _tests bin | xargs -0 git update-index --chmod=+x
+# make file in "bin" and "tests" directories executable
+git ls-files -z bin tests | xargs -0 git update-index --chmod=+x
 
 # make ".sh" file executable
 git ls-files -z *.sh | xargs -0 git update-index --chmod=+x
