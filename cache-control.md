@@ -4,10 +4,10 @@
 
 Nginx doesn't cache response when:
 
--   `private`, `no-cache` or `no-store` directives are used.
--   `set-cookie` headers is exists in response.
--   `proxy_buffering` is set to `off`.
--   `max-age` is not specified or `max-age=0` or `s-maxage=0`.
+- `private`, `no-cache` or `no-store` directives are used.
+- `set-cookie` headers is exists in response.
+- `proxy_buffering` is set to `off`.
+- `max-age` is not specified or `max-age=0` or `s-maxage=0`.
 
 Nginx caches a response only if the origin server includes either the `expires` header with a date and time in the future, or the `cache-control` header with the `max-age` directive set to a non‑zero value.
 
@@ -17,11 +17,11 @@ Nginx doesn't process `cache-control` header from client request, so it is impos
 
 ### Chrome
 
--   On `F5` chrome always revalidates main html page.
+- On `F5` chrome always revalidates main html page.
 
--   When chrome revalidates content it sends `cache-control: max-age=0` and `if-modified-since`.
+- When chrome revalidates content it sends `cache-control: max-age=0` and `if-modified-since`.
 
--   If `must-revalidate`, `proxy-revalidate` are used - browser sends `cache-control: max-age=0` in request.
+- If `must-revalidate`, `proxy-revalidate` are used - browser sends `cache-control: max-age=0` in request.
 
 ### Configuration examples
 

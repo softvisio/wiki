@@ -2,15 +2,15 @@
 
 Links:
 
--   [Cloud DNS](https://cloud.google.com/compute/docs/internal-dns)
--   [Cloud IP addresses](https://cloud.google.com/compute/docs/ip-addresses)
--   [Cloud init](https://www.digitalocean.com/community/tutorials/an-introduction-to-cloud-config-scripting)
+- [Cloud DNS](https://cloud.google.com/compute/docs/internal-dns)
+- [Cloud IP addresses](https://cloud.google.com/compute/docs/ip-addresses)
+- [Cloud init](https://www.digitalocean.com/community/tutorials/an-introduction-to-cloud-config-scripting)
 
 NOTE:
 
--   `gc` is the alias for `gcloud`;
--   `gce` is the alias for `gcloud compute`;
--   `gcp` is the alias for `gcloud config configurations`;
+- `gc` is the alias for `gcloud`;
+- `gce` is the alias for `gcloud compute`;
+- `gcp` is the alias for `gcloud config configurations`;
 
 ## Init gcloud
 
@@ -128,8 +128,8 @@ where `public-ipv4` must be regional (created without `--global` flag).
 
 Before start:
 
--   Create `dns` records for all used domains, using load valancer ip addresses.
--   On `cloudflare` for each domain separately add CAA records for "pki.goog".
+- Create `dns` records for all used domains, using load valancer ip addresses.
+- On `cloudflare` for each domain separately add CAA records for "pki.goog".
 
 Create certificate:
 
@@ -373,9 +373,9 @@ In the left-side panel add new user with the following roles: - `Viewer`; - `Pro
 
 Other roles, which can be useful:
 
--   `Owner`;
--   `Viewer` + `Billing Account Administrator`;
--   `Billing Account User` + `Billing Account Viewer`;
+- `Owner`;
+- `Viewer` + `Billing Account Administrator`;
+- `Billing Account User` + `Billing Account Viewer`;
 
 ### Change billing account
 

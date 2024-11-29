@@ -4,11 +4,11 @@
 
 If you have cordova platform install or build errors:
 
--   Cheche, that you have latest `xcode` version installed. If new `xcode` version is exists but not available in updates - you need to upgrade `macos` to the latest release.
+- Cheche, that you have latest `xcode` version installed. If new `xcode` version is exists but not available in updates - you need to upgrade `macos` to the latest release.
 
--   Build project in `xcode` (product -> build) and apply all recommended fixes to config (using panel at the left) until it will built siccessfully.
+- Build project in `xcode` (product -> build) and apply all recommended fixes to config (using panel at the left) until it will built siccessfully.
 
--   Update `cocoapods`:
+- Update `cocoapods`:
 
     ```shell
     brew upgrade cocoapods
@@ -16,7 +16,7 @@ If you have cordova platform install or build errors:
     pod repo update
     ```
 
--   Update platform `pods`:
+- Update platform `pods`:
 
     ```shell
     cd platform/ios
@@ -44,9 +44,9 @@ update
 
 ### Prepare project
 
--   Copy project from the VMWare host directory to the local filesystem.
+- Copy project from the VMWare host directory to the local filesystem.
 
--   Install cordova platform:
+- Install cordova platform:
 
     ```shell
     npm up
@@ -54,7 +54,7 @@ update
     cordova platform add --nosave ios
     ```
 
--   Open project workspace in `xcode`:
+- Open project workspace in `xcode`:
 
     ```shell
     open -a xcode platforms/ios/*.xcworkspace
@@ -123,8 +123,8 @@ xcode -> preferences -> account tab (at the top) -> select team -> press manage 
 
 #### Remove old certificates
 
--   Revoke certificate on <https://developer.apple.com/account/resources/certificates/list>;
--   Delete certificate in `Keychain Access Tool`: Finder -> Applications -> Utils -> Keychain Access -> My Certificates;
+- Revoke certificate on <https://developer.apple.com/account/resources/certificates/list>;
+- Delete certificate in `Keychain Access Tool`: Finder -> Applications -> Utils -> Keychain Access -> My Certificates;
 
 ### Sign
 
@@ -132,12 +132,12 @@ For ios, macos creates certificates and povisioning profiles in xcode.
 
 #### Identifier
 
--   Register new `App ID` identifier;
+- Register new `App ID` identifier;
 
--   Do not forget to add `Push Notifications` capability. Do not create any push notifications certificates because we will use keys;
+- Do not forget to add `Push Notifications` capability. Do not create any push notifications certificates because we will use keys;
 
 #### Profile
 
 Provisioning profile links certificate, identified and devices together.
 
--   Create new provisioning profile, select `Distribution / App Store`;
+- Create new provisioning profile, select `Distribution / App Store`;

@@ -35,9 +35,9 @@ call win-install.cmd
 
 #### Install
 
--   Use APFS case-sensitive FS;
--   Unsubscribe from the BETA program, System Preferences -> Updates -> Details;
--   Change resolution
+- Use APFS case-sensitive FS;
+- Unsubscribe from the BETA program, System Preferences -> Updates -> Details;
+- Change resolution
 
 ```shell
 sudo "/Library/Application Support/VMware Tools/vmware-resolutionSet" 1920 1080

@@ -137,9 +137,9 @@ UPDATE task SET lock = 0 WHERE lock != 0 AND NOT EXISTS ( SELECT FROM pg_active_
 
 ### PostGIS
 
--   Default SRID is `4326`.
+- Default SRID is `4326`.
 
--   Coordinates order: longitude, latitude.
+- Coordinates order: longitude, latitude.
 
 ```sql
 CREATE EXTENSION IF NOT EXISTS postgis;

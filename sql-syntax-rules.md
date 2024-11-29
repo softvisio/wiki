@@ -15,19 +15,19 @@ SELECT count(*) AS total, COALESCE(name, 'no name') FROM user WHERE id IN (100, 
 
 ## Rules
 
--   All keywords (SELECT, INSER, etc.) must be in upper case;
+- All keywords (SELECT, INSER, etc.) must be in upper case;
 
--   All identifiers (table, column, indexes, etc. names) must be in the snake_case.
+- All identifiers (table, column, indexes, etc. names) must be in the snake_case.
 
-    -   Reserved row identifiers `NEW`, `OLD`, `EXCLUDED` must be unquoted upper case.
+    - Reserved row identifiers `NEW`, `OLD`, `EXCLUDED` must be unquoted upper case.
 
--   Subquery expressions: `EXISTS`, `IN`, `NOT IN`, `ANY`, `SOME`, `ALL` must be in upper case.
+- Subquery expressions: `EXISTS`, `IN`, `NOT IN`, `ANY`, `SOME`, `ALL` must be in upper case.
 
--   Conditional expressions `CASE`, `COALECSE`, `NULLIF`, `CREATEST`, `LEAST` must be in upper case;
+- Conditional expressions `CASE`, `COALECSE`, `NULLIF`, `CREATEST`, `LEAST` must be in upper case;
 
--   All type names must be in the `snake_case`.
+- All type names must be in the `snake_case`.
 
--   All functions names must be in the `snake_case`.
+- All functions names must be in the `snake_case`.
 
 ### Indexes
 
@@ -37,12 +37,12 @@ Index name must be in the `snake_case`.
 
 Index name template `<table_name>_<column_name>..._<suffix>`, where the suffix is one of the following:
 
--   'pkey' for a Primary Key constraint;
--   `key` for a Unique constraint;
--   `excl` for an Exclusion constraint;
--   `idx` for any other kind of index;
--   `fkey` for a Foreign key;
--   `check` for a Check constraint;
+- 'pkey' for a Primary Key constraint;
+- `key` for a Unique constraint;
+- `excl` for an Exclusion constraint;
+- `idx` for any other kind of index;
+- `fkey` for a Foreign key;
+- `check` for a Check constraint;
 
 Examples
 

@@ -2,32 +2,32 @@ patch - softvisio/vue-ext/resources/vue.config.js - remove vue-loader-16, when v
 
 ---
 
--   main - app init;
+- main - app init;
 
--   viewport - move data to created;
+- viewport - move data to created;
 
--   this.$. -> this.$util.;
+- this.$. -> this.$util.;
 
--   Vue.extend - removed;
+- Vue.extend - removed;
 
--   settings dialog template - rename Dialog -> SettingsDialog;
+- settings dialog template - rename Dialog -> SettingsDialog;
 
--   declare component events with `emit: ["name1", "name2"]`;
+- declare component events with `emit: ["name1", "name2"]`;
 
--   .$o -> events api removed;
+- .$o -> events api removed;
 
--   .$emit -> need to declare events names with `emit: [...]`;
+- .$emit -> need to declare events names with `emit: [...]`;
 
--   slot attribute was deprecated;
+- slot attribute was deprecated;
 
--   $global -> $events;
+- $global -> $events;
 
--   $destroy() -> $unmount();
+- $destroy() -> $unmount();
 
--   dialogs - remove displayed=";
+- dialogs - remove displayed=";
 
--   addVue -> $mount;
+- addVue -> $mount;
 
--   remove fullscreen="true";
+- remove fullscreen="true";
 
--   replce import( -> defineAsyncComponent(;
+- replce import( -> defineAsyncComponent(;

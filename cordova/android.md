@@ -2,23 +2,23 @@
 
 ### Prepare environment
 
--   Java SE JDK
+- Java SE JDK
 
-    -   [download latest JDK](https://www.oracle.com/java/technologies/downloads/#jdk18-windows)
-    -   unpack to devel/android/java
+    - [download latest JDK](https://www.oracle.com/java/technologies/downloads/#jdk18-windows)
+    - unpack to devel/android/java
 
--   Gradle:
+- Gradle:
 
-    -   [download binary-only](https://gradle.org/install/#manually)
-    -   unpack to devel/android/gradle
+    - [download binary-only](https://gradle.org/install/#manually)
+    - unpack to devel/android/gradle
 
--   Android SDK tools
-    -   [download sdk-tools-windows.zip](https://developer.android.com/studio/#downloads)
-    -   unpack to devel/android/cmdline-tools/latest
+- Android SDK tools
+    - [download sdk-tools-windows.zip](https://developer.android.com/studio/#downloads)
+    - unpack to devel/android/cmdline-tools/latest
 
 ### Prepare project
 
--   Install cordova platform:
+- Install cordova platform:
 
     ```shell
     env-android
@@ -58,17 +58,17 @@ chrome://inspect/#devices
 
 ### Prepare device
 
--   Sony device drivers
+- Sony device drivers
 
-    -   [download and install drivers for your device](https://developer.sony.com/develop/drivers/)
+    - [download and install drivers for your device](https://developer.sony.com/develop/drivers/)
 
--   To enable developers mode tap 7 times on `Settings -> System -> About phone -> Build number`.
+- To enable developers mode tap 7 times on `Settings -> System -> About phone -> Build number`.
 
--   Enable / disable USB debugging: `Settings -> Advanced -> Developer options`.
+- Enable / disable USB debugging: `Settings -> Advanced -> Developer options`.
 
 ### Prepare android emulator
 
--   Intel HEXM
+- Intel HEXM
 
     Download and install [Intel HEXM](https://software.intel.com/en-us/articles/intel-hardware-accelerated-execution-manager-intel-haxm) or using sdkmanager:
 
@@ -78,31 +78,31 @@ chrome://inspect/#devices
 
     and install from `cordova/android/extras`.
 
--   Install emulator
+- Install emulator
 
     ```shell
     sdkmanager emulator
     ```
 
--   List abi system images
+- List abi system images
 
     ```shell
     sdkmanager --list | grep "system-images;android-"
     ```
 
--   Install abi system image
+- Install abi system image
 
     ```shell
     sdkmanager "system-images;android-28;google_apis;x86_64"
     ```
 
--   Create avd
+- Create avd
 
     ```shell
     avdmanager create avd --force --abi "google_apis/x86_64" --package "system-images;android-28;google_apis;x86_64" --device "pixel" --name "pixel"
     ```
 
--   Run emulator
+- Run emulator
     ```shell
     emulator -avd pixel
     ```
