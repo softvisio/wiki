@@ -191,3 +191,19 @@ SELECT * FROM pg_available_extensions WHERE installed_version IS NOT NULL AND in
 -- create extension in the specific schema
 CREATE EXTENSION <extension-name> SCHEMA <schema-name>;
 ```
+
+### Text search indexed
+
+To use `=` or `LIKE` operators without pattern chars ( `%`, `_` ) you need simple `btree` index:
+
+```sql
+CREATE INDEX ON table ( column );
+```
+
+To use `LIKE` with pattern or `~` you need `trigram gin` index:
+
+```sql
+CREATE EXTENSION IF NOT EXISTS pg_trgm;
+
+CREATE INDEX ON table USING gin ( column gin_trgm_ops );
+```
