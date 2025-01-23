@@ -1,5 +1,9 @@
 # GPG
 
+```shell
+export GNUPGHOME="$(mktemp -d)"
+```
+
 ### Generate key
 
 Interactive:
@@ -8,19 +12,19 @@ Interactive:
 gpg --full-gen-key
 ```
 
-Automated:
+Automated <https://www.gnupg.org/documentation/manuals/gnupg/Unattended-GPG-key-generation.html>:
 
 ```shell
-export GNUPGHOME="$(mktemp -d)"
-
 gpg --batch --generate-key << EOF
-     Key-Type: ECDSA
-     Key-Curve: NIST P-384
-     Key-Usage: sign
-     Name-Email: apt@softvisio.net
-     Expire-Date: 0
-     %no-protection
-     %commit
+    Name-Email: apt@softvisio.net
+    Name-Real:
+    Name-Comment
+    Key-Type: ECDSA
+    Key-Curve: NIST P-384
+    Key-Usage: sign
+    Expire-Date: 0
+    %no-protection
+    %commit
 EOF
 ```
 
