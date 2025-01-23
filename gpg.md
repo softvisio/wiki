@@ -1,17 +1,67 @@
 # GPG
 
-### Generate gpg key pairs
+### Generate key
+
+Interactive:
 
 ```shell
 gpg --full-gen-key
 ```
 
-### Authenticate with gpg
-
-You need to create sub-key with the authentication capability:
+Automated:
 
 ```shell
-gpg --expert --edit-key zdm@softvisio.net
+export GNUPGHOME="$(mktemp -d)"
+
+gpg --batch --generate-key << EOF
+     Key-Type: ECDSA
+     Key-Curve: NIST P-384
+     Key-Usage: sign
+     Name-Email: apt@softvisio.net
+     Expire-Date: 0
+     %no-protection
+     %commit
+EOF
+```
+
+### Export keys
+
+Export private key:
+
+```shell
+gpg --export-secret-key --armor --output private-key.asc <KEY-ID>
+```
+
+Export private sub-key:
+
+```shell
+gpg --export-secret-subkeys --armor <KEY-ID>
+```
+
+Export public key:
+
+```shell
+gpg --export --armor --output public-key.asc <KEY-ID>
+```
+
+Export SSH public key:
+
+```shell
+gpg --export-ssh-key <KEY-ID>
+```
+
+### Import keys
+
+```shell
+gpg --import <PRIVATE-OR-PUBLIC-KEY-PATH>
+```
+
+### SSH authentication
+
+Generate sub-key with the `authentication` capability:
+
+```shell
+gpg --edit-key --expert zdm@softvisio.net
 
 addkey
 
@@ -19,22 +69,10 @@ addkey
 # follow instructions
 ```
 
-### Export public ssh key
+Add keygrip for key with `authenticate` capability to `sshcontrol` file:
 
 ```shell
-gpg --export-ssh-key zdm@softvisio.net
-```
-
-### Export private gpg key
-
-```shell
-gpg --armor --export-secret-keys zdm@softvisio.net
-```
-
-### Import gpg key (private or public)
-
-```shell
-gpg --import private.key
+gpg --with-keygrip -k <KEY-ID>
 ```
 
 ### Keyserver
@@ -55,6 +93,14 @@ Refresh keys:
 
 ```shell
 gpg --refresh-keys
+```
+
+Check supported schemes:
+
+```shell
+dirmngr
+
+KEYSERVER --help
 ```
 
 ### Revoke and delete private key
