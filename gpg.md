@@ -16,7 +16,9 @@ Interactive:
 gpg --full-gen-key
 ```
 
-Automated <https://www.gnupg.org/documentation/manuals/gnupg/Unattended-GPG-key-generation.html>:
+Automated:
+
+<https://www.gnupg.org/documentation/manuals/gnupg/Unattended-GPG-key-generation.html>
 
 ```shell
 gpg --batch --generate-key << EOF
