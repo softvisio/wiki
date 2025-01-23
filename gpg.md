@@ -24,7 +24,7 @@ Automated:
 gpg --batch --generate-key << EOF
     Name-Email: <EMAIL>
     Name-Real:
-    Name-Comment
+    Name-Comment:
     Key-Type: ECDSA
     Key-Curve: NIST P-384
     Key-Usage: sign
