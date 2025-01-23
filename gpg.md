@@ -1,5 +1,9 @@
 # GPG
 
+### Environment
+
+Create temporary `GPG` home:
+
 ```shell
 export GNUPGHOME="$(mktemp -d)"
 ```
@@ -79,7 +83,7 @@ Add keygrip for key with `authenticate` capability to `sshcontrol` file:
 gpg --with-keygrip -k <KEY-ID>
 ```
 
-### Keyserver
+### Keyserver (publish keys)
 
 Publish private key:
 
