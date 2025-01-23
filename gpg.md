@@ -13,7 +13,7 @@ export GNUPGHOME="$(mktemp -d)"
 Interactive:
 
 ```shell
-gpg --full-gen-key
+gpg --full-gen-key --expert
 ```
 
 Automated:
@@ -26,7 +26,7 @@ gpg --batch --generate-key << EOF
     Name-Real:
     Name-Comment:
     Key-Type: ECDSA
-    Key-Curve: NIST P-384
+    Key-Curve: NIST P-521
     Key-Usage: sign
     Expire-Date: 0
     Keyserver: hkps://keyserver.ubuntu.com
