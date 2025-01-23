@@ -22,7 +22,7 @@ Automated:
 
 ```shell
 gpg --batch --generate-key << EOF
-    Name-Email: apt@softvisio.net
+    Name-Email: <EMAIL>
     Name-Real:
     Name-Comment
     Key-Type: ECDSA
@@ -71,7 +71,7 @@ gpg --import <PRIVATE-OR-PUBLIC-KEY-PATH>
 Generate sub-key with the `authentication` capability:
 
 ```shell
-gpg --edit-key --expert zdm@softvisio.net
+gpg --edit-key --expert <KEY-ID>
 
 addkey
 
