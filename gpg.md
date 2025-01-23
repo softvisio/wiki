@@ -82,7 +82,7 @@ addkey
 Add keygrip for key with `authenticate` capability to `sshcontrol` file:
 
 ```shell
-gpg --with-keygrip -k <KEY-ID>
+gpg --list-keys --with-keygrip <KEY-ID>
 ```
 
 ### Keyserver (publish keys)
@@ -133,13 +133,13 @@ Or you can manually generate revocation certificate:
 
 ```shell
 # create revocation certificate
-gpg --gen-revoke --output revoke.asc <KEY-ID>
+gpg --gen-revoke --output certificate.rev <KEY-ID>
 
 # revoke private key
-gpg --import revoke.asc
+gpg --import certificate.rev
 
 # cleanup
-rm -f revoke.asc
+rm -f certificate.rev
 ```
 
 Send revoked key to the `keyserver`:
