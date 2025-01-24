@@ -27,11 +27,11 @@ Key types / curves:
 
 ```shell
 gpg --batch --generate-key << EOF
-    Key-Type: EDDSA
-    Key-Curve: ed25519
+    Key-Type: EdDSA
+    Key-Curve: Ed25519
     Key-Usage: cert
-    Subkey-Type: EDDSA
-    Subkey-Curve: ed25519
+    Subkey-Type: EdDSA
+    Subkey-Curve: Ed25519
     Subkey-Usage: sign
     Name-Email: <EMAIL>
     # Name-Real:
