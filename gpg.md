@@ -27,9 +27,12 @@ gpg --batch --generate-key << EOF
     Name-Comment:
     Key-Type: ECDSA
     Key-Curve: NIST P-521
-    Key-Usage: sign
+    Key-Usage: cert
     Expire-Date: 0
     Keyserver: hkps://keyserver.ubuntu.com
+    Subkey-Type: ECDSA
+    Subkey-Curve: NIST P-521
+    Subkey-Usage: sign
     %no-protection
     %commit
 EOF
@@ -37,25 +40,19 @@ EOF
 
 ### Export keys
 
-Export private key:
+Export `private` key:
 
 ```shell
 gpg --export-secret-key --armor --output private-key.asc <KEY-ID>
 ```
 
-Export private sub-key:
-
-```shell
-gpg --export-secret-subkeys --armor <KEY-ID>
-```
-
-Export public key:
+Export `public` key:
 
 ```shell
 gpg --export --armor --output public-key.asc <KEY-ID>
 ```
 
-Export SSH public key:
+Export `SSH public` key:
 
 ```shell
 gpg --export-ssh-key <KEY-ID>
@@ -152,7 +149,7 @@ gpg --send-keys <KEY-ID>
 Delete revoked private key from the local storage:
 
 ```shell
-gpg --delete-secret-key <KEY-ID>
+gpg --delete-secret-and-public-keys <KEY-ID>
 ```
 
 ### Delete public key
