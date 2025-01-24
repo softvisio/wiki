@@ -20,19 +20,24 @@ Automated:
 
 <https://www.gnupg.org/documentation/manuals/gnupg/Unattended-GPG-key-generation.html>
 
+Key types / curves:
+
+- EDDSA: ed25519
+- ECDSA: NIST P-256, NIST P-384, NIST P-521
+
 ```shell
 gpg --batch --generate-key << EOF
-    Name-Email: <EMAIL>
-    Name-Real:
-    Name-Comment:
-    Key-Type: ECDSA
-    Key-Curve: NIST P-521
+    Key-Type: EDDSA
+    Key-Curve: ed25519
     Key-Usage: cert
+    Subkey-Type: EDDSA
+    Subkey-Curve: ed25519
+    Subkey-Usage: sign
+    Name-Email: <EMAIL>
+    # Name-Real:
+    # Name-Comment:
     Expire-Date: 0
     Keyserver: hkps://keyserver.ubuntu.com
-    Subkey-Type: ECDSA
-    Subkey-Curve: NIST P-521
-    Subkey-Usage: sign
     %no-protection
     %commit
 EOF
