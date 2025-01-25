@@ -13,7 +13,7 @@ export GNUPGHOME="$(mktemp -d)"
 Interactive:
 
 ```shell
-gpg --full-gen-key --expert
+gpg --full-gen-key
 ```
 
 Automated:
@@ -74,7 +74,7 @@ gpg --import <PRIVATE-OR-PUBLIC-KEY-PATH>
 Generate sub-key with the `authentication` capability:
 
 ```shell
-gpg --edit-key --expert <KEY-ID>
+gpg --edit-key <KEY-ID>
 
 addkey
 
