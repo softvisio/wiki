@@ -124,12 +124,12 @@ Revocation certificate is created automatically on private key generation.
 
 1. Find certificate related to the private key.
 
-2. Remove ":" at ":-----BEGIN PGP PUBLIC KEY BLOCK-----".
+2. Remove `":"` at ":-----BEGIN PGP PUBLIC KEY BLOCK-----".
 
 3. Revoke:
 
 ```shell
-gpg --import openpgp-revocs.d/ < KEY-ID > .rev
+gpg --import openpgp-revocs.d/\<KEY-ID\>.rev
 ```
 
 Or you can manually generate revocation certificate:
@@ -145,13 +145,13 @@ gpg --import certificate.rev
 rm -f certificate.rev
 ```
 
-Send revoked key to the `keyserver`:
+Send revoked key to the keyserver:
 
 ```shell
 gpg --send-keys <KEY-ID>
 ```
 
-Delete revoked private key from the local storage:
+Delete revoked private key from the local keyring:
 
 ```shell
 gpg --delete-secret-and-public-keys <KEY-ID>
