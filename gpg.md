@@ -122,7 +122,7 @@ KEYSERVER --help
 
 Revocation certificate is created automatically on private key generation.
 
-1. Find certificate related to the private key.
+1. Find certificate related to the private key. Revocation certificate file name is equal to the private key full fingerprint: `openpgp-revocs.d/<FINGERPRINT>.rev`.
 
 2. Remove `":"` character from the `":-----BEGIN PGP PUBLIC KEY BLOCK-----"` line.
 
