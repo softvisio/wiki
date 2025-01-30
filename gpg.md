@@ -129,7 +129,7 @@ Revocation certificate is created automatically on private key generation.
 3. Revoke:
 
 ```shell
-gpg --import openpgp-revocs.d/ < KEY-ID > .rev
+gpg --import "openpgp-revocs.d/<KEY-ID>.rev"
 ```
 
 Or you can manually generate revocation certificate:
