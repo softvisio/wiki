@@ -22,7 +22,7 @@ Automated:
 
 Key types / curves:
 
-- `EdDSA`: `ed25519`
+- `EdDSA`: `Ed25519`
 - `ECDSA`: `NIST P-256`, `NIST P-384`, `NIST P-521`
 
 ```shell
