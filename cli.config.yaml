@@ -1,5 +1,5 @@
 releasable: false
 
 docs:
-    location: /
-    changelog: false
+  location: /
+  changelog: false

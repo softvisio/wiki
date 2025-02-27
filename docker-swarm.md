@@ -19,11 +19,11 @@ Use host network:
 
 ```yaml
 services:
-    service:
-        networks: [host]
+  service:
+    networks: [host]
 
 networks:
-    host: { name: host, external: true }
+  host: { name: host, external: true }
 ```
 
 ### Set node labels
