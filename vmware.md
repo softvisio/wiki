@@ -12,7 +12,7 @@ cat /dev/zero > ~/wipefile
 rm -rf ~/wipefile
 ```
 
-```batch
+```bat
 :: defragment all .vmdk files in the current directory
 for /R %f in (*.vmdk) do vmware-vdiskmanager -d "%f"
 
