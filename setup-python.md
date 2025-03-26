@@ -12,7 +12,7 @@ python d:\devel\python\get-pip.py
 
 Edit `python310._pth`
 
-```text
+```
 python310.zip
 .
 Lib\site-packages

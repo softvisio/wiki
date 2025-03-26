@@ -100,7 +100,7 @@ cordova run ios --target="iPad-Pro--12-9-inch---4th-generation-, 13.5" --nobuild
 
 You can install and use `Transporter` tool (preferred):
 
-```text
+```
 https://apps.apple.com/us/app/transporter/id1450874784?mt=12
 ```
 

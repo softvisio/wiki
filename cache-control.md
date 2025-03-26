@@ -27,18 +27,18 @@ Nginx doesn't process `cache-control` header from client request, so it is impos
 
 #### Cache for 1 second, revalidate
 
-```text
+```
 cache-control: public, max-age=1
 ```
 
 #### Cache forever
 
-```text
+```
 cache-control: public, max-age=30672000
 ```
 
 #### Do not cache
 
-```text
+```
 cache-control: no-cache, no-store
 ```

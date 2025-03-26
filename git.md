@@ -4,37 +4,37 @@
 
 - Link to the docs site, returns data with the valid content type:
 
-    ```text
+    ```
     https://<OWNER>.github.io/<NAME>/
     ```
 
 - Link to the content from the repository. Returns data **without** content type:
 
-    ```text
+    ```
     https://raw.githubusercontent.com/<OWNER>/<NAME>/<BRANCH>/
     ```
 
 - Link to the `LFS` repository content:
 
-    ```text
+    ```
     https://media.githubusercontent.com/media/<OWNER>/<NAME>/<BRANCH>/
     ```
 
 - Download release asset:
 
-    ```text
+    ```
     https://github.com/<OWNER>/<NAME>/releases/download/<TAG>/<FILE-NAME>
     ```
 
 - Download branch as archive:
 
-    ```text
+    ```
     https://github.com/<OWNER>/<NAME>/archive/<BRANCH>.tar.gz
     ```
 
 - Download tag as archive:
 
-    ```text
+    ```
     https://github.com/<OWNER>/<NAME>/archive/refs/tags/<TAG>.tar.gz
     ```
 

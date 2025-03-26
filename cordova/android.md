@@ -52,7 +52,7 @@ cordova run android --device
 
 Access app console from the browser:
 
-```text
+```
 chrome://inspect/#devices
 ```
 
