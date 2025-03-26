@@ -2,7 +2,7 @@
 
 ## Install "pip"
 
-```shell
+```sh
 curl -fSsLo d:\devel\python\get-pip.py https://bootstrap.pypa.io/get-pip.py
 
 python d:\devel\python\get-pip.py
@@ -23,7 +23,7 @@ import site
 
 ## Install packages
 
-```shell
+```sh
 pip3 install --upgrade pynvim
 pip3 install --upgrade msgpack
 ```

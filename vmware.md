@@ -6,7 +6,7 @@ Use this screen resolution for `windows` and `macos`: `1400 x 610`
 
 ### Compact `.vmdk`
 
-```shell
+```sh
 # fill free space with zeros
 cat /dev/zero > ~/wipefile
 rm -rf ~/wipefile
@@ -26,7 +26,7 @@ for /R %f in (*.vmdk) do vmware-vdiskmanager -k "%f"
 
 Need to reinstall on every vmware update.
 
-```shell
+```sh
 git clone git@github.com:DrDonk/unlocker.git
 
 # from admin
@@ -39,6 +39,6 @@ call win-install.cmd
 - Unsubscribe from the BETA program, System Preferences -> Updates -> Details;
 - Change resolution
 
-```shell
+```sh
 sudo "/Library/Application Support/VMware Tools/vmware-resolutionSet" 1920 1080
 ```

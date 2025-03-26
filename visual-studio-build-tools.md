@@ -4,7 +4,7 @@
 
 ## OPTIONAL
 
-```shell
+```sh
 npm config set msvs_version 2019
 npm config set python python3.8
 ```

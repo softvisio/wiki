@@ -20,7 +20,7 @@
 
 - Install cordova platform:
 
-    ```shell
+    ```sh
     env-android
     npm up
     cordova platform add --nosave android
@@ -32,13 +32,13 @@
 
 ### Build
 
-```shell
+```sh
 cordova build android
 ```
 
 ### Release
 
-```shell
+```sh
 cordova build android --release
 ```
 
@@ -46,7 +46,7 @@ cordova build android --release
 
 Run on android device, connected to the USB port:
 
-```shell
+```sh
 cordova run android --device
 ```
 
@@ -72,7 +72,7 @@ chrome://inspect/#devices
 
     Download and install [Intel HEXM](https://software.intel.com/en-us/articles/intel-hardware-accelerated-execution-manager-intel-haxm) or using sdkmanager:
 
-    ```shell
+    ```sh
     sdkmanager "extras;intel;Hardware_Accelerated_Execution_Manager"
     ```
 
@@ -80,36 +80,36 @@ chrome://inspect/#devices
 
 - Install emulator
 
-    ```shell
+    ```sh
     sdkmanager emulator
     ```
 
 - List abi system images
 
-    ```shell
+    ```sh
     sdkmanager --list | grep "system-images;android-"
     ```
 
 - Install abi system image
 
-    ```shell
+    ```sh
     sdkmanager "system-images;android-28;google_apis;x86_64"
     ```
 
 - Create avd
 
-    ```shell
+    ```sh
     avdmanager create avd --force --abi "google_apis/x86_64" --package "system-images;android-28;google_apis;x86_64" --device "pixel" --name "pixel"
     ```
 
 - Run emulator
-    ```shell
+    ```sh
     emulator -avd pixel
     ```
 
 ### Certificates
 
-```shell
+```sh
 # setup build environment
 env-android
 

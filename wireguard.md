@@ -2,14 +2,14 @@
 
 ### Install on CentOS
 
-```shell
+```sh
 dnf install -y elrepo-release epel-release
 dnf install -y kmod-wireguard wireguard-tools iptables
 ```
 
 ### Setup
 
-```shell
+```sh
 NETWORK_ADDR=10.0.0.1/24
 POSTROUTING_ETH=eth0
 
@@ -46,7 +46,7 @@ systemctl restart wg-quick@wg0.service
 
 ### Client
 
-```shell
+```sh
 ENDPOINT=dev.creationshop:51820
 CLIENT_ADDR=10.0.0.10
 
@@ -89,7 +89,7 @@ On client if you want to tunnel all traffic - use `0.0.0.0/0`, or if you want to
 
 :warning: wireguard kernel module must be installed on the host machine.
 
-```shell
+```sh
 d run -it --cap-add=NET_ADMIN --cap-add=SYS_ADMIN -p 51820:51820/tcp -p 51820:51820/udp --network private softvisio/core
 
 dnf install -y elrepo-release epel-release

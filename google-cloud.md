@@ -14,7 +14,7 @@ NOTE:
 
 ## Init gcloud
 
-```shell
+```sh
 gc init --console-only
 ```
 
@@ -24,7 +24,7 @@ Project id must be unique across all google cloud platform. So use project id in
 
 Create project:
 
-```shell
+```sh
 gc projects create <project-id>
 ```
 
@@ -32,7 +32,7 @@ Enabled GCE API : `https://console.developers.google.com/apis/api/compute.google
 
 Link billing account:
 
-```shell
+```sh
 gc beta billing accounts list
 
 gc beta billing projects link <project-id> --billing-account <billing-account-id>
@@ -44,13 +44,13 @@ Set project region and zone according to the ping latency value <https://www.gcp
 
 Activate project configuration:
 
-```shell
+```sh
 gcp activate <project-name>
 ```
 
 ## Initialize cluster
 
-```shell
+```sh
 # create default ssl policies
 gce ssl-policies create compatible --profile=COMPATIBLE
 gce ssl-policies create modern --profile=MODERN
@@ -84,14 +84,14 @@ gce firewall-rules create allow-ipv4-http --action=ALLOW --rules=tcp:80,tcp:443
 
 Simple cluster without `load balancer` and `NAT`:
 
-```shell
+```sh
 # reserve regional ip address for main instance
 gce addresses create public-ipv4
 ```
 
 If you are plannign to use `load balancer` and `NAT` (paid services):
 
-```shell
+```sh
 # reserve global ip address for load balancer
 gce addresses create public-ipv4 --ip-version=IPV4 --global
 
@@ -102,7 +102,7 @@ gce routers nats create nat --router=nat --auto-allocate-nat-external-ips --nat-
 
 ## Create instances
 
-```shell
+```sh
 gce instances create a0 \
     --machine-type=e2-micro \
     --image-project=ubuntu-os-cloud --image-family=ubuntu-minimal-2404-lts \
@@ -112,13 +112,13 @@ gce instances create a0 \
 
 To create instance with external reserved ip address assigned replace:
 
-```shell
+```sh
 --network-interface=no-address
 ```
 
 with:
 
-```shell
+```sh
 --address=public-ipv4
 ```
 
@@ -133,19 +133,19 @@ Before start:
 
 Create certificate:
 
-```shell
+```sh
 gce ssl-certificates create <domain-com> --global --domains= <domain.com>
 ```
 
 Check certificates status:
 
-```shell
+```sh
 gce ssl-certificates list
 ```
 
 ## Create instances group
 
-```shell
+```sh
 gce instance-groups unmanaged create nginx
 gce instance-groups unmanaged add-instances nginx --instances=a0
 gce instance-groups set-named-ports nginx --named-ports=http:80,pgsql:5432,proxy:8085
@@ -155,14 +155,14 @@ gce instance-groups set-named-ports nginx --named-ports=http:80,pgsql:5432,proxy
 
 Create redirect from `http` to `https`:
 
-```shell
+```sh
 gce target-http-proxies create http --url-map=http --global
 gce forwarding-rules create http --load-balancing-scheme=EXTERNAL --address=public-ipv4 --ports=80 --target-http-proxy=http --global
 ```
 
 Remove:
 
-```shell
+```sh
 yes | gce forwarding-rules delete http --global
 yes | gce target-http-proxies delete http
 yes | gce url-maps delete http
@@ -172,7 +172,7 @@ yes | gce url-maps delete http
 
 Create backend service:
 
-```shell
+```sh
 gce backend-services create nginx \
     --global \
     --global-health-checks --health-checks=tcp \
@@ -185,7 +185,7 @@ gce backend-services add-backend nginx --global --instance-group=nginx
 
 Create load balancer:
 
-```shell
+```sh
 gce url-maps create https --default-service=nginx
 gce target-https-proxies create https --url-map=https --ssl-policy=modern --ssl-certificates=<domain-com>
 gce forwarding-rules create https --load-balancing-scheme=EXTERNAL --address=public-ipv4 --ports=443 --target-https-proxy=https --global
@@ -193,7 +193,7 @@ gce forwarding-rules create https --load-balancing-scheme=EXTERNAL --address=pub
 
 Remove:
 
-```shell
+```sh
 yes | gce forwarding-rules delete https --global
 yes | gce target-https-proxies delete https
 yes | gce url-maps delete https
@@ -205,28 +205,28 @@ yes | gce backend-services delete nginx --global
 
 Reserve private IP address
 
-```shell
+```sh
 # reserve ip addresses for load balancer
 gce addresses create private-ipv4 --ip-version=IPV4 --global
 ```
 
 Create backend service:
 
-```shell
+```sh
 gce backend-services create pgsql --global --global-health-checks --health-checks=tcp --protocol=TCP --port-name=pgsql --timeout=600s
 gce backend-services add-backend pgsql --global --instance-group=nginx
 ```
 
 Create SSL load balancer (not works with `psql` client, need to create SSL tunnel first):
 
-```shell
+```sh
 gce target-ssl-proxies create pgsql --backend-service=pgsql --ssl-policy=restricted --ssl-certificates=<domain-com>
 gce forwarding-rules create pgsql --load-balancing-scheme=EXTERNAL --address=private-ipv4 --ports=5432 --target-ssl-proxy=pgsql --global
 ```
 
 Remove:
 
-```shell
+```sh
 yes | gce forwarding-rules delete pgsql --global
 yes | gce target-ssl-proxies delete pgsql
 
@@ -237,7 +237,7 @@ yes | gce backend-services delete pgsql --global
 
 Create backend service:
 
-```shell
+```sh
 gce backend-services create proxy \
     --global \
     --global-health-checks --health-checks=tcp \
@@ -248,21 +248,21 @@ gce backend-services add-backend proxy --global --instance-group=nginx
 
 Create TCP:8085 proxy
 
-```shell
+```sh
 gce target-tcp-proxies create proxy-tcp --proxy-header=PROXY_V1 --backend-service=proxy
 gce forwarding-rules create proxy-tcp --load-balancing-scheme=EXTERNAL --address=public-ipv4 --ports=8085 --target-tcp-proxy=proxy-tcp --global
 ```
 
 Create SSL:8099 proxy:
 
-```shell
+```sh
 gce target-ssl-proxies create proxy-ssl --backend-service=proxy --proxy-header=PROXY_V1 --ssl-policy=restricted --ssl-certificates=proxy-softvisio-net
 gce forwarding-rules create proxy-ssl --load-balancing-scheme=EXTERNAL --address=public-ipv4 --ports=8099 --target-ssl-proxy=proxy-ssl --global
 ```
 
 Remove:
 
-```shell
+```sh
 yes | gce forwarding-rules delete proxy-tcp --global
 yes | gce target-tcp-proxies delete proxy-tcp
 
@@ -278,7 +278,7 @@ Default type is: `n1-standard-1`, 1 cpu, 3.75 GB.
 
 List available machines for selected zone:
 
-```shell
+```sh
 gce machine-types list --filter="zone:(us-central1-a) AND guestCpus=4 AND memoryMb>=8000"
 ```
 
@@ -321,7 +321,7 @@ Some common machines:
 
 ### Set instance tags
 
-```shell
+```sh
 gce instances add-tags test --tags=nginx
 ```
 
@@ -329,7 +329,7 @@ gce instances add-tags test --tags=nginx
 
 Used for `--image-project` and `--image-family` options.
 
-```shell
+```sh
 gce images list
 ```
 
@@ -337,7 +337,7 @@ gce images list
 
 ### Enable service
 
-```shell
+```sh
 # compute
 gc services enable compute.googleapis.com
 
@@ -350,7 +350,7 @@ gc services enable timezone-backend.googleapis.com
 
 ### Create API key
 
-```shell
+```sh
 gc alpha services api-keys create --display-name=maps.local \
     --api-target=service=places-backend.googleapis.com \
     --api-target=service=geocoding-backend.googleapis.com \
@@ -359,7 +359,7 @@ gc alpha services api-keys create --display-name=maps.local \
 
 ### Get API key
 
-```shell
+```sh
 gc alpha services api-keys get-key-string --format="get(keyString)" $(gc alpha services api-keys list --format="get(uid)" --filter=displayName=maps.local)
 ```
 

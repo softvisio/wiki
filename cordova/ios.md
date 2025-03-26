@@ -10,7 +10,7 @@ If you have cordova platform install or build errors:
 
 - Update `cocoapods`:
 
-    ```shell
+    ```sh
     brew upgrade cocoapods
 
     pod repo update
@@ -18,7 +18,7 @@ If you have cordova platform install or build errors:
 
 - Update platform `pods`:
 
-    ```shell
+    ```sh
     cd platform/ios
 
     pod deintegrate
@@ -30,7 +30,7 @@ If you have cordova platform install or build errors:
 
 Init `macos` environment:
 
-```shell
+```sh
 /usr/bin/env bash <(curl -fsSL https://raw.githubusercontent.com/softvisio/scripts/main/setup-host-macos.sh)
 
 # TODO restart terminal
@@ -38,7 +38,7 @@ Init `macos` environment:
 
 Update `macos` environment:
 
-```shell
+```sh
 update
 ```
 
@@ -48,7 +48,7 @@ update
 
 - Install cordova platform:
 
-    ```shell
+    ```sh
     npm up
 
     cordova platform add --nosave ios
@@ -56,7 +56,7 @@ update
 
 - Open project workspace in `xcode`:
 
-    ```shell
+    ```sh
     open -a xcode platforms/ios/*.xcworkspace
     ```
 
@@ -64,19 +64,19 @@ update
 
 ### Build
 
-```shell
+```sh
 cordova build ios
 ```
 
 ### Release
 
-```shell
+```sh
 cordova build ios --release --device
 ```
 
 ### Run in simulator
 
-```shell
+```sh
 # view available devices under emulator
 cordova run --list
 
@@ -106,7 +106,7 @@ https://apps.apple.com/us/app/transporter/id1450874784?mt=12
 
 or upload, using command line:
 
-```shell
+```sh
 # upload via command line
 xcrun altool --upload-app -f -u dzagashev@gmail.com < filename > .ipa
 ```

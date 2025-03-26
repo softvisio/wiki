@@ -40,7 +40,7 @@
 
 ### Move repository
 
-```shell
+```sh
 git remote rm origin
 git remote add origin <URL>
 git push origin --all
@@ -49,7 +49,7 @@ git push --tags
 
 ### Sync forked repository
 
-```shell
+```sh
 git clone ssh://<YOUR-FORKED-REPO>
 cd <YOUR-FORKED-REPO>
 git remote add upstream https://<ORIGINAL-REPO>
@@ -63,7 +63,7 @@ git push
 
 In the following example we rename `master` to `main`:
 
-```shell
+```sh
 git sw master
 git branch -m main
 git push origin -u main
@@ -74,7 +74,7 @@ On `GitHub` repository `settings/branches` switch default branch to the `main`.
 
 ### Restore deleted file
 
-```shell
+```sh
 FILE=<FILE-PATH>
 
 git checkout $(git rev-list -n 1 HEAD -- "$FILE")^ -- "$FILE"
@@ -82,7 +82,7 @@ git checkout $(git rev-list -n 1 HEAD -- "$FILE")^ -- "$FILE"
 
 ### Remove untracked files
 
-```shell
+```sh
 # files
 git clean --force
 
@@ -92,19 +92,19 @@ git clean --force -d
 
 ### Delete commited changesets
 
-```shell
+```sh
 git reset --hard <sha1-commit-id>
 ```
 
 If changesets were pushed:
 
-```shell
+```sh
 git push origin HEAD --force
 ```
 
 ### Delete file from commits
 
-```shell
+```sh
 git filter-repo --force --partial --invert-paths --path-match <FILE-PATH>
 
 git reflog expire --expire-unreachable=now --all
@@ -128,7 +128,7 @@ where:
     - `644` - `rw-r--r--`
     - `755` - `rwxr-xr-x`
 
-```shell
+```sh
 # list execulable files
 git ls-files --format "%(objectmode) %(path)" | grep "^100755"
 

@@ -2,14 +2,14 @@
 
 ## Deploy
 
-```shell
+```sh
 dnf -y install mariadb-devel
 cpanm Devel::CheckLib DBI https://github.com/gooddata/DBD-MariaDB/archive/master.tar.gz
 ```
 
 ## Connect
 
-```shell
+```sh
 my $dbh = DBI->connect(
     qq[DBI:MariaDB:database=$db;host=$host;port=$port],
     $username,

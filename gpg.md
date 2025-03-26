@@ -4,7 +4,7 @@
 
 Create temporary `GPG` home:
 
-```shell
+```sh
 export GNUPGHOME="$(mktemp -d)"
 ```
 
@@ -12,7 +12,7 @@ export GNUPGHOME="$(mktemp -d)"
 
 Interactive:
 
-```shell
+```sh
 gpg --full-gen-key
 ```
 
@@ -25,7 +25,7 @@ Key types / curves:
 - `EdDSA`: `Ed25519`
 - `ECDSA`: `NIST P-256`, `NIST P-384`, `NIST P-521`
 
-```shell
+```sh
 gpg --batch --generate-key << EOF
     Key-Type: EdDSA
     Key-Curve: Ed25519
@@ -47,25 +47,25 @@ EOF
 
 Export `private` key:
 
-```shell
+```sh
 gpg --export-secret-key --armor --output private-key.asc <KEY-ID>
 ```
 
 Export `public` key:
 
-```shell
+```sh
 gpg --export --armor --output public-key.asc <KEY-ID>
 ```
 
 Export `SSH public` key:
 
-```shell
+```sh
 gpg --export-ssh-key <KEY-ID>
 ```
 
 ### Import keys
 
-```shell
+```sh
 gpg --import <PRIVATE-OR-PUBLIC-KEY-PATH>
 ```
 
@@ -73,7 +73,7 @@ gpg --import <PRIVATE-OR-PUBLIC-KEY-PATH>
 
 Generate sub-key with the `authentication` capability:
 
-```shell
+```sh
 gpg --edit-key <KEY-ID>
 
 addkey
@@ -84,7 +84,7 @@ addkey
 
 Add keygrip for key with `authenticate` capability to `sshcontrol` file:
 
-```shell
+```sh
 gpg --list-keys --with-keygrip <KEY-ID>
 ```
 
@@ -92,25 +92,25 @@ gpg --list-keys --with-keygrip <KEY-ID>
 
 Publish private key:
 
-```shell
+```sh
 gpg --send-keys <KEY-ID>
 ```
 
 Search / import keys:
 
-```shell
+```sh
 gpg --search-keys <NAME-OR-EMAIL>
 ```
 
 Refresh keys:
 
-```shell
+```sh
 gpg --refresh-keys
 ```
 
 Check supported schemes:
 
-```shell
+```sh
 dirmngr
 
 KEYSERVER --help
@@ -128,13 +128,13 @@ Revocation certificate is created automatically on private key generation.
 
 3. Revoke:
 
-```shell
+```sh
 gpg --import "openpgp-revocs.d/<KEY-ID>.rev"
 ```
 
 Or you can manually generate revocation certificate:
 
-```shell
+```sh
 # create revocation certificate
 gpg --gen-revoke --output certificate.rev <KEY-ID>
 
@@ -147,18 +147,18 @@ rm -f certificate.rev
 
 Send revoked key to the keyserver:
 
-```shell
+```sh
 gpg --send-keys <KEY-ID>
 ```
 
 Delete revoked private key from the local keyring:
 
-```shell
+```sh
 gpg --delete-secret-and-public-keys <KEY-ID>
 ```
 
 ### Delete public key
 
-```shell
+```sh
 gpg --delete-key <KEY-ID>
 ```
