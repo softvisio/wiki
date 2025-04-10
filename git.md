@@ -42,7 +42,7 @@
 
 ```sh
 git remote rm origin
-git remote add origin <URL>
+git remote add origin $URL
 git push origin --all
 git push --tags
 ```
@@ -50,9 +50,9 @@ git push --tags
 ### Sync forked repository
 
 ```sh
-git clone ssh://<YOUR-FORKED-REPO>
-cd <YOUR-FORKED-REPO>
-git remote add upstream https://<ORIGINAL-REPO>
+git clone ssh://$YOUR_FORKED_REPO
+cd $YOUR_FORKED_REPO
+git remote add upstream https://$ORIGINAL_REPO
 git fetch upstream
 git pull upstream main
 git push
@@ -75,9 +75,7 @@ On `GitHub` repository `settings/branches` switch default branch to the `main`.
 ### Restore deleted file
 
 ```sh
-FILE=<FILE-PATH>
-
-git checkout $(git rev-list -n 1 HEAD -- "$FILE")^ -- "$FILE"
+git checkout $(git rev-list -n 1 HEAD -- "$FILE_PATH")^ -- "$FILE_PATH"
 ```
 
 ### Remove untracked files
@@ -93,7 +91,7 @@ git clean --force -d
 ### Delete commited changesets
 
 ```sh
-git reset --hard <sha1-commit-id>
+git reset --hard $SHA1_COMMIT_ID
 ```
 
 If changesets were pushed:
@@ -105,7 +103,7 @@ git push origin HEAD --force
 ### Delete file from commits
 
 ```sh
-git filter-repo --force --partial --invert-paths --path-match <FILE-PATH>
+git filter-repo --force --partial --invert-paths --path-match $FILE_PATH
 
 git reflog expire --expire-unreachable=now --all
 
