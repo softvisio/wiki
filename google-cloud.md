@@ -20,12 +20,12 @@ gc init --console-only
 
 ## Create project
 
-Project id must be unique across all google cloud platform. So use project id in `<organization-name>-<project-name>` format.
+Project id must be unique across all google cloud platform. So use project id in `<ORGANIZATION-NAME>-<PROJECT-NAME>` format.
 
 Create project:
 
 ```sh
-gc projects create <project-id>
+gc projects create $PROJECT_ID
 ```
 
 Enabled GCE API : `https://console.developers.google.com/apis/api/compute.googleapis.com/overview?authuser=dzagashev@gmail.com&project=<PROJECT-ID>`
@@ -35,17 +35,17 @@ Link billing account:
 ```sh
 gc beta billing accounts list
 
-gc beta billing projects link <project-id> --billing-account <billing-account-id>
+gc beta billing projects link $PROJECT_ID --billing-account $BILLING_ACCOUNT_ID
 ```
 
-After project is created you need to create project configuration file at `~/.config/gcloud/configurations/config_<project_name>`.
+After project is created you need to create project configuration file at `~/.config/gcloud/configurations/config_$PROJECT_NAME`.
 
 Set project region and zone according to the ping latency value <https://www.gcping.com>.
 
 Activate project configuration:
 
 ```sh
-gcp activate <project-name>
+gcp activate $PROJECT_NAME
 ```
 
 ## Initialize cluster
@@ -134,7 +134,7 @@ Before start:
 Create certificate:
 
 ```sh
-gce ssl-certificates create <domain-com> --global --domains= <domain.com>
+gce ssl-certificates create $DOMAIN --global --domains= $DOMAIN
 ```
 
 Check certificates status:
@@ -187,7 +187,7 @@ Create load balancer:
 
 ```sh
 gce url-maps create https --default-service=nginx
-gce target-https-proxies create https --url-map=https --ssl-policy=modern --ssl-certificates=<domain-com>
+gce target-https-proxies create https --url-map=https --ssl-policy=modern --ssl-certificates=$DOMAIN
 gce forwarding-rules create https --load-balancing-scheme=EXTERNAL --address=public-ipv4 --ports=443 --target-https-proxy=https --global
 ```
 
@@ -220,7 +220,7 @@ gce backend-services add-backend pgsql --global --instance-group=nginx
 Create SSL load balancer (not works with `psql` client, need to create SSL tunnel first):
 
 ```sh
-gce target-ssl-proxies create pgsql --backend-service=pgsql --ssl-policy=restricted --ssl-certificates=<domain-com>
+gce target-ssl-proxies create pgsql --backend-service=pgsql --ssl-policy=restricted --ssl-certificates=$DOMAIN
 gce forwarding-rules create pgsql --load-balancing-scheme=EXTERNAL --address=private-ipv4 --ports=5432 --target-ssl-proxy=pgsql --global
 ```
 
