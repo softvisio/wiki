@@ -4,39 +4,39 @@
 
 - Link to the docs site, returns data with the valid content type:
 
-    ```
-    https://<OWNER>.github.io/<NAME>/
-    ```
+```
+https://<OWNER>.github.io/<NAME>/
+```
 
 - Link to the content from the repository. Returns data **without** content type:
 
-    ```
-    https://raw.githubusercontent.com/<OWNER>/<NAME>/<BRANCH>/
-    ```
+```
+https://raw.githubusercontent.com/<OWNER>/<NAME>/<BRANCH>/
+```
 
 - Link to the `LFS` repository content:
 
-    ```
-    https://media.githubusercontent.com/media/<OWNER>/<NAME>/<BRANCH>/
-    ```
+```
+https://media.githubusercontent.com/media/<OWNER>/<NAME>/<BRANCH>/
+```
 
 - Download release asset:
 
-    ```
-    https://github.com/<OWNER>/<NAME>/releases/download/<TAG>/<FILE-NAME>
-    ```
+```
+https://github.com/<OWNER>/<NAME>/releases/download/<TAG>/<FILE-NAME>
+```
 
 - Download branch as archive:
 
-    ```
-    https://github.com/<OWNER>/<NAME>/archive/<BRANCH>.tar.gz
-    ```
+```
+https://github.com/<OWNER>/<NAME>/archive/<BRANCH>.tar.gz
+```
 
 - Download tag as archive:
 
-    ```
-    https://github.com/<OWNER>/<NAME>/archive/refs/tags/<TAG>.tar.gz
-    ```
+```
+https://github.com/<OWNER>/<NAME>/archive/refs/tags/<TAG>.tar.gz
+```
 
 ### Move repository
 
