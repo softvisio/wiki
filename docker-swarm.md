@@ -29,9 +29,9 @@ networks:
 ### Set node labels
 
 ```sh
-docker node update --label-add nginx=true `docker node inspect self --format "{{ .ID }}"`
-docker node update --label-add pgsql=true `docker node inspect self --format "{{ .ID }}"`
-docker node update --label-add redis=true `docker node inspect self --format "{{ .ID }}"`
+docker node update --label-add nginx=true $(docker node inspect self --format "{{ .ID }}")
+docker node update --label-add pgsql=true $(docker node inspect self --format "{{ .ID }}")
+docker node update --label-add redis=true $(docker node inspect self --format "{{ .ID }}")
 
 docker node update --label-add proxy=true $NODE_NAME
 ```
