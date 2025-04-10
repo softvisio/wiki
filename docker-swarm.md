@@ -33,19 +33,19 @@ docker node update --label-add nginx=true `docker node inspect self --format "{{
 docker node update --label-add pgsql=true `docker node inspect self --format "{{ .ID }}"`
 docker node update --label-add redis=true `docker node inspect self --format "{{ .ID }}"`
 
-docker node update --label-add proxy=true <NODE-NAME>
+docker node update --label-add proxy=true $NODE_NAME
 ```
 
 ### Set service labels
 
 ```sh
-docker service update --label-add nginx-server-name=www.example.com <SERVICE-NAME>
+docker service update --label-add nginx-server-name=www.example.com $SERVICE_NAME
 ```
 
 ### Update service images
 
 ```sh
-docker service update --image softvisio/<NAME> <SERVICE-NAME>
+docker service update --image softvisio/$NAME $SERVICE_NAME
 ```
 
 ### Continer log by name
