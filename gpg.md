@@ -54,13 +54,13 @@ gpg --export-secret-key --armor --output private-key.asc $KEY_ID
 Export `public` key:
 
 ```sh
-gpg --export --armor --output public-key.asc <KEY-ID>
+gpg --export --armor --output public-key.asc $KEY_ID
 ```
 
 Export `SSH public` key:
 
 ```sh
-gpg --export-ssh-key <KEY-ID>
+gpg --export-ssh-key $KEY_ID
 ```
 
 ### Import keys
@@ -154,11 +154,11 @@ gpg --send-keys $KEY_ID
 Delete revoked private key from the local keyring:
 
 ```sh
-gpg --delete-secret-and-public-keys <KEY-ID>
+gpg --delete-secret-and-public-keys $KEY_ID
 ```
 
 ### Delete public key
 
 ```sh
-gpg --delete-key <KEY-ID>
+gpg --delete-key $KEY_ID
 ```
