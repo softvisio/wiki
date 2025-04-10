@@ -56,7 +56,6 @@ git remote add upstream https://$ORIGINAL_REPO
 git fetch upstream
 git pull upstream main
 git push
-
 ```
 
 ### Rename branch
