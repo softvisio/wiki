@@ -33,7 +33,7 @@ gpg --batch --generate-key << EOF
     Subkey-Type: EdDSA
     Subkey-Curve: Ed25519
     Subkey-Usage: sign
-    Name-Email: <EMAIL>
+    Name-Email: $EMAIL
     # Name-Real:
     # Name-Comment:
     Expire-Date: 0
@@ -48,7 +48,7 @@ EOF
 Export `private` key:
 
 ```sh
-gpg --export-secret-key --armor --output private-key.asc <KEY-ID>
+gpg --export-secret-key --armor --output private-key.asc $KEY_ID
 ```
 
 Export `public` key:
@@ -66,7 +66,7 @@ gpg --export-ssh-key <KEY-ID>
 ### Import keys
 
 ```sh
-gpg --import <PRIVATE-OR-PUBLIC-KEY-PATH>
+gpg --import $PRIVATE_OR_PUBLIC_KEY_PATH
 ```
 
 ### SSH authentication
@@ -74,7 +74,7 @@ gpg --import <PRIVATE-OR-PUBLIC-KEY-PATH>
 Generate sub-key with the `authentication` capability:
 
 ```sh
-gpg --edit-key <KEY-ID>
+gpg --edit-key $KEY_ID
 
 addkey
 
@@ -85,7 +85,7 @@ addkey
 Add keygrip for key with `authenticate` capability to `sshcontrol` file:
 
 ```sh
-gpg --list-keys --with-keygrip <KEY-ID>
+gpg --list-keys --with-keygrip $KEY_ID
 ```
 
 ### Keyserver (publish keys)
@@ -93,13 +93,13 @@ gpg --list-keys --with-keygrip <KEY-ID>
 Publish private key:
 
 ```sh
-gpg --send-keys <KEY-ID>
+gpg --send-keys $KEY_ID
 ```
 
 Search / import keys:
 
 ```sh
-gpg --search-keys <NAME-OR-EMAIL>
+gpg --search-keys $NAME_OR_EMAIL
 ```
 
 Refresh keys:
@@ -122,21 +122,21 @@ KEYSERVER --help
 
 Revocation certificate is created automatically on private key generation.
 
-1. Find certificate related to the private key. Revocation certificate file name is equal to the private key full fingerprint: `openpgp-revocs.d/<FINGERPRINT>.rev`.
+1. Find certificate related to the private key. Revocation certificate file name is equal to the private key full fingerprint: `openpgp-revocs.d/$FINGERPRINT.rev`.
 
 2. Remove `":"` character from the `":-----BEGIN PGP PUBLIC KEY BLOCK-----"` line.
 
 3. Revoke:
 
 ```sh
-gpg --import "openpgp-revocs.d/<KEY-ID>.rev"
+gpg --import "openpgp-revocs.d/$KEY_ID.rev"
 ```
 
 Or you can manually generate revocation certificate:
 
 ```sh
 # create revocation certificate
-gpg --gen-revoke --output certificate.rev <KEY-ID>
+gpg --gen-revoke --output certificate.rev $KEY_ID
 
 # revoke private key
 gpg --import certificate.rev
@@ -148,7 +148,7 @@ rm -f certificate.rev
 Send revoked key to the keyserver:
 
 ```sh
-gpg --send-keys <KEY-ID>
+gpg --send-keys $KEY_ID
 ```
 
 Delete revoked private key from the local keyring:
