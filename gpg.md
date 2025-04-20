@@ -78,8 +78,8 @@ gpg --decrypt --batch --passphrase $PASSWORD $PRIVATE_OR_PUBLIC_KEY_PATH \
 
 ```sh
 # full backup
-gpg --export-secret-key --output - \
-    | gpg --symmetric --batch --armor --yes --passphrase $PASSWORD --cipher-algo AES25 --output gpg-backup.asc
+gpg --export-secret-keys --output - \
+    | gpg --symmetric --batch --armor --yes --passphrase $PASSWORD --cipher-algo AES256 --output gpg-backup.asc
 
 gpg --export-ownertrust > gpg-ownertrust.txt
 
