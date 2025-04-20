@@ -153,3 +153,12 @@ git-crypt unlock secret.git-crypto
 git-crypt add-gpg-user --trusted $EMAIL
 git-crypt unlock
 ```
+
+### Remove all commits, except last
+
+```sh
+git reset --soft $(git rev-list --max-parents=0 HEAD)
+git commit -a --amend -m "chore: init"
+git push origin HEAD --force
+git gc
+```
