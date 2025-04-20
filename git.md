@@ -135,3 +135,18 @@ git ls-files -z bin tests | xargs -0 git update-index --chmod=+x
 # make ".sh" file executable
 git ls-files -z *.sh | xargs -0 git update-index --chmod=+x
 ```
+
+### Crypto
+
+```sh
+# init
+git-crypt init
+
+# symmetric key
+git-crypt export-key secret.git-crypto
+git-crypt unlock secret.git-crypto
+
+# gpg
+git-crypt add-gpg-user --trusted $EMAIL
+git-crypt unlock
+```
