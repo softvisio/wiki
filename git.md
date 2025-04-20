@@ -161,4 +161,8 @@ git reset --soft $(git rev-list --max-parents=0 HEAD)
 git commit -a --amend -m "chore: init"
 git push origin HEAD --force
 git gc
+
+# sync other clone with updates
+git fetch --all
+git reset --hard origin/main
 ```
