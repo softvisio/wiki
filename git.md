@@ -136,9 +136,12 @@ git ls-files -z bin tests | xargs -0 git update-index --chmod=+x
 git ls-files -z *.sh | xargs -0 git update-index --chmod=+x
 ```
 
-### Crypto
+### Encryption with `git-crypt`
 
 ```sh
+# install
+apt install --yes git-crypt
+
 # init
 git-crypt init
 
