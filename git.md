@@ -165,4 +165,5 @@ git gc
 # sync other clone with updates
 git fetch --all
 git reset --hard origin/main
+git gc
 ```
