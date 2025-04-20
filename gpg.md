@@ -66,7 +66,12 @@ gpg --export-ssh-key $KEY_ID
 ### Import keys
 
 ```sh
+# import unencrypted key
 gpg --import $PRIVATE_OR_PUBLIC_KEY_PATH
+
+# import encrypted key
+gpg --decrypt --batch --passphrase $PASSWORD $PRIVATE_OR_PUBLIC_KEY_PATH \
+    | gpg --import
 ```
 
 ### Backup / restore
