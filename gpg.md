@@ -87,7 +87,7 @@ curl https://raw.githubusercontent.com/zdm/secure/main/backup/deployment@softvis
 
 ```sh
 # full backup
-gpg --export-secret-keys --output - \
+gpg --export-secret-keys \
     | gpg --symmetric --batch --armor --yes --passphrase $PASSWORD --output gpg-backup.asc
 
 gpg --export-ownertrust > gpg-ownertrust.txt
