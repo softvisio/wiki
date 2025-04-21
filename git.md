@@ -149,15 +149,15 @@ git ls-files -z *.sh | xargs -0 git update-index --chmod=+x
 apt install --yes git-crypt
 
 # init
-git-crypt init
+git crypt init
 
 # symmetric key
-git-crypt export-key secret.git-crypto
-git-crypt unlock secret.git-crypto
+git crypt export-key secret.git-crypto
+git crypt unlock secret.git-crypto
 
 # gpg
-git-crypt add-gpg-user --trusted $EMAIL
-git-crypt unlock
+git crypt add-gpg-user --trusted $EMAIL
+git crypt unlock
 ```
 
 ### Remove all commits, except last
