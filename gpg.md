@@ -67,10 +67,19 @@ gpg --export-ssh-key $KEY_ID
 
 ```sh
 # import unencrypted key
-gpg --import $PRIVATE_OR_PUBLIC_KEY_PATH
+gpg --import $KEY_PATH
+
+# import key from url
+curl https://raw.githubusercontent.com/zdm/secure/main/backup/deployment@softvisio.net.asc \
+    | gpg --import
 
 # import encrypted key
-gpg --decrypt --batch --passphrase $PASSWORD $PRIVATE_OR_PUBLIC_KEY_PATH \
+gpg --decrypt --batch --passphrase $PASSWORD $KEY_PATH \
+    | gpg --import
+
+# import encrypted key from url
+curl https://raw.githubusercontent.com/zdm/secure/main/backup/deployment@softvisio.net.asc \
+    | gpg --decrypt --batch --passphrase $PASSWORD \
     | gpg --import
 ```
 
