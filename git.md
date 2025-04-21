@@ -4,38 +4,44 @@
 
 - Link to the docs site, returns data with the correct `Content-Type` header:
 
-```
-https://<OWNER>.github.io/<NAME>/<PATH>
+```sh
+curl https://${OWNER}.github.io/${NAME}/${PATH}
 ```
 
 - Link to the content from the repository. Returns data **without** `Content-Type` header:
 
+```sh
+curl https://raw.githubusercontent.com/${OWNER}/${NAME}/${BRANCH}/${PATH}
 ```
-https://raw.githubusercontent.com/<OWNER>/<NAME>/<BRANCH>/<PATH>
+
+- Download file from the private repository:
+
+```sh
+curl https://${TOKEN}@raw.githubusercontent.com/${OWNER}/${NAME}/${BRANCH}/${PATH}
 ```
 
 - Link to the `LFS` repository content:
 
-```
-https://media.githubusercontent.com/media/<OWNER>/<NAME>/<BRANCH>/<PATH>
+```sh
+curl https://media.githubusercontent.com/media/${OWNER}/${NAME}/${BRANCH}/${PATH}
 ```
 
 - Download release asset:
 
-```
-https://github.com/<OWNER>/<NAME>/releases/download/<TAG>/<FILE-NAME>
+```sh
+curl https://github.com/${OWNER}/${NAME}/releases/download/${TAG}/${FILE_NAME}
 ```
 
 - Download branch as archive:
 
-```
-https://github.com/<OWNER>/<NAME>/archive/<BRANCH>.tar.gz
+```sh
+curl https://github.com/${OWNER}/${NAME}/archive/${BRANCH}.tar.gz
 ```
 
 - Download tag as archive:
 
-```
-https://github.com/<OWNER>/<NAME>/archive/refs/tags/<TAG>.tar.gz
+```sh
+curl https://github.com/${OWNER}/${NAME}/archive/refs/tags/${TAG}.tar.gz
 ```
 
 ### Move repository
