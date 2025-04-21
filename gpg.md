@@ -78,6 +78,7 @@ gpg --decrypt --batch --passphrase $PASSWORD $KEY_PATH \
     | gpg --import
 
 # import encrypted key from url
+export GPG_TTY=$(tty)
 curl https://raw.githubusercontent.com/zdm/secure/main/backup/deployment@softvisio.net.asc \
     | gpg --decrypt --batch --passphrase $PASSWORD \
     | gpg --import
