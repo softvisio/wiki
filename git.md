@@ -2,22 +2,22 @@
 
 ### GitHub links
 
-- Link to the docs site, returns data with the valid content type:
+- Link to the docs site, returns data with the correct `Content-Type` header:
 
 ```
-https://<OWNER>.github.io/<NAME>/
+https://<OWNER>.github.io/<NAME>/<PATH>
 ```
 
-- Link to the content from the repository. Returns data **without** content type:
+- Link to the content from the repository. Returns data **without** `Content-Type` header:
 
 ```
-https://raw.githubusercontent.com/<OWNER>/<NAME>/<BRANCH>/
+https://raw.githubusercontent.com/<OWNER>/<NAME>/<BRANCH>/<PATH>
 ```
 
 - Link to the `LFS` repository content:
 
 ```
-https://media.githubusercontent.com/media/<OWNER>/<NAME>/<BRANCH>/
+https://media.githubusercontent.com/media/<OWNER>/<NAME>/<BRANCH>/<PATH>
 ```
 
 - Download release asset:
@@ -99,7 +99,7 @@ If changesets were pushed:
 git push origin HEAD --force
 ```
 
-### Delete file from commits
+### Delete file from history
 
 ```sh
 git filter-repo --force --partial --invert-paths --path-match $FILE_PATH
