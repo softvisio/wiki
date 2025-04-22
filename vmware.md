@@ -8,8 +8,10 @@ Use this screen resolution for `windows` and `macos`: `1400 x 610`
 
 ```sh
 # fill free space with zeros
+rm -rf /tmp/**
 cat /dev/zero > ~/wipefile
 rm -rf ~/wipefile
+poweroff
 ```
 
 ```batch
