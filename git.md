@@ -111,7 +111,6 @@ git push origin HEAD --force
 git filter-repo --force --partial --invert-paths --path-match $FILE_PATH
 
 git reflog expire --expire-unreachable=now --all
-
 git gc --prune=now --aggressive
 ```
 
@@ -166,10 +165,14 @@ git crypt unlock
 git reset --soft $(git rev-list --max-parents=0 HEAD)
 git commit -a --amend -m "chore: init"
 git push origin HEAD --force
-git gc
+
+git reflog expire --expire-unreachable=now --all
+git gc --prune=now --aggressive
 
 # sync other clone with updates
 git fetch --all
 git reset --hard origin/main
-git gc
+
+git reflog expire --expire-unreachable=now --all
+git gc --prune=now --aggressive
 ```
