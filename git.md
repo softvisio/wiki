@@ -168,8 +168,11 @@ git push origin HEAD --force
 
 git reflog expire --expire-unreachable=now --all
 git gc --prune=now --aggressive
+```
 
-# sync other clone with updates
+Sync other clone with updates:
+
+```sh
 git fetch --all
 git reset --hard origin/main
 
