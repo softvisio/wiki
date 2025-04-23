@@ -24,6 +24,7 @@ Key types / curves:
 
 - `EdDSA`: `Ed25519`
 - `ECDSA`: `NIST P-256`, `NIST P-384`, `NIST P-521`
+- `ECC`: `Cv25519`
 
 ```sh
 gpg --batch --generate-key << EOF
