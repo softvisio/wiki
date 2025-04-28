@@ -1,9 +1,10 @@
+- [Archive 🡢](archive/)
 - [Cache control](cache-control.md)
-- [Cordova 🡢](/cordova/)
+- [Cordova 🡢](cordova/)
 - [Docker swarm](docker-swarm.md)
 - [Linux](linux.md)
 - [ExtJS](extjs.md)
-  [Firebase](firebase.md)
+- [Firebase](firebase.md)
 - [Git](git.md)
 - [Google caldav](google-caldav.md)
 - [Google cloud](google-cloud.md)
@@ -27,7 +28,3 @@
 - [@zerocluster/proxy](https://zerocluster.github.io/proxy/)
 - [@softvisio/result](https://softvisio-node.github.io/result/)
 - [@softvisio/vuex](https://softvisio-node.github.io/vuex/)
-
-**Links**
-
-- [Archive 🡢](/archive/)
