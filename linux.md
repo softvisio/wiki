@@ -1,4 +1,6 @@
-# Extend linux volume
+# Linux
+
+### Extend linux volume
 
 ```sh
 vgdisplay

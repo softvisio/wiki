@@ -1,7 +1,7 @@
 - [Cache control](cache-control.md)
 - [Cordova 🡢](/cordova/)
 - [Docker swarm](docker-swarm.md)
-- [Extend linux volume](extend-linux-volume.md)
+- [Linux](linux.md)
 - [ExtJS](extjs.md)
   [Firebase](firebase.md)
 - [Git](git.md)
@@ -13,7 +13,7 @@
 - [PostgreSQL](postgresql.md)
 - [SQLite](sqlite.md)
 - [SSH](ssh.md)
-- [Visual studio-build tools](visual-studio-build-tools.md)
+- [Visual Studio build tools](visual-studio-build-tools.md)
 - [VMWare](vmware.md)
 - [WireGuard](wireguard.md)
 
