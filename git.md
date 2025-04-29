@@ -66,21 +66,21 @@ git push
 
 ### Rename branch
 
-In the following example we rename `master` to `main`:
+- Rename local branch:
 
-```sh
-# rename lolcal branch
-git branch -m master main
+    ```sh
+    git branch -m old new
+    ```
 
-# rename remote branch
-git push origin :master main
+- Rename remote branch:
 
-# or
-git push origin -u main
-git push origin --delete master
-```
+    ```sh
+    # rename remote branch
+    git push origin :old new
 
-On `GitHub` repository `settings/branches` switch default branch to the `main`.
+    # update local branch upstream
+    git branch new -u origin/new
+    ```
 
 ### Restore deleted file
 
