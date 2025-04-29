@@ -53,17 +53,6 @@ git push origin --all
 git push --tags
 ```
 
-### Sync forked repository
-
-```sh
-git clone ssh://$YOUR_FORKED_REPO
-cd $YOUR_FORKED_REPO
-git remote add upstream https://$ORIGINAL_REPO
-git fetch upstream
-git pull upstream main
-git push
-```
-
 ### Rename branch
 
 - Rename local branch:
@@ -202,4 +191,15 @@ git gc --prune=now --aggressive
     ```sh
     # sync remote "main" branch with the upstream "feat" branch
     gh repo sync softvisio/test --branch feat
+    ```
+
+- Manual sync:
+
+    ```sh
+    # fetch changes from the upstream
+    git fetch upstream
+
+    # merge "main" branch with upstream
+    git sw main
+    git merge upstream/main
     ```
