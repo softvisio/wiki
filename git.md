@@ -69,8 +69,13 @@ git push
 In the following example we rename `master` to `main`:
 
 ```sh
-git sw master
-git branch -m main
+# rename lolcal branch
+git branch -m master main
+
+# rename remote branch
+git push origin :master main
+
+# or
 git push origin -u main
 git push origin --delete master
 ```
@@ -179,3 +184,22 @@ git reset --hard origin/main
 git reflog expire --expire-unreachable=now --all
 git gc --prune=now --aggressive
 ```
+
+### Sync fork
+
+- Current repository:
+
+    ```sh
+    # sync local "main" branch with the upstream "main" brach
+    gh repo sync
+
+    # sync local "feat" branch with the upstream "feat" branch
+    gh repo sync --branch feat
+    ```
+
+- Remote repository:
+
+    ```sh
+    # sync remote "feat" branch with the upstream "main" branch
+    gh repo sync softvisio/test --branch feat
+    ```
