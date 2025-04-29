@@ -193,13 +193,13 @@ git gc --prune=now --aggressive
     # sync local "main" branch with the upstream "main" brach
     gh repo sync
 
-    # sync local "feat" branch with the upstream "feat" branch
+    # sync local "main" branch with the upstream "feat" branch
     gh repo sync --branch feat
     ```
 
 - Remote repository:
 
     ```sh
-    # sync remote "feat" branch with the upstream "main" branch
+    # sync remote "main" branch with the upstream "feat" branch
     gh repo sync softvisio/test --branch feat
     ```
