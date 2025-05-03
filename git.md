@@ -174,6 +174,19 @@ git reflog expire --expire-unreachable=now --all
 git gc --prune=now --aggressive
 ```
 
+### Manage remotes
+
+```sh
+# create remote "upstream"
+git remote add upstream --no-mirror git@github.com:${OWNER}/${NAME}.git
+
+# track "main" branch only
+git remote set-branches upstream main
+
+# add tracking branch
+git remote set-branches --add upstream $BRANCH_NAME
+```
+
 ### Sync fork
 
 - Current repository:
