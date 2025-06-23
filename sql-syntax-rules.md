@@ -18,7 +18,6 @@ SELECT count(*) AS total, COALESCE(name, 'no name') FROM user WHERE id IN (100, 
 - All keywords (SELECT, INSER, etc.) must be in upper case;
 
 - All identifiers (table, column, indexes, etc. names) must be in the snake_case.
-
     - Reserved row identifiers `NEW`, `OLD`, `EXCLUDED` must be unquoted upper case.
 
 - Subquery expressions: `EXISTS`, `IN`, `NOT IN`, `ANY`, `SOME`, `ALL` must be in upper case.

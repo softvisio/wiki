@@ -91,11 +91,9 @@ const message = {
 3. Open project settings -> `Service account`. Click `Generate new private key`. Use downloaded file in backend config.
 
 4. Create new android app:
-
     - download `google-services.json`, this file will be used in cordova push notifications plugin;
 
 5. Create new iOS app:
-
     - set `TeamID`;
     - download `GoogleService-Info.plist` for use in cordova;
 

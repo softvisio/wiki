@@ -115,12 +115,10 @@ Mode: `XXXYYY`
 where:
 
 - `XXX`:
-
     - `100` - regular file
     - `120` - symlink
 
 - `YYY`:
-
     - `644` - `rw-r--r--`
     - `755` - `rwxr-xr-x`
 

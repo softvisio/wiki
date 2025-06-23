@@ -3,12 +3,10 @@
 ### Prepare environment
 
 - Java SE JDK
-
     - [download latest JDK](https://www.oracle.com/java/technologies/downloads/#jdk18-windows)
     - unpack to devel/android/java
 
 - Gradle:
-
     - [download binary-only](https://gradle.org/install/#manually)
     - unpack to devel/android/gradle
 
@@ -59,7 +57,6 @@ chrome://inspect/#devices
 ### Prepare device
 
 - Sony device drivers
-
     - [download and install drivers for your device](https://developer.sony.com/develop/drivers/)
 
 - To enable developers mode tap 7 times on `Settings -> System -> About phone -> Build number`.
