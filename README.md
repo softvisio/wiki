@@ -3,7 +3,7 @@
 **Packages**
 
 - [@c0rejs/api](https://c0rejs.github.io/api/)
-- [@c0rejs/cli](https://c0rejs.github.io/cli/)
+- [@softvisio/cli](https://softvisio.github.io/cli/)
 - [@c0rejs/core](https://c0rejs.github.io/core/)
 - [@zerocluster/datasets](https://zerocluster.github.io/datasets/)
 - [@c0rejs/playwright](https://c0rejs.github.io/playwright/)
