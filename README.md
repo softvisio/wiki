@@ -2,11 +2,11 @@
 
 **Packages**
 
-- [@softvisio/api](https://softvisio-node.github.io/api/)
-- [@softvisio/cli](https://softvisio-node.github.io/cli/)
-- [@softvisio/core](https://softvisio-node.github.io/core/)
+- [@c0rejs/api](https://c0rejs.github.io/api/)
+- [@c0rejs/cli](https://c0rejs.github.io/cli/)
+- [@c0rejs/core](https://c0rejs.github.io/core/)
 - [@zerocluster/datasets](https://zerocluster.github.io/datasets/)
-- [@softvisio/playwright](https://softvisio-node.github.io/playwright/)
+- [@c0rejs/playwright](https://c0rejs.github.io/playwright/)
 - [@zerocluster/proxy](https://zerocluster.github.io/proxy/)
-- [@softvisio/result](https://softvisio-node.github.io/result/)
-- [@softvisio/vuex](https://softvisio-node.github.io/vuex/)
+- [@c0rejs/result](https://c0rejs.github.io/result/)
+- [@c0rejs/vuex](https://c0rejs.github.io/vuex/)
