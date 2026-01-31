@@ -21,11 +21,11 @@
 
 **Packages**
 
-- [@c0rejs/api](https://c0rejs.github.io/api/)
+- [@corejslib/api](https://corejslib.github.io/api/)
 - [@softvisio/cli](https://softvisio.github.io/cli/)
-- [@c0rejs/core](https://c0rejs.github.io/core/)
+- [@corejslib/core](https://corejslib.github.io/core/)
 - [@zerocluster/datasets](https://zerocluster.github.io/datasets/)
-- [@c0rejs/playwright](https://c0rejs.github.io/playwright/)
+- [@corejslib/playwright](https://corejslib.github.io/playwright/)
 - [@zerocluster/proxy](https://zerocluster.github.io/proxy/)
-- [@c0rejs/result](https://c0rejs.github.io/result/)
-- [@c0rejs/vuex](https://c0rejs.github.io/vuex/)
+- [@corejslib/result](https://corejslib.github.io/result/)
+- [@corejslib/vuex](https://corejslib.github.io/vuex/)
