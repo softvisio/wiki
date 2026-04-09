@@ -69,15 +69,15 @@ gce firewall-rules update default-allow-rdp --disabled
 # allow traffic from Google cloud load balancers and health checkers
 # gce firewall-rules create allow-gcloud-load-balancer --source-ranges=35.191.0.0/16,130.211.0.0/22 --action=ALLOW --rules=tcp,udp
 
-# allow http traffic from CloudFlare ipv4
-yes | gce firewall-rules delete allow-cloudflare-ipv4-http
-gce firewall-rules create allow-cloudflare-ipv4-http --source-ranges=$(curl -fsSL https://www.cloudflare.com/ips-v4 | xargs | sed -e "s/ /,/g") --action=ALLOW --rules=tcp:80,tcp:443,udp:443
+# allow ipv4 http traffic from CloudFlare
+yes | gce firewall-rules delete allow-ipv4-http-cloudflare
+gce firewall-rules create allow-ipv4-http-cloudflare --source-ranges=$(curl -fsSL https://www.cloudflare.com/ips-v4 | xargs | sed -e "s/ /,/g") --action=ALLOW --rules=tcp:80,tcp:443,udp:443
 
-# allow http traffic from CloudFlare ipv6
-yes | gce firewall-rules delete allow-cloudflare-ipv6-http
-gce firewall-rules create allow-cloudflare-ipv6-http --source-ranges=$(curl -fsSL https://www.cloudflare.com/ips-v6 | xargs | sed -e "s/ /,/g") --action=ALLOW --rules=tcp:80,tcp:443,udp:443
+# allow ipv6 http traffic from CloudFlare
+yes | gce firewall-rules delete allow-ipv6-http-cloudflare
+gce firewall-rules create allow-ipv6-http-cloudflare --source-ranges=$(curl -fsSL https://www.cloudflare.com/ips-v6 | xargs | sed -e "s/ /,/g") --action=ALLOW --rules=tcp:80,tcp:443,udp:443
 
-# allow http traffic from ipv4
+# allow ipv4 http traffic
 yes | gce firewall-rules delete allow-ipv4-http
 gce firewall-rules create allow-ipv4-http --action=ALLOW --rules=tcp:80,tcp:443,udp:443
 ```
