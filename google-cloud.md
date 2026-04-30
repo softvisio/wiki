@@ -107,7 +107,7 @@ gce instances create a0 \
     --machine-type=e2-micro \
     --image-project=ubuntu-os-cloud --image-family=ubuntu-minimal-2604-lts-amd64 \
     --network-interface=no-address \
-    --metadata-from-file user-data=cloud-init.yaml
+    --metadata-from-file user-data=init.sh
 ```
 
 - To create instance with external reserved ip address assigned replace:
