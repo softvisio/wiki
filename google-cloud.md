@@ -51,18 +51,6 @@ gcp activate $PROJECT_NAME
 ## Initialize cluster
 
 ```sh
-# create default ssl policies
-gce ssl-policies create compatible --profile=COMPATIBLE
-gce ssl-policies create modern --profile=MODERN
-gce ssl-policies create restricted --profile=RESTRICTED
-
-# create default healthchecks
-gce health-checks create tcp tcp --use-serving-port
-gce health-checks create http http --use-serving-port --request-path=/healthcheck
-
-# create default url maps
-gce url-maps import http --global --source=http.url-map.yaml
-
 # disable default firewall rules
 gce firewall-rules update default-allow-rdp --disabled
 
@@ -104,201 +92,30 @@ gce firewall-rules create allow-ipv4-8085 \
     --target-tags=load-balancer
 ```
 
-Simple cluster without `load balancer` and `NAT`:
+## Create instances
+
+Create `load-balancer` instance:
 
 ```sh
 # reserve regional ip address for load balancer instance
 gce addresses create public-ipv4
-```
 
-If you are plannign to use `load balancer` and `NAT` (paid services):
-
-```sh
-# reserve global ip address for load balancer
-gce addresses create public-ipv4 --ip-version=IPV4 --global
-
-# create nat
-gce routers create nat --network=default
-gce routers nats create nat --router=nat --auto-allocate-nat-external-ips --nat-all-subnet-ip-ranges --enable-dynamic-port-allocation
-```
-
-## Create instances
-
-```sh
 gce instances create a0 \
     --machine-type=e2-micro \
     --image-project=ubuntu-os-cloud --image-family=ubuntu-minimal-2604-lts-amd64 \
-    --network-interface=no-address \
-    --metadata-from-file user-data=init.sh \
+    --address=public-ipv4 \
+    --metadata-from-file user-data=cloud-init.sh \
     --tags=load-balancer
 ```
 
-- To create instance with external reserved ip address assigned replace:
+Create `worker` instance:
 
 ```sh
---network-interface=no-address
-```
-
-with:
-
-```sh
---address=public-ipv4
-```
-
-where `public-ipv4` must be regional (created without `--global` flag).
-
-- To automatically init `docker` use:
-
-```sh
---metadata init_docker="docker swarm join --token ..."
-```
-
-## Create certificates
-
-Before start:
-
-- Create `dns` records for all used domains, using load valancer ip addresses.
-- On `cloudflare` for each domain separately add CAA records for "pki.goog".
-
-Create certificate:
-
-```sh
-gce ssl-certificates create $DOMAIN --global --domains= $DOMAIN
-```
-
-Check certificates status:
-
-```sh
-gce ssl-certificates list
-```
-
-## Create instances group
-
-```sh
-gce instance-groups unmanaged create nginx
-gce instance-groups unmanaged add-instances nginx --instances=a0
-gce instance-groups set-named-ports nginx --named-ports=http:80,pgsql:5432,proxy:8085
-```
-
-## HTTP load balancer
-
-Create redirect from `http` to `https`:
-
-```sh
-gce target-http-proxies create http --url-map=http --global
-gce forwarding-rules create http --load-balancing-scheme=EXTERNAL --address=public-ipv4 --ports=80 --target-http-proxy=http --global
-```
-
-Remove:
-
-```sh
-yes | gce forwarding-rules delete http --global
-yes | gce target-http-proxies delete http
-yes | gce url-maps delete http
-```
-
-## HTTPS load balancer
-
-Create backend service:
-
-```sh
-gce backend-services create nginx \
-    --global \
-    --global-health-checks --health-checks=tcp \
-    --protocol=HTTP --port-name=http --timeout=60s \
-    --custom-response-header="Strict-Transport-Security:max-age=63072000; includeSubdomains; preload" \
-    --cache-mode=USE_ORIGIN_HEADERS --enable-cdn --serve-while-stale=0
-
-gce backend-services add-backend nginx --global --instance-group=nginx
-```
-
-Create load balancer:
-
-```sh
-gce url-maps create https --default-service=nginx
-gce target-https-proxies create https --url-map=https --ssl-policy=modern --ssl-certificates=$DOMAIN
-gce forwarding-rules create https --load-balancing-scheme=EXTERNAL --address=public-ipv4 --ports=443 --target-https-proxy=https --global
-```
-
-Remove:
-
-```sh
-yes | gce forwarding-rules delete https --global
-yes | gce target-https-proxies delete https
-yes | gce url-maps delete https
-
-yes | gce backend-services delete nginx --global
-```
-
-## PostgreSQL service
-
-Reserve private IP address
-
-```sh
-# reserve ip addresses for load balancer
-gce addresses create private-ipv4 --ip-version=IPV4 --global
-```
-
-Create backend service:
-
-```sh
-gce backend-services create pgsql --global --global-health-checks --health-checks=tcp --protocol=TCP --port-name=pgsql --timeout=600s
-gce backend-services add-backend pgsql --global --instance-group=nginx
-```
-
-Create SSL load balancer (not works with `psql` client, need to create SSL tunnel first):
-
-```sh
-gce target-ssl-proxies create pgsql --backend-service=pgsql --ssl-policy=restricted --ssl-certificates=$DOMAIN
-gce forwarding-rules create pgsql --load-balancing-scheme=EXTERNAL --address=private-ipv4 --ports=5432 --target-ssl-proxy=pgsql --global
-```
-
-Remove:
-
-```sh
-yes | gce forwarding-rules delete pgsql --global
-yes | gce target-ssl-proxies delete pgsql
-
-yes | gce backend-services delete pgsql --global
-```
-
-## Proxy service
-
-Create backend service:
-
-```sh
-gce backend-services create proxy \
-    --global \
-    --global-health-checks --health-checks=tcp \
-    --protocol=TCP --port-name=proxy --timeout=60s
-
-gce backend-services add-backend proxy --global --instance-group=nginx
-```
-
-Create TCP:8085 proxy
-
-```sh
-gce target-tcp-proxies create proxy-tcp --proxy-header=PROXY_V1 --backend-service=proxy
-gce forwarding-rules create proxy-tcp --load-balancing-scheme=EXTERNAL --address=public-ipv4 --ports=8085 --target-tcp-proxy=proxy-tcp --global
-```
-
-Create SSL:8099 proxy:
-
-```sh
-gce target-ssl-proxies create proxy-ssl --backend-service=proxy --proxy-header=PROXY_V1 --ssl-policy=restricted --ssl-certificates=proxy-softvisio-net
-gce forwarding-rules create proxy-ssl --load-balancing-scheme=EXTERNAL --address=public-ipv4 --ports=8099 --target-ssl-proxy=proxy-ssl --global
-```
-
-Remove:
-
-```sh
-yes | gce forwarding-rules delete proxy-tcp --global
-yes | gce target-tcp-proxies delete proxy-tcp
-
-yes | gce forwarding-rules delete proxy-ssl --global
-yes | gce target-ssl-proxies delete proxy-ssl
-
-yes | gce backend-services delete proxy --global
+gce instances create b0 \
+    --machine-type=e2-micro \
+    --image-project=ubuntu-os-cloud --image-family=ubuntu-minimal-2604-lts-amd64 \
+    --metadata-from-file user-data=cloud-init.sh \
+    --metadata init_docker="docker swarm join --token ..."
 ```
 
 ## Machine type
