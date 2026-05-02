@@ -58,16 +58,16 @@ gce firewall-rules update default-allow-rdp --disabled
 # gce firewall-rules create allow-gcloud-load-balancer --source-ranges=35.191.0.0/16,130.211.0.0/22 --action=ALLOW --rules=tcp,udp
 
 # allow IPv4 HTTP traffic to load balancer
-yes | gce firewall-rules delete allow-ipv4-http
-gce firewall-rules create allow-ipv4-http \
+yes | gce firewall-rules delete allow-ipv4-http-to-load-balancer
+gce firewall-rules create allow-ipv4-http-to-load-balancer \
     --description="Allow IPv4 HTTP traffic to load balancer" \
     --action=ALLOW \
     --rules=tcp:80,tcp:443,udp:443 \
     --target-tags=load-balancer
 
 # allow IPv4 HTTP traffic from CloudFlare to load balancer
-yes | gce firewall-rules delete allow-ipv4-http-cloudflare
-gce firewall-rules create allow-ipv4-http-cloudflare \
+yes | gce firewall-rules delete allow-ipv4-http-cloudflare-to-load-balancer
+gce firewall-rules create allow-ipv4-http-cloudflare-to-load-balancer \
     --description="Allow IPv4 HTTP traffic from CloudFlare to load balancer" \
     --source-ranges=$(curl -fsSL https://www.cloudflare.com/ips-v4 | xargs | sed -e "s/ /,/g") \
     --action=ALLOW \
@@ -75,8 +75,8 @@ gce firewall-rules create allow-ipv4-http-cloudflare \
     --target-tags=load-balancer
 
 # allow IPv6 HTTP traffic from CloudFlare to load balancer
-yes | gce firewall-rules delete allow-ipv6-http-cloudflare
-gce firewall-rules create allow-ipv6-http-cloudflare \
+yes | gce firewall-rules delete allow-ipv6-http-cloudflare-to-load-balancer
+gce firewall-rules create allow-ipv6-http-cloudflare-to-load-balancer \
     --description="Allow IPv6 HTTP traffic from CloudFlare to load balancer" \
     --source-ranges=$(curl -fsSL https://www.cloudflare.com/ips-v6 | xargs | sed -e "s/ /,/g") \
     --action=ALLOW \
@@ -84,8 +84,8 @@ gce firewall-rules create allow-ipv6-http-cloudflare \
     --target-tags=load-balancer
 
 # allow IPv4 tcp:8085 traffic to load balancer
-yes | gce firewall-rules delete allow-ipv4-8085
-gce firewall-rules create allow-ipv4-8085 \
+yes | gce firewall-rules delete allow-ipv4-8085-to-load-balancer
+gce firewall-rules create allow-ipv4-8085-to-load-balancer \
     --description="Allow IPv4 tcp:8085 traffic to load balancer" \
     --action=ALLOW \
     --rules=tcp:8085 \
