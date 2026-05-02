@@ -69,23 +69,45 @@ gce firewall-rules update default-allow-rdp --disabled
 # allow traffic from Google cloud load balancers and health checkers
 # gce firewall-rules create allow-gcloud-load-balancer --source-ranges=35.191.0.0/16,130.211.0.0/22 --action=ALLOW --rules=tcp,udp
 
-# allow ipv4 http traffic from CloudFlare
-yes | gce firewall-rules delete allow-ipv4-http-cloudflare
-gce firewall-rules create allow-ipv4-http-cloudflare --source-ranges=$(curl -fsSL https://www.cloudflare.com/ips-v4 | xargs | sed -e "s/ /,/g") --action=ALLOW --rules=tcp:80,tcp:443,udp:443
-
-# allow ipv6 http traffic from CloudFlare
-yes | gce firewall-rules delete allow-ipv6-http-cloudflare
-gce firewall-rules create allow-ipv6-http-cloudflare --source-ranges=$(curl -fsSL https://www.cloudflare.com/ips-v6 | xargs | sed -e "s/ /,/g") --action=ALLOW --rules=tcp:80,tcp:443,udp:443
-
-# allow ipv4 http traffic
+# allow IPv4 HTTP traffic to load balancer
 yes | gce firewall-rules delete allow-ipv4-http
-gce firewall-rules create allow-ipv4-http --action=ALLOW --rules=tcp:80,tcp:443,udp:443
+gce firewall-rules create allow-ipv4-http \
+    --description="Allow IPv4 HTTP traffic to load balancer" \
+    --action=ALLOW \
+    --rules=tcp:80,tcp:443,udp:443 \
+    --target-tags=load-balancer
+
+# allow IPv4 HTTP traffic from CloudFlare to load balancer
+yes | gce firewall-rules delete allow-ipv4-http-cloudflare
+gce firewall-rules create allow-ipv4-http-cloudflare \
+    --description="Allow IPv4 HTTP traffic from CloudFlare to load balancer" \
+    --source-ranges=$(curl -fsSL https://www.cloudflare.com/ips-v4 | xargs | sed -e "s/ /,/g") \
+    --action=ALLOW \
+    --rules=tcp:80,tcp:443,udp:443 \
+    --target-tags=load-balancer
+
+# allow IPv6 HTTP traffic from CloudFlare to load balancer
+yes | gce firewall-rules delete allow-ipv6-http-cloudflare
+gce firewall-rules create allow-ipv6-http-cloudflare \
+    --description="Allow IPv6 HTTP traffic from CloudFlare to load balancer" \
+    --source-ranges=$(curl -fsSL https://www.cloudflare.com/ips-v6 | xargs | sed -e "s/ /,/g") \
+    --action=ALLOW \
+    --rules=tcp:80,tcp:443,udp:443 \
+    --target-tags=load-balancer
+
+# allow IPv4 tcp:8085 traffic to load balancer
+yes | gce firewall-rules delete allow-ipv4-8085
+gce firewall-rules create allow-ipv4-8085 \
+    --description="Allow IPv4 tcp:8085 traffic to load balancer" \
+    --action=ALLOW \
+    --rules=tcp:8085 \
+    --target-tags=load-balancer
 ```
 
 Simple cluster without `load balancer` and `NAT`:
 
 ```sh
-# reserve regional ip address for main instance
+# reserve regional ip address for load balancer instance
 gce addresses create public-ipv4
 ```
 
@@ -107,7 +129,8 @@ gce instances create a0 \
     --machine-type=e2-micro \
     --image-project=ubuntu-os-cloud --image-family=ubuntu-minimal-2604-lts-amd64 \
     --network-interface=no-address \
-    --metadata-from-file user-data=init.sh
+    --metadata-from-file user-data=init.sh \
+    --tags=load-balancer
 ```
 
 - To create instance with external reserved ip address assigned replace:
