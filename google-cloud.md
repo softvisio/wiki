@@ -69,8 +69,8 @@ gce firewall-rules create allow-ipv4-http-to-load-balancer \
 yes | gce firewall-rules delete allow-ipv4-http-cloudflare-to-load-balancer
 gce firewall-rules create allow-ipv4-http-cloudflare-to-load-balancer \
     --description="Allow IPv4 HTTP traffic from CloudFlare to load balancer" \
-    --source-ranges=$(curl -fsSL https://www.cloudflare.com/ips-v4 | xargs | sed -e "s/ /,/g") \
     --action=ALLOW \
+    --source-ranges=$(curl -fsSL https://www.cloudflare.com/ips-v4 | xargs | sed -e "s/ /,/g") \
     --rules=tcp:80,tcp:443,udp:443 \
     --target-tags=load-balancer
 
@@ -78,8 +78,8 @@ gce firewall-rules create allow-ipv4-http-cloudflare-to-load-balancer \
 yes | gce firewall-rules delete allow-ipv6-http-cloudflare-to-load-balancer
 gce firewall-rules create allow-ipv6-http-cloudflare-to-load-balancer \
     --description="Allow IPv6 HTTP traffic from CloudFlare to load balancer" \
-    --source-ranges=$(curl -fsSL https://www.cloudflare.com/ips-v6 | xargs | sed -e "s/ /,/g") \
     --action=ALLOW \
+    --source-ranges=$(curl -fsSL https://www.cloudflare.com/ips-v6 | xargs | sed -e "s/ /,/g") \
     --rules=tcp:80,tcp:443,udp:443 \
     --target-tags=load-balancer
 
