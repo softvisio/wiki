@@ -55,9 +55,6 @@ gcp activate $PROJECT_NAME
 gce firewall-rules update default-allow-rdp --disabled
 gce firewall-rules update default-allow-icmp --disabled
 
-# allow traffic from Google cloud load balancers and health checkers
-# gce firewall-rules create allow-gcloud-load-balancer --source-ranges=35.191.0.0/16,130.211.0.0/22 --action=ALLOW --rules=tcp,udp
-
 # allow IPv4 HTTP traffic to load balancer
 yes | gce firewall-rules delete allow-ipv4-http-to-load-balancer
 gce firewall-rules create allow-ipv4-http-to-load-balancer \
