@@ -55,10 +55,10 @@ gcp activate $PROJECT_NAME
 gce firewall-rules update default-allow-rdp --disabled
 gce firewall-rules update default-allow-icmp --disabled
 
-# allow IPv4 HTTP traffic to load balancer
-yes | gce firewall-rules delete allow-ipv4-http-to-load-balancer
-gce firewall-rules create allow-ipv4-http-to-load-balancer \
-    --description="Allow IPv4 HTTP traffic to load balancer" \
+# allow HTTP traffic to load balancer
+yes | gce firewall-rules delete allow-http-to-load-balancer
+gce firewall-rules create allow-http-to-load-balancer \
+    --description="Allow HTTP traffic to load balancer" \
     --action=ALLOW \
     --rules=tcp:80,tcp:443,udp:443 \
     --target-tags=load-balancer
@@ -81,10 +81,10 @@ gce firewall-rules create allow-ipv6-http-cloudflare-to-load-balancer \
     --rules=tcp:80,tcp:443,udp:443 \
     --target-tags=load-balancer
 
-# allow IPv4 tcp:8085 traffic to load balancer
-yes | gce firewall-rules delete allow-ipv4-8085-to-load-balancer
-gce firewall-rules create allow-ipv4-8085-to-load-balancer \
-    --description="Allow IPv4 tcp:8085 traffic to load balancer" \
+# allow tcp:8085 traffic to load balancer
+yes | gce firewall-rules delete allow-8085-to-load-balancer
+gce firewall-rules create allow-8085-to-load-balancer \
+    --description="Allow tcp:8085 traffic to load balancer" \
     --action=ALLOW \
     --rules=tcp:8085 \
     --target-tags=load-balancer
