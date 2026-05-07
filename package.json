@@ -14,7 +14,7 @@
     "license": "Proprietary Software",
     "author": "root <root@softvisio.net>",
     "scripts": {
-        "build": "softvisio-cli docs build",
-        "start": "softvisio-cli docs start"
+        "build": "scli docs build",
+        "start": "scli docs start"
     }
 }
