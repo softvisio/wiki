@@ -38,13 +38,12 @@ unix_timestamp float NOT NULL DEFAULT extract( EPOCH FROM CURRENT_TIMESTAMP ),
 
 ### UUID
 
-[`uuid-ossp` extension documentation.](https://www.postgresql.org/docs/current/static/uuid-ossp.html)
-
 ```sql
-CREATE EXTENSION IF NOT EXISTS pgcrypto;
+-- use UUID v4
+id uuid PRIMARY KEY NOT NULL DEFAULT uuidv4()
 
-# use UUID v4
-id uuid PRIMARY KEY NOT NULL DEFAULT gen_random_uuid()
+-- use UUID v7
+id uuid PRIMARY KEY NOT NULL DEFAULT uuidv7()
 ```
 
 ### Notifications
