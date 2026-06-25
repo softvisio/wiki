@@ -88,6 +88,14 @@ gce firewall-rules create allow-8085-to-load-balancer \
     --action=ALLOW \
     --rules=tcp:8085 \
     --target-tags=load-balancer
+
+# allow tcp:6881, udp:6881 traffic to load balancer
+yes | gce firewall-rules delete allow-6881-to-load-balancer
+gce firewall-rules create allow-6881-to-load-balancer \
+    --description="Allow tcp:6881, udp:6881 traffic to load balancer" \
+    --action=ALLOW \
+    --rules=tcp:6881,udp:6881 \
+    --target-tags=load-balancer
 ```
 
 ## Create instances
