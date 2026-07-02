@@ -58,7 +58,7 @@ use vmrun to manage workstation
 
 # /etc/vmware/networking
 
-answer VNET_8_HOSTONLY_SUBNET 192.168.175.0
+answer VNET\_8\_HOSTONLY\_SUBNET 192.168.175.0
 
 # /etc/vmware/vmnet8/nat/nat.conf
 
@@ -68,11 +68,11 @@ ip = 192.168.175.2
 
 # /etc/sysctl.conf
 
-net.ipv4.ip_forward = 1
+net.ipv4.ip\_forward = 1
 
-# enable net.ipv4.ip_forward = 1 for current session
+# enable net.ipv4.ip\_forward = 1 for current session
 
-sysctl -w net.ipv4.ip_forward=1
+sysctl -w net.ipv4.ip\_forward=1
 
 # manually configure ports forwarding in iptables script
 

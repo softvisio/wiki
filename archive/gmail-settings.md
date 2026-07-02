@@ -1,4 +1,4 @@
-Login - your full email address (including @gmail.com or @your_domain.com)
+Login - your full email address (including @gmail.com or @your\_domain.com)
 SSL: pop.gmail.com:995
 SSL: smtp.gmail.com:465
 TLS/STARTTLS: smtp.gmail.com:587
