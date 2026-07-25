@@ -47,7 +47,7 @@ PostgresSQL tunnel:
 autossh -f -N -L *:5432:/var/run/postgresql/.s.PGSQL.5432 root@host
 
 # google cloud
-gce ssh a0 -- -N -L *:5432:/var/run/postgresql/.s.PGSQL.5432
+gcloud compute ssh a0 -- -N -L *:5432:/var/run/postgresql/.s.PGSQL.5432
 
 psql -h localhost -p 5432
 ```
