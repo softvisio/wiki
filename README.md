@@ -3,7 +3,7 @@
 **Packages**
 
 - [@corejslib/api](https://corejslib.github.io/api/)
-- [@softvisio/cli](https://softvisio.github.io/cli/)
+- [@corejslib/cli](https://corejslib.github.io/cli/)
 - [@corejslib/core](https://corejslib.github.io/core/)
 - [@zerocluster/datasets](https://zerocluster.github.io/datasets/)
 - [@corejslib/playwright](https://corejslib.github.io/playwright/)
