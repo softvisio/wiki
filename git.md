@@ -201,7 +201,7 @@ git remote set-branches --add upstream $BRANCH_NAME
 
     ```sh
     # sync remote "main" branch with the upstream "feat" branch
-    gh repo sync softvisio/test --branch feat
+    gh repo sync $repo_slug --branch feat
     ```
 
 - Manual sync:

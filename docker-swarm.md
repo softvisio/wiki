@@ -45,7 +45,7 @@ docker service update --label-add nginx-server-name=www.example.com $SERVICE_NAM
 ### Update service images
 
 ```sh
-docker service update --image softvisio/$NAME $SERVICE_NAME
+docker service update --image $OWNER/$NAME $SERVICE_NAME
 ```
 
 ### Continer log by name

@@ -3,7 +3,7 @@
 ### Create database
 
 ```sql
-CREATE EXTENSION IF NOT EXISTS softvisio;
+CREATE EXTENSION IF NOT EXISTS softvisio_admin;
 
 SELECT create_database( 'test', 'en_US.UTF8' ) AS password;
 ```

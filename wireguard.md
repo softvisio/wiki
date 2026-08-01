@@ -90,7 +90,7 @@ On client if you want to tunnel all traffic - use `0.0.0.0/0`, or if you want to
 :warning: wireguard kernel module must be installed on the host machine.
 
 ```sh
-d run -it --cap-add=NET_ADMIN --cap-add=SYS_ADMIN -p 51820:51820/tcp -p 51820:51820/udp --network private softvisio/core
+docker run -it --cap-add=NET_ADMIN --cap-add=SYS_ADMIN -p 51820:51820/tcp -p 51820:51820/udp --network private zerocluster/node
 
 dnf install -y elrepo-release epel-release
 dnf install -y kmod-wireguard wireguard-tools iptables
