@@ -9,8 +9,9 @@ Use this screen resolution for `windows` and `macos`: `1400 x 610`
 ```sh
 # fill free space with zeros
 rm -rf /tmp/**
-cat /dev/zero > ~/wipefile
-rm -rf ~/wipefile
+dd if=/dev/zero of=~/wipefile bs=10M status=progress
+sync
+rm -f ~/wipefile
 poweroff
 ```
 
