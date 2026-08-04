@@ -14,7 +14,7 @@
     "license": "Proprietary Software",
     "author": "root <root@softvisio.net>",
     "scripts": {
-        "build": "ccli docs build",
-        "start": "ccli docs start"
+        "build": "zcli docs build",
+        "start": "zcli docs start"
     }
 }
