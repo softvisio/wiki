@@ -3,7 +3,7 @@
 **Packages**
 
 - [@corejslib/api](https://corejslib.github.io/api/)
-- [@corejslib/cli](https://corejslib.github.io/cli/)
+- [@corejslib/zcli](https://corejslib.github.io/zcli/)
 - [@corejslib/core](https://corejslib.github.io/core/)
 - [@zerocluster/datasets](https://zerocluster.github.io/datasets/)
 - [@corejslib/playwright](https://corejslib.github.io/playwright/)
