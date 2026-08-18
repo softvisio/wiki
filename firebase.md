@@ -78,7 +78,7 @@ const message = {
 ### Generate APNS key
 
 1. In apple developers console goto `Keys` and generate new `Apple Push Notifications service (APNs)`.
-   Store `KeyID` and download `.p8` file;
+    Store `KeyID` and download `.p8` file;
 
 2. Get your `TeamID` from <https://developer.apple.com/account/#/membership>;
 

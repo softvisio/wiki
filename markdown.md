@@ -34,7 +34,6 @@ Some content under spoiler
 To instruct `prettier` to skip fenced code block formatting place `<!-- prettier-ignore -->` just before code block:
 
 ````markdown
-<!-- prettier-ignore -->
 ```javascript
 const a = 1;
 ```
