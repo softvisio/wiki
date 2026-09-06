@@ -72,7 +72,7 @@ Trigger functions names must have same name as trigger and must have `_trigger` 
 Examples:
 
 ```sql
-CREATE FUNCTION user_before_insert_trigger() RETURNS TRIGGER
+CREATE FUNCTION user_before_insert_trigger () RETURNS TRIGGER
 
 -- SQLite
 CREATE TRIGGER user_before_insert_trigger BEFORE INSERT ON user FOR EACH ROW EXECUTE PROCEDURE user_before_insert_trigger();
