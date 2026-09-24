@@ -1,14 +1,10 @@
-# Google cloud
+# Google Cloud
 
 Links:
 
 - [Cloud DNS](https://cloud.google.com/compute/docs/internal-dns)
 - [Cloud IP addresses](https://cloud.google.com/compute/docs/ip-addresses)
-- [Cloud init](https://www.digitalocean.com/community/tutorials/an-introduction-to-cloud-config-scripting)
-
-NOTE:
-
-- `gc` is the alias for `gcloud`;
+- [Cloud-init](https://www.digitalocean.com/community/tutorials/an-introduction-to-cloud-config-scripting)
 
 ## Init gcloud
 
@@ -18,17 +14,17 @@ gcloud init --console-only
 
 ## Create project
 
-Project id must be unique across all google cloud platform. So use project id in `<ORGANIZATION-NAME>-<PROJECT-NAME>` format.
+Project ID must be unique across all of Google Cloud Platform. Use the project ID in `<ORGANIZATION-NAME>-<PROJECT-NAME>` format.
 
-Create project:
+Create a project:
 
 ```sh
 gcloud projects create $PROJECT_ID
 ```
 
-View enabled compute APIs: `https://console.developers.google.com/apis/api/compute.googleapis.com/overview?authuser=dzagashev@gmail.com&project=<PROJECT-ID>`
+View enabled Compute APIs: `https://console.developers.google.com/apis/api/compute.googleapis.com/overview?authuser=dzagashev@gmail.com&project=<PROJECT-ID>`.
 
-Link billing account:
+Link a billing account:
 
 ```sh
 gcloud beta billing accounts list
@@ -36,11 +32,11 @@ gcloud beta billing accounts list
 gcloud beta billing projects link $PROJECT_ID --billing-account $BILLING_ACCOUNT_ID
 ```
 
-After project is created you need to create project configuration file at `~/.config/gcloud/configurations/config_$PROJECT_NAME`.
+After the project is created, create a project configuration file at `~/.config/gcloud/configurations/config_$PROJECT_NAME`.
 
-Set project region and zone according to the ping latency value <https://www.gcping.com>.
+Set the project region and zone according to the ping latency values at <https://www.gcping.com>.
 
-Activate project configuration:
+Activate the project configuration:
 
 ```sh
 gcloud config configurations activate $PROJECT_NAME
@@ -53,7 +49,7 @@ gcloud config configurations activate $PROJECT_NAME
 gcloud compute firewall-rules update default-allow-rdp --disabled
 gcloud compute firewall-rules update default-allow-icmp --disabled
 
-# allow HTTP traffic to load balancer
+# allow HTTP traffic to the load balancer
 yes | gcloud compute firewall-rules delete allow-http-to-load-balancer
 gcloud compute firewall-rules create allow-http-to-load-balancer \
     --description="Allow HTTP traffic to load balancer" \
@@ -61,25 +57,25 @@ gcloud compute firewall-rules create allow-http-to-load-balancer \
     --rules=tcp:80,tcp:443,udp:443 \
     --target-tags=load-balancer
 
-# allow IPv4 HTTP traffic from CloudFlare to load balancer
+# allow IPv4 HTTP traffic from Cloudflare to the load balancer
 yes | gcloud compute firewall-rules delete allow-ipv4-http-cloudflare-to-load-balancer
 gcloud compute firewall-rules create allow-ipv4-http-cloudflare-to-load-balancer \
-    --description="Allow IPv4 HTTP traffic from CloudFlare to load balancer" \
+    --description="Allow IPv4 HTTP traffic from Cloudflare to load balancer" \
     --action=ALLOW \
     --source-ranges=$(curl -fsSL https://www.cloudflare.com/ips-v4 | xargs | sed -e "s/ /,/g") \
     --rules=tcp:80,tcp:443,udp:443 \
     --target-tags=load-balancer
 
-# allow IPv6 HTTP traffic from CloudFlare to load balancer
+# allow IPv6 HTTP traffic from Cloudflare to the load balancer
 yes | gcloud compute firewall-rules delete allow-ipv6-http-cloudflare-to-load-balancer
 gcloud compute firewall-rules create allow-ipv6-http-cloudflare-to-load-balancer \
-    --description="Allow IPv6 HTTP traffic from CloudFlare to load balancer" \
+    --description="Allow IPv6 HTTP traffic from Cloudflare to load balancer" \
     --action=ALLOW \
     --source-ranges=$(curl -fsSL https://www.cloudflare.com/ips-v6 | xargs | sed -e "s/ /,/g") \
     --rules=tcp:80,tcp:443,udp:443 \
     --target-tags=load-balancer
 
-# allow tcp:8085 traffic to load balancer
+# allow tcp:8085 traffic to the load balancer
 yes | gcloud compute firewall-rules delete allow-8085-to-load-balancer
 gcloud compute firewall-rules create allow-8085-to-load-balancer \
     --description="Allow tcp:8085 traffic to load balancer" \
@@ -87,7 +83,7 @@ gcloud compute firewall-rules create allow-8085-to-load-balancer \
     --rules=tcp:8085 \
     --target-tags=load-balancer
 
-# allow tcp:6881, udp:6881 traffic to load balancer
+# allow tcp:6881, udp:6881 traffic to the load balancer
 yes | gcloud compute firewall-rules delete allow-6881-to-load-balancer
 gcloud compute firewall-rules create allow-6881-to-load-balancer \
     --description="Allow tcp:6881, udp:6881 traffic to load balancer" \
@@ -98,10 +94,10 @@ gcloud compute firewall-rules create allow-6881-to-load-balancer \
 
 ## Create instances
 
-Create `load-balancer` instance:
+Create the `load-balancer` instance:
 
 ```sh
-# reserve regional ip address for load balancer instance
+# reserve a regional IP address for the load balancer instance
 gcloud compute addresses create public-ipv4
 
 gcloud compute instances create a0 \
@@ -112,7 +108,7 @@ gcloud compute instances create a0 \
     --tags=load-balancer
 ```
 
-Create `worker` instance:
+Create the `worker` instance:
 
 ```sh
 gcloud compute instances create b0 \
@@ -124,9 +120,9 @@ gcloud compute instances create b0 \
 
 ## Machine type
 
-Default type is: `n1-standard-1`, 1 cpu, 3.75 GB.
+Default type: `n1-standard-1`, 1 CPU, 3.75 GB.
 
-List available machines for selected zone:
+List available machines for the selected zone:
 
 ```sh
 gcloud compute machine-types list --filter="zone:(us-central1-a) AND guestCpus=4 AND memoryMb>=8000"
@@ -140,7 +136,7 @@ Prices: <https://cloud.google.com/compute/vm-instance-pricing>
 
 | Type        | Purpose               |
 | ----------- | --------------------- |
-| E2          | Costs optimized       |
+| E2          | Cost-optimized        |
 | N1, N2, N2D | Balanced              |
 | Tau T2D     | Scale-out optimized   |
 | M1, M2      | Memory-optimized      |
@@ -165,7 +161,7 @@ Some common machines:
 | n2-highcpu-2   |     2 |   2 |                42 |
 | n2-highcpu-4   |     4 |   4 |                84 |
 
-[^1]: `micro`, `small`, `medium` - is a machines with the shared vCPUs.
+[^1]: `micro`, `small`, `medium` are machine types with shared vCPUs.
 
 ## Compute
 
@@ -217,11 +213,14 @@ gcloud alpha services api-keys get-key-string --format="get(keyString)" $(gcloud
 
 ### Add billing manager
 
-Open resources management: <https://console.cloud.google.com/cloud-resource-manager?authuser=dzagashev@gmail.com>.
+Open resource management: <https://console.cloud.google.com/cloud-resource-manager?authuser=dzagashev@gmail.com>.
 
-In the left-side panel add new user with the following roles: - `Viewer`; - `Project Billing Manager`;
+In the left-side panel, add a new user with the following roles:
 
-Other roles, which can be useful:
+- `Viewer`;
+- `Project Billing Manager`;
+
+Other roles that may be useful:
 
 - `Owner`;
 - `Viewer` + `Billing Account Administrator`;
@@ -229,19 +228,19 @@ Other roles, which can be useful:
 
 ### Change billing account
 
-Oppen <https://console.cloud.google.com/billing/projects>.
+Open <https://console.cloud.google.com/billing/projects>.
 
-Change billing account for the project.
+Change the billing account for the project.
 
 ### Rename billing account
 
 Open billing accounts: <https://console.cloud.google.com/billing?authuser=dzagashev@gmail.com>.
 
-Open needed billing account by clucking on it's nane.
+Open the needed billing account by clicking on its name.
 
-At the top-left menu select `Account management`.
+At the top-left menu, select `Account management`.
 
-At the top press `Rename` button.
+At the top, press the `Rename` button.
 
 ## OAuth access
 
@@ -254,4 +253,4 @@ Create OAuth client credentials:
 URL: <https://domain>
 Redirect URL: <https://domain/api/oauth.html>
 
-Save credentials, update backend config witj clientId anf clientSecret.
+Save the credentials and update the backend config with `clientId` and `clientSecret`.
