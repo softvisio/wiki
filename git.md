@@ -87,7 +87,7 @@ git clean --force
 git clean --force -d
 ```
 
-### Delete commited changesets
+### Delete committed changesets
 
 ```sh
 git reset --hard $SHA1_COMMIT_ID
@@ -123,7 +123,7 @@ where:
     - `755` - `rwxr-xr-x`
 
 ```sh
-# list execulable files
+# list executable files
 git ls-files --format "%(objectmode) %(path)" | grep "^100755"
 
 # make file in "bin" and "tests" directories executable
@@ -190,7 +190,7 @@ git remote set-branches --add upstream $BRANCH_NAME
 - Current repository:
 
     ```sh
-    # sync local "main" branch with the upstream "main" brach
+    # sync local "main" branch with the upstream "main" branch
     gh repo sync
 
     # sync local "main" branch with the upstream "feat" branch
