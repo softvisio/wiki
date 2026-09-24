@@ -1,4 +1,4 @@
-# WIki
+# Wiki
 
 **Packages**
 
