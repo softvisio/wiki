@@ -17,7 +17,7 @@ CREATE USER <username> WITH ENCRYPTED PASSWORD '<password>';
 # change password for user
 \password <username>
 
-# grant priviledges
+# grant privileges
 /c <dbname>;
 GRANT ALL PRIVILEGES ON ALL TABLES IN schema public To <username>;
 
@@ -62,7 +62,7 @@ PERFORM pg_notify( 'event-name', json_build_object( 'key1', 'value1', 'key2', 'v
 
 ### INSERT ON CONFLICT UPDATE RETURNING
 
-All inserted `key` fields must be unique, otherwise you will get error `Can not affect row a second time`. In the example below if `column` field is unique in the table - you must pre-filter data and throw away rows with the duplicate `column`.
+All inserted `key` fields must be unique, otherwise you will get error `Cannot affect row a second time`. In the example below if `column` field is unique in the table - you must pre-filter data and throw away rows with the duplicate `column`.
 
 ```sql
 INSERT INTO table ( column ) VALUES ( ? )
@@ -182,7 +182,7 @@ SELECT postgis_extensions_upgrade();
 
 ```sql
 -- get available extensions
-ELECT * FROM pg_available_extensions;
+SELECT * FROM pg_available_extensions;
 
 -- get updatable extensions
 SELECT * FROM pg_available_extensions WHERE installed_version IS NOT NULL AND installed_version != default_version;
