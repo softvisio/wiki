@@ -1,4 +1,4 @@
-# GPG
+# GnuPG
 
 ### Environment
 
